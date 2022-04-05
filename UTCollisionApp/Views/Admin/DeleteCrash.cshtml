@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Delete Crash";
+}
+
+@model Crash
+
+<div class="text-center">
+    <h2>Confirm Deletion</h2>
+    <h3>Are you sure you want to delete the crash that happened on @Model.CRASH_DATETIME with Crash Number of @Model.CRASH_ID?</h3>
+
+    <form method="post" asp-controller="Admin" asp-action="DeleteCrash">
+        <br /><button type="submit" class="btn">Delete</button>
+        <a asp-controller="Admin" asp-action="CrashTable" class="btn btn-secondary font-weight-bold">Cancel</a>
+
+        <input type="hidden" asp-for="CRASH_ID" />
+    </form>
+</div>

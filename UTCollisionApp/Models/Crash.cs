@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UTCollisionApp.Models
 {
@@ -13,12 +14,12 @@ namespace UTCollisionApp.Models
 
         // Foreign Location Key
         [Required]
-        public int LOCATION_ID { get; set; }
+        [ForeignKey("LOCATION_ID")]
         public Location Location { get; set; }
 
         // Foreign Factor Key
         [Required]
-        public int FACTOR_ID { get; set; }
+        [ForeignKey("FACTOR_ID")]
         public Factor Factor { get; set; }
     }
 }

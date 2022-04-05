@@ -2,6 +2,7 @@
     ViewData["Title"] = "Home";
 }
 
+
 <div class="bg-dark text-white">
     <div class="container-fluid">
         <div class="navbar nav-item float-end p-2">
@@ -41,8 +42,11 @@
 
 <div class="row">
     <div class="col-2">
-
-        <p class="bg-danger text-white m-2 p-2 mb-2 rounded-pill sticky-top">Total Deaths 2019: </p>
+        <div class="card m-2 p-2">
+            <p class="mb-2 text-center"><b>2019 Stats</b></p>
+            <p class="bg-danger text-white m-2 p-2 mb-2 rounded-pill">Total Deaths: @ViewBag.Deaths</p>
+            <p class="bg-warning text-white m-2 p-2 mb-2 rounded-pill">Total Accidents: @ViewBag.Accidents</p>
+        </div>
     </div>
 
     <div class="col-8">
@@ -54,7 +58,7 @@
     </div>
 
     <div class="col-2">
-        <h4 class="sticky-top">Contact us here to report an accident:</h4>
+        <h4>Contact us here to report an accident:</h4>
     </div>
 </div>
 
