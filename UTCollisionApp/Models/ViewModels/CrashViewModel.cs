@@ -9,5 +9,6 @@ namespace UTCollisionApp.Models.ViewModels
     {
         public IQueryable<Crash> Crashes { get; set; }
         public IQueryable<Location> Locations { get; set; }
+        public PageInfo PageInfo { get; set; }
     }
 }
