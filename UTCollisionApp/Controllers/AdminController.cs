@@ -34,11 +34,7 @@ namespace UTCollisionApp.Controllers
             ViewBag.Controller = "Home";
             ViewBag.Action = "Index";
 
-            var x = _repo.Locations
-                
-                .ToList();
-
-            return View(x);
+            return View();
         }
 
         //[HttpPost]
