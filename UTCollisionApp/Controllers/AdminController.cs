@@ -77,6 +77,36 @@ namespace UTCollisionApp.Controllers
         }
 
         [HttpGet]
+        public IActionResult EditCrashForm(int CRASH_ID)
+        {
+            //Button Viewbags
+            ViewBag.Button = "Sign Out";
+            ViewBag.Controller = "Home";
+            ViewBag.Action = "Index";
+
+            //County Option Viewbag
+            ViewBag.Counties = _repo.Locations
+                .Select(x => x.COUNTY_NAME)
+                .Distinct()
+                .ToList();
+
+            var crash = _repo.Crashes
+                .Include(x => x.Location)
+                .Include(x => x.Factor)
+                .Single(x => x.CRASH_ID == CRASH_ID);
+
+            return View("EditCrashForm", crash);
+        }
+
+        [HttpPost]
+        public IActionResult EditCrashForm(Crash c)
+        {
+            _repo.SaveCrash(c);
+
+            return RedirectToAction("CrashTable");
+        }
+
+        [HttpGet]
         public IActionResult DeleteCrash(int CRASH_ID)
         {
             var crash = _repo.Crashes.Single(x => x.CRASH_ID == CRASH_ID);
