@@ -45,5 +45,10 @@ namespace UTCollisionApp.Controllers
         {
             return View();
         }
+
+        public IActionResult SeverityCalc()
+        {
+            return View(new SeverityPredictorData());
+        }
     }
 }
