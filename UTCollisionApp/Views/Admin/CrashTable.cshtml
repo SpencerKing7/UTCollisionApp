@@ -22,7 +22,8 @@
                     <th>Date</th>
                     <th>Severity</th>
                     <th>Route</th>
-                    <th colspan="2"></th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                 </tr>
             </thead>
 
@@ -37,10 +38,10 @@
                     <td>@c.CRASH_SEVERITY_ID</td>
                     <td>@c.Location.ROUTE</td>
                     <td>
-                        <a class="btn btn-primary btn-sm" asp-controller="Admin" asp-action="EditCrashForm" asp-route-CRASH_ID="@c.CRASH_ID">Edit</a>
+                        <a class="btn btn-warning btn-sm" asp-controller="Admin" asp-action="EditCrashForm" asp-route-CRASH_ID="@c.CRASH_ID">Edit</a>
                     </td>
                     <td>
-                        <a class="btn btn-primary btn-sm" asp-controller="Admin" asp-action="DeleteCrash" asp-route-CRASH_ID="@c.CRASH_ID">Delete</a>
+                        <a class="btn btn-danger btn-sm" asp-controller="Admin" asp-action="DeleteCrash" asp-route-CRASH_ID="@c.CRASH_ID">Delete</a>
                     </td>
                 </tr>
 
