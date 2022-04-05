@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -21,9 +22,18 @@ namespace UTCollisionApp.Controllers
 
         public IActionResult Index()
         {
+            //Button Viewbags
             ViewBag.Button = "Admin Sign In";
             ViewBag.Controller = "Admin";
             ViewBag.Action = "AdminHome";
+
+            //Stats Viewbags
+            ViewBag.Deaths = _repo.Crashes
+                .Where(x => x.CRASH_SEVERITY_ID == 5)
+                .Count();
+            ViewBag.Accidents = _repo.Crashes
+                .Where(x => x.CRASH_DATETIME.ToString().Contains("2019"))
+                .Count();
 
             return View();
         }
