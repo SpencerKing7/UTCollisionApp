@@ -62,5 +62,23 @@ namespace UTCollisionApp.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public IActionResult DeleteCrash(int CRASH_ID)
+        {
+            var crash = _repo.Crashes.Single(x => x.CRASH_ID == CRASH_ID);
+
+            return View("Delete", crash);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteCrash(Crash c)
+        {
+            var crash = _repo.Crashes.Single(x => x.CRASH_ID == c.CRASH_ID);
+
+            _repo.DeleteCrash(crash);
+
+            return RedirectToAction("CrashTable");
+        }
     }
 }
