@@ -1,0 +1,177 @@
+﻿@{
+    ViewData["Title"] = "Severity Calculator";
+}
+
+@model SeverityPredictorData
+
+<div class="text-center">
+    <h1 class="display-4">Sales Price Predictor</h1>
+    <div class="col-3"></div>
+    <div class="col">
+
+        <form method="post" asp-controller="Predictor" asp-action="predict" enctype="application/x-www-form-urlencoded">
+            <div class="form-group">
+                <label asp-for="Milepoint">Milepoint:</label>
+                <input class="form-control" asp-for="Milepoint" value="4.56" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Lat_utm_y">Lat_utm_y:</label>
+                <input class="form-control" asp-for="Lat_utm_y" value="4513124.085" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Long_utm_x">Long_utm_x:</label>
+                <input class="form-control" asp-for="Long_utm_x" value="422620.0512" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Work_zone_related">Work_zone_related:</label>
+                <input class="form-control" asp-for="Work_zone_related" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Pedestrian_involved">Pedestrian_involved:</label>
+                <input class="form-control" asp-for="Pedestrian_involved" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Bicyclist_involved">Bicyclist_involved:</label>
+                <input class="form-control" asp-for="Bicyclist_involved" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Motorcycle_involved">Motorcycle_involved:</label>
+                <input class="form-control" asp-for="Motorcycle_involved" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Improper_restraint">Improper_restraint:</label>
+                <input class="form-control" asp-for="Improper_restraint" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Unrestrained">Unrestrained:</label>
+                <input class="form-control" asp-for="Unrestrained" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Dui">DUI:</label>
+                <input class="form-control" asp-for="Dui" value="1" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Intersection_related">Intersection_related:</label>
+                <input class="form-control" asp-for="Intersection_related" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Wild_animal_related">Wild_animal_related:</label>
+                <input class="form-control" asp-for="Wild_animal_related" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Domestic_animal_related">Domestic_animal_related:</label>
+                <input class="form-control" asp-for="Domestic_animal_related" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Overturn_rollover">Overturn_rollover:</label>
+                <input class="form-control" asp-for="Overturn_rollover" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Commercial_motor_veh_involved">Commercial_motor_veh_involved:</label>
+                <input class="form-control" asp-for="Commercial_motor_veh_involved" value="1" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Teenage_driver_involved">Teenage_driver_involved:</label>
+                <input class="form-control" asp-for="Teenage_driver_involved" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Older_driver_involved">Older_driver_involved:</label>
+                <input class="form-control" asp-for="Older_driver_involved" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Night_dark_condition">Night_dark_condition:</label>
+                <input class="form-control" asp-for="Night_dark_condition" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Single_vehicle">Single_vehicle:</label>
+                <input class="form-control" asp-for="Single_vehicle" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Distracted_driving">Distracted_driving:</label>
+                <input class="form-control" asp-for="Distracted_driving" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Drowsy_driving">Drowsy_driving:</label>
+                <input class="form-control" asp-for="Drowsy_driving" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Roadway_departure">Roadway_departure:</label>
+                <input class="form-control" asp-for="Roadway_departure" value="1" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Route_89">Route_89:</label>
+                <input class="form-control" asp-for="Route_89" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Route_Other">Route_Other:</label>
+                <input class="form-control" asp-for="Route_Other" value="1" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Main_road_name_Other">Main_road_name_Other:</label>
+                <input class="form-control" asp-for="Main_road_name_Other" value="1" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="City_Other">City_Other:</label>
+                <input class="form-control" asp-for="City_Other" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="City_SALT_LAKE_CITY">City_SALT_LAKE_CITY:</label>
+                <input class="form-control" asp-for="City_SALT_LAKE_CITY" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="City_WEST_VALLEY_CITY">City_WEST_VALLEY_CITY:</label>
+                <input class="form-control" asp-for="City_WEST_VALLEY_CITY" value="1" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="County_name_Other">County_name_Other:</label>
+                <input class="form-control" asp-for="County_name_Other" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="County_name_SALT_LAKE">County_name_SALT_LAKE:</label>
+                <input class="form-control" asp-for="County_name_SALT_LAKE" value="1" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="County_name_UTAH">County_name_UTAH:</label>
+                <input class="form-control" asp-for="County_name_UTAH" value="0" /><br />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="County_name_WEBER">County_name_WEBER:</label>
+                <input class="form-control" asp-for="County_name_WEBER" value="0" /><br />
+            </div>
+
+            <button class="btn btn-outline-primary btn-warning" type="submit">Calculate</button>
+        </form>
+    </div>
+    <div class="col-3"></div>
+</div>
