@@ -26,16 +26,29 @@
                 <div class="form-group">
 
                     <label asp-for="CRASH_DATETIME">Date of crash:</label>
-                    <input class="form-control" asp-for="CRASH_DATETIME" />
+                    <input class="form-control" asp-for="CRASH_DATETIME" value="@DateTime.Today"/>
 
                     <label asp-for="Location.CITY">City:</label>
                     <input class="form-control" asp-for="Location.CITY" />
 
                     <label asp-for="Location.COUNTY_NAME">County:</label>
-                    <input class="form-control" asp-for="Location.COUNTY_NAME" />
+                    <select class="form-control" asp-for="Location.COUNTY_NAME">
+                        <option value="">--Select County--</option>
+                        @foreach (var l in ViewBag.Counties)
+                        {
+                            <option value="@l">@l</option>
+                        }
+                    </select>
 
                     <label asp-for="CRASH_SEVERITY_ID">Severity:</label>
-                    <input class="form-control" asp-for="CRASH_SEVERITY_ID" />
+                    <select class="form-control" asp-for="CRASH_SEVERITY_ID">
+                        <option value="">--Select Crash Severity--</option>
+                        <option value="1">No Injury</option>
+                        <option value="2">Possible Injury</option>
+                        <option value="3">Suspected Minor Injury</option>
+                        <option value="4">Suspected Serious Injury</option>
+                        <option value="5">Fatal</option>
+                    </select>
                 </div>
 
             @*Location*@
@@ -191,9 +204,9 @@
                     <input type="radio" name="departure" asp-for="Factor.ROADWAY_DEPARTURE" value="false" />
                     &emsp;<i>Roadway Departure?</i>
                 </div>
-
+            <br />
             <button type="submit" class="btn btn-lg btn-info">Save Crash</button>
-
+            <br /><br />
         </form>
     </div>
 
