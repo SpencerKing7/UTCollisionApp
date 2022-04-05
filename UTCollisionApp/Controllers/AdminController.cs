@@ -20,6 +20,7 @@ namespace UTCollisionApp.Controllers
 
         public IActionResult AdminHome()
         {
+            //Button Viewbags
             ViewBag.Button = "Sign Out";
             ViewBag.Controller = "Home";
             ViewBag.Action = "Index";
@@ -30,6 +31,7 @@ namespace UTCollisionApp.Controllers
         [HttpGet]
         public IActionResult AddCrashForm()
         {
+            //Button Viewbags
             ViewBag.Button = "Sign Out";
             ViewBag.Controller = "Home";
             ViewBag.Action = "Index";
@@ -45,6 +47,7 @@ namespace UTCollisionApp.Controllers
 
         public IActionResult CrashTable()
         {
+            //Button Viewbags
             ViewBag.Button = "Sign Out";
             ViewBag.Controller = "Home";
             ViewBag.Action = "Index";
