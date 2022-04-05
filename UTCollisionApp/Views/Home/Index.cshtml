@@ -5,10 +5,14 @@
 
 <div class="bg-dark text-white">
     <div class="container-fluid">
-        <div class="navbar nav-item float-end p-2">
-            <a>Statistics</a>
-            <a class="navbar nav-item float-end p-2" style="position:center" asp-controller="Home" asp-action="SeverityCalc">Severvity Calculator</a>
-            <a>Contact Us</a>
+
+        <div class="row">
+            <div class="navbar p-2">
+                <a class="nav-link">Statistics</a>
+                <a class="nav-link float-end p-2 text-white" style="position:center" asp-controller="Home" asp-action="SeverityCalc">Severvity Calculator</a>
+                <a class="nav-link" href="#contact">Contact Us</a>
+            </div>
+
         </div>
     </div>
 </div>
@@ -36,7 +40,7 @@
 </div>
 <br />
 <div class="text-center">
-    <h1 class="display-4">Utah State Collision Center</h1>
+    <h1 class="display-3">Utah State Collision Center</h1>
 </div>
 
 <br />
@@ -46,7 +50,8 @@
         <div class="card m-2 p-2">
             <p class="mb-2 text-center"><b>2019 Stats</b></p>
             <p class="bg-danger text-white m-2 p-2 mb-2 rounded-pill">Total Deaths: @ViewBag.Deaths</p>
-            <p class="bg-warning text-white m-2 p-2 mb-2 rounded-pill">Total Accidents: @ViewBag.Accidents</p>
+            <p class="bg-warning text-white m-2 p-2 mb-2 rounded-pill">Total Injuries: @ViewBag.Injuries</p>
+            <p class="bg-success text-white m-2 p-2 mb-2 rounded-pill">Total Accidents: @ViewBag.Accidents</p>
         </div>
     </div>
 
@@ -59,7 +64,12 @@
     </div>
 
     <div class="col-2">
-        <h4>Contact us here to report an accident:</h4>
+        <div class="card m-2 p-2">
+            <h4 class="text-center" id="contact">Contact Barbra Freeman for additional information about the Traffic Records Program:</h4>
+            <br />
+            <p class="text-center"><b>Phone:</b><br />(801) 783-7250</p>
+            <p class="text-center"><b>Email:</b><br /><a href="mailto:befreeman@utah.gov" target="_blank">bafreeman@utah.gov</a></p>
+        </div>
     </div>
 </div>
 

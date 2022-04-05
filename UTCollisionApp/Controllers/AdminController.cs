@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UTCollisionApp.Models;
+using UTCollisionApp.Models.ViewModels;
 
 namespace UTCollisionApp.Controllers
 {
@@ -65,7 +66,14 @@ namespace UTCollisionApp.Controllers
             ViewBag.Controller = "Home";
             ViewBag.Action = "Index";
 
-            return View();
+            var x = new CrashViewModel
+            {
+                Crashes = _repo.Crashes
+                .Include( x => x.Location)
+                .OrderByDescending(c => c.CRASH_DATETIME)
+            };
+
+            return View(x);
         }
 
         [HttpGet]
