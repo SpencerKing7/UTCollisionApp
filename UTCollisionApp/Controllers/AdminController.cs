@@ -76,7 +76,7 @@ namespace UTCollisionApp.Controllers
         {
             var crash = _repo.Crashes.Single(x => x.CRASH_ID == CRASH_ID);
 
-            return View("Delete", crash);
+            return View("DeleteCrash", crash);
         }
 
         [HttpPost]
