@@ -7,16 +7,18 @@ namespace UTCollisionApp.Models
     {
         [Key]
         [Required]
-        public int CrashId { get; set; }
-        public DateTime CrashDateTime { get; set; }
-        public int CrashSeverityId { get; set; }
+        public int CRASH_ID { get; set; }
+        public DateTime CRASH_DATETIME { get; set; }
+        public int CRASH_SEVERITY_ID { get; set; }
 
         // Foreign Location Key
-        public int LocationId { get; set; }
+        [Required]
+        public int LOCATION_ID { get; set; }
         public Location Location { get; set; }
 
         // Foreign Factor Key
-        public int FactorId { get; set; }
+        [Required]
+        public int FACTOR_ID { get; set; }
         public Factor Factor { get; set; }
     }
 }

@@ -1,0 +1,41 @@
+﻿@{
+    ViewData["Title"] = "Add Crash";
+}
+
+@model IEnumerable<Location>
+
+<div class="text-center">
+    <p class="display-2">Add a crash here</p>
+</div>
+
+<ul>
+    @foreach (var c in Model)
+    {
+        <li>@c.ROUTE</li>
+    }
+</ul>
+
+
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-10">
+
+
+        <form method="post">
+
+            @*Crash Table*@
+
+
+
+            @*Location*@
+
+
+
+            @*Factors*@
+
+        </form>
+
+
+    </div>
+    <div class="col-1"></div>
+</div>
