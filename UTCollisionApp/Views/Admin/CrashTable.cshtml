@@ -17,8 +17,8 @@
 
             <thead class="bg-success">
                 <tr>
+                    <th>City</th>
                     <th>County</th>
-                    <th>State</th>
                     <th>Date</th>
                     <th>Severity</th>
                     <th>Route</th>
@@ -28,16 +28,24 @@
 
             <tbody>
                 @* Load data from the tables here *@
+                @foreach (Crash c in Model.Crashes)
+                { 
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>Edit Button</td>
-                    <td>Delete Button</td>
-
+                    <td>@c.Location.CITY</td>
+                    <td>@c.Location.COUNTY_NAME</td>
+                    <td>@c.CRASH_DATETIME</td>
+                    <td>@c.CRASH_SEVERITY_ID</td>
+                    <td>@c.Location.ROUTE</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" asp-controller="Admin" asp-action="EditCrashForm" asp-route-CRASH_ID="@c.CRASH_ID">Edit</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary btn-sm" asp-controller="Admin" asp-action="DeleteCrash" asp-route-CRASH_ID="@c.CRASH_ID">Delete</a>
+                    </td>
                 </tr>
+
+                }
+
             </tbody>
 
         </table>
