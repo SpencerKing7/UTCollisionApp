@@ -36,14 +36,22 @@ namespace UTCollisionApp.Controllers
             ViewBag.Controller = "Home";
             ViewBag.Action = "Index";
 
-            return View();
+            //County Option Viewbag
+            ViewBag.Counties = _repo.Locations
+                .Select(x => x.COUNTY_NAME)
+                .Distinct()
+                .ToList();
+
+            return View(new Crash());
         }
 
-        //[HttpPost]
-        //public IActionResult AddCrashForm()
-        //{
-        //    return RedirectToAction("AdminHome");
-        //}
+        [HttpPost]
+        public IActionResult AddCrashForm(Crash c)
+        {
+            _repo.CreateCrash(c);
+
+            return RedirectToAction("AdminHome");
+        }
 
         public IActionResult CrashTable()
         {

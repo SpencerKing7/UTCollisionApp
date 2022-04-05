@@ -21,21 +21,21 @@ namespace UTCollisionApp.Models
         public IQueryable<Location> Locations => _context.Locations;
 
         //Editing
-        public void CreateCrash(Crash c)
+        public void SaveCrash(Crash c)
         {
             _context.Update(c);
             _context.SaveChanges();
         }
 
         //Adding
-        public void DeleteCrash(Crash c)
+        public void CreateCrash(Crash c)
         {
             _context.Add(c);
             _context.SaveChanges();
         }
 
         //Deleting
-        public void SaveCrash(Crash c)
+        public void DeleteCrash(Crash c)
         {
             _context.Remove(c);
             _context.SaveChanges();
