@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Admin Home";
+}
+
+<h1 class="text-center display-1 font-weight-bold">Welcome, User!</h1>
+
+<br /><br /><br />
+
+<div class="row">
+    <div class="col-1"></div>
+    <div class="col-5 text-center border-right">
+        <p class="display-4">Add a car crash here.</p>
+        <br /><br /><br /><br />
+        <a class="btn btn-lg btn-info btn-outline-info text-white" asp-controller="Admin" asp-action="AddCrashForm">Add Crash</a>
+        <br /><br /><br /><br />
+    </div>
+
+    <div class="col-5 text-center">
+        <p class="display-4">Search, Edit, or Delete a car crash here.</p>
+        <br />
+        <a class="btn btn-lg btn-info btn-outline-info text-white" asp-controller="Admin" asp-action="CrashTable">Search, Edit, Delete</a>
+        <br /><br /><br /><br />
+    </div>
+    <div class="col-1"></div>
+</div>

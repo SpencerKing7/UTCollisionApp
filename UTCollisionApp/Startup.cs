@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -8,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using UTCollisionApp.Models;
 
 namespace UTCollisionApp
 {
@@ -24,6 +26,13 @@ namespace UTCollisionApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<CollisionDbContext>(options =>
+            {
+                options.UseMySql(Configuration["ConnectionStrings:UTCollisionsDbConnection"]);
+            });
+
+            services.AddScoped<ICollisionRepository, EFCollisionRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,9 +57,7 @@ namespace UTCollisionApp
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapDefaultControllerRoute();
             });
         }
     }
