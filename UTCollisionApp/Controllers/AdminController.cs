@@ -59,18 +59,31 @@ namespace UTCollisionApp.Controllers
             return RedirectToAction("AdminHome");
         }
 
-        public IActionResult CrashTable()
+        public IActionResult CrashTable(int pageNum = 1)
         {
             //Button Viewbags
             ViewBag.Button = "Sign Out";
             ViewBag.Controller = "Home";
             ViewBag.Action = "Index";
 
+            //Pagination and Table Data
+            int pageSize = 25;
+
             var x = new CrashViewModel
             {
                 Crashes = _repo.Crashes
-                .Include( x => x.Location)
+                .Include(x => x.Location)
+                .Include(x => x.Factor)
                 .OrderByDescending(c => c.CRASH_DATETIME)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumCrashes = _repo.Crashes.Count(),
+                    CrashesPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
             };
 
             return View(x);
