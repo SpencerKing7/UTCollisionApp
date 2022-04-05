@@ -43,6 +43,11 @@ namespace UTCollisionApp.Controllers
                 .Distinct()
                 .ToList();
 
+            //IDs Viewbags
+            ViewBag.CrashID = _repo.Crashes.Max(x => x.CRASH_ID) + 1;
+            ViewBag.LocationID = _repo.Locations.Max(x => x.LOCATION_ID) + 1;
+            ViewBag.FactorID = _repo.Factors.Max(x => x.FACTOR_ID) + 1;
+
             return View(new Crash());
         }
 

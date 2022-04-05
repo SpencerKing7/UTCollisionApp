@@ -1,13 +1,13 @@
 ﻿@{
-    ViewData["Title"] = "Add Crash";
+    ViewData["Title"] = "Edit Crash";
 }
+
 
 @model Crash
 
 <div class="text-center">
-    <p class="display-2">Add a crash</p>
+    <p class="display-2">Edit a crash</p>
 </div>
-
 
 <div class="row">
     <div class="col-3"></div>
@@ -18,9 +18,9 @@
 
             <div asp-validation-summary="All" class="text-danger"></div>
 
-            <input type="hidden" asp-for="CRASH_ID" value="@ViewBag.CrashID" />
-            <input type="hidden" asp-for="Location.LOCATION_ID" value="@ViewBag.LocationID" />
-            <input type="hidden" asp-for="Factor.FACTOR_ID" value="@ViewBag.FactorID" />
+            <input type="hidden" asp-for="CRASH_ID" value="" />
+            <input type="hidden" asp-for="Location.LOCATION_ID" value="" />
+            <input type="hidden" asp-for="Factor.FACTOR_ID" value="" />
 
 
             @*Basic Info*@
@@ -28,7 +28,7 @@
             <div class="form-group">
 
                 <label asp-for="CRASH_DATETIME">Date of crash:</label>
-                <input class="form-control" asp-for="CRASH_DATETIME" value="@DateTime.Today" />
+                <input class="form-control" asp-for="CRASH_DATETIME" value="" />
 
                 <label asp-for="Location.CITY">City:</label>
                 <input class="form-control" asp-for="Location.CITY" />
@@ -207,7 +207,7 @@
                 &emsp;<i>Roadway Departure?</i>
             </div>
             <br />
-            <button type="submit" class="btn btn-lg btn-info">Save Crash</button>
+            <button type="submit" class="btn btn-lg btn-info">Update Crash</button>
             <br /><br />
         </form>
     </div>

@@ -29,7 +29,10 @@ namespace UTCollisionApp.Controllers
 
             //Stats Viewbags
             ViewBag.Deaths = _repo.Crashes
-                .Where(x => x.CRASH_SEVERITY_ID == 5)
+                .Where(x => x.CRASH_SEVERITY_ID == 5 && x.CRASH_DATETIME.ToString().Contains("2019"))
+                .Count();
+            ViewBag.Injuries = _repo.Crashes
+                .Where(x => (x.CRASH_SEVERITY_ID == 2 || x.CRASH_SEVERITY_ID == 3 || x.CRASH_SEVERITY_ID == 4) && x.CRASH_DATETIME.ToString().Contains("2019"))
                 .Count();
             ViewBag.Accidents = _repo.Crashes
                 .Where(x => x.CRASH_DATETIME.ToString().Contains("2019"))
