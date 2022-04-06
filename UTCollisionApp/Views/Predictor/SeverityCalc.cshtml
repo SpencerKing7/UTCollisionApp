@@ -32,17 +32,17 @@
                     <div class="w-50">
                         <div class="form-group">
                             <label asp-for="Milepoint">Mile Point:</label>
-                            <input class="form-control" asp-for="Milepoint" value="4.56" /><br />
+                            <input class="form-control" asp-for="Milepoint" placeholder="4.56" /><br />
                         </div>
 
                         <div class="form-group">
                             <label asp-for="Lat_utm_y">Latitude:</label>
-                            <input class="form-control" asp-for="Lat_utm_y" value="4513124.085" /><br />
+                            <input class="form-control" asp-for="Lat_utm_y" placeholder="4513124.085" /><br />
                         </div>
 
                         <div class="form-group">
                             <label asp-for="Long_utm_x">Longitude:</label>
-                            <input class="form-control" asp-for="Long_utm_x" value="422620.0512" /><br />
+                            <input class="form-control" asp-for="Long_utm_x" placeholder="422620.0512" /><br />
                         </div>
                     </div>
 
@@ -131,13 +131,13 @@
                     @*Factors*@
                     <h3>Additional Factors</h3><br />
                     @*Work zone*@
-                    <div class="form-group">
-                        <label asp-for="Work_zone_related">Yes</label>
-                        <input type="radio" name="work" asp-for="Work_zone_related" value="1" />
-                        <label asp-for="Work_zone_related">No</label>
-                        <input type="radio" name="work" asp-for="Work_zone_related" value="0" checked="checked" />&emsp;
-                        &emsp;<i>Work Zone Related?</i>
-                    </div>
+                <div class="form-group">
+                    <label asp-for="Work_zone_related">Yes</label>
+                    <input type="radio" name="work" asp-for="Work_zone_related" value="1" />&emsp;
+                    <label asp-for="Work_zone_related">No</label>
+                    <input type="radio" name="work" asp-for="Work_zone_related" value="0" checked="checked" />&emsp;
+                    &emsp;<i>Work Zone Related?</i>
+                </div>
                     @* Pedestrian *@
                     <div class="form-group">
                         <label asp-for="Pedestrian_involved">Yes</label>
