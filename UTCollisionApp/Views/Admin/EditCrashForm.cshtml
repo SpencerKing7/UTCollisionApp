@@ -54,7 +54,7 @@
             </div>
 
             @*Location*@
-            <br /><h3>Location of Crash</h3><br />
+            <br /><h3>Crash Location</h3><br />
             <div class="form-group">
 
                 <label asp-for="Location.MAIN_ROAD_NAME">Road Name:</label>
@@ -94,6 +94,14 @@
                 <input type="radio" name="bike" asp-for="Factor.BICYCLIST_INVOLVED" value="false" checked="checked" />
                 &emsp;<i>Bicyclist Invovled?</i>
             </div>
+            @* Motorcycle *@
+            <div class="form-group">
+                <label asp-for="Factor.MOTORCYCLE_INVOLVED">Yes</label>
+                <input type="radio" name="motorbike" asp-for="Factor.MOTORCYCLE_INVOLVED" value="true" />&emsp;
+                <label asp-for="Factor.MOTORCYCLE_INVOLVED">No</label>
+                <input type="radio" name="motorbike" asp-for="Factor.MOTORCYCLE_INVOLVED" value="false" checked="checked" />
+                &emsp;<i>Motorcycle Invovled?</i>
+            </div>
             @* Improper Restraint *@
             <div class="form-group">
                 <label asp-for="Factor.IMPROPER_RESTRAINT">Yes</label>
@@ -109,6 +117,14 @@
                 <label asp-for="Factor.UNRESTRAINED">No</label>
                 <input type="radio" name="seatbelt" asp-for="Factor.UNRESTRAINED" value="false" checked="checked" />
                 &emsp;<i>Did they have a seatbelt on?</i>
+            </div>
+            @* DUI *@
+            <div class="form-group">
+                <label asp-for="Factor.DUI">Yes</label>
+                <input type="radio" name="seatbelt" asp-for="Factor.DUI" value="true" />&emsp;
+                <label asp-for="Factor.DUI">No</label>
+                <input type="radio" name="seatbelt" asp-for="Factor.DUI" value="false" checked="checked" />
+                &emsp;<i>Were they driving under the influence?</i>
             </div>
             @* Intersection *@
             <div class="form-group">
