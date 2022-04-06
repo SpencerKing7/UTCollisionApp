@@ -2,15 +2,7 @@
 }
 
 @model IEnumerable<string>
-@*<div class="d-grid gap-2">
-        <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="" asp-route-pageNum="1" class="btn btn-block btn-outline-secondary">ALL CRASHES</a>
 
-        @foreach (string c in Model)
-        {
-            <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="@c" asp-route-pageNum="1"
-               class="btn btn-block @(ViewBag.SelectedCategory == c ? "btn-dark" : "btn-outline-secondary")">@c</a>
-        }
-    </div>*@
 
 <div class="row">
     <div class="col-4">
@@ -37,14 +29,35 @@
             </div>
         </div>
     </div>
+
+
+    @* Severity *@
     <div class="col-4">
-        @* Severity *@
         <h4 class="text-center">Filter by Severity</h4>
         <div class="dropdown text-center">
             <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                @if (ViewBag.County != null)
+                @if (ViewBag.Severity != null)
                 {
-                    <span>@ViewBag.County</span>
+                    @if (ViewBag.Severity == "1")
+                    {
+                        <span>1 - No Injury</span>
+                    }
+                    @if (ViewBag.Severity == "2")
+                    {
+                        <span>2 - Possible Injury</span>
+                    }
+                    @if (ViewBag.Severity == "3")
+                    {
+                        <span>3 - Suspected Minor Injury</span>
+                    }
+                    @if (ViewBag.Severity == "4")
+                    {
+                        <span>4 - Suspected Serious Injury</span>
+                    }
+                    @if (ViewBag.Severity == "5")
+                    {
+                        <span>5 - Fatal</span>
+                    }
                 }
                 else
                 {
@@ -52,15 +65,18 @@
                 }
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="" asp-route-pageNum="1" class="dropdown-item">ALL CRASHES</a>
-                @foreach (string c in Model)
-                {
-                    <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="@c" asp-route-pageNum="1"
-                       class="dropdown-item">@c</a>
-                }
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-severity="" asp-route-pageNum="" class="dropdown-item">All Levels</a>
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-severity="1" asp-route-pageNum="1" class="dropdown-item">1 - No Injury</a>
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-severity="2" asp-route-pageNum="1" class="dropdown-item">2 - Possible Injury</a>
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-severity="3" asp-route-pageNum="1" class="dropdown-item">3 - Suspected Minor Injury</a>
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-severity="4" asp-route-pageNum="1" class="dropdown-item">4 - Suspected Serious Injury</a>
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-severity="5" asp-route-pageNum="1" class="dropdown-item">5 - Fatal</a>
             </div>
         </div>
     </div>
+
+
+    @* Date *@
     <div class="col-4">
         <h4 class="text-center">Filter by Date</h4>
         <div class="dropdown text-center">
@@ -73,15 +89,14 @@
                 {
                     <span>Select Year</span>
                 }
-                    
+
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="" asp-route-pageNum="1" class="dropdown-item">ALL CRASHES</a>
-                @foreach (string c in Model)
-                {
-                    <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="@c" asp-route-pageNum="1"
-                       class="dropdown-item">@c</a>
-                }
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-year="" asp-route-pageNum="1" class="dropdown-item">All Years</a>
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-year="2016" asp-route-pageNum="1" class="dropdown-item">2016</a>
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-year="2017" asp-route-pageNum="1" class="dropdown-item">2017</a>
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-year="2018" asp-route-pageNum="1" class="dropdown-item">2018</a>
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-year="2019" asp-route-pageNum="1" class="dropdown-item">2019</a>
             </div>
         </div>
     </div>

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UTCollisionApp.Models;
+using UTCollisionApp.Models.ViewModels;
 
 namespace UTCollisionApp.Components
 {
@@ -18,14 +19,12 @@ namespace UTCollisionApp.Components
 
         public IViewComponentResult Invoke()
         {
-            ViewBag.SelectedCategory = RouteData?.Values["county"];
-
-            var counties = _repo.Crashes
+            var x = _repo.Crashes
                 .Select(x => x.Location.COUNTY_NAME)
                 .Distinct()
                 .OrderBy(x => x);
 
-            return View(counties);
+            return View(x);
         }
     }
 }

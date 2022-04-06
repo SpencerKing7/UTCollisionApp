@@ -63,7 +63,7 @@ namespace UTCollisionApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("Counties",
-                    "{county}/Page{pageNum}",
+                    "{county}/Page{pageNum}/{severity?}",
                     new { Controller = "Admin", action = "CrashTable", pageNum = 1 });
 
                 endpoints.MapControllerRoute("Paging",
