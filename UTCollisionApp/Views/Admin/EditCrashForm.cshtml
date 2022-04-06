@@ -9,6 +9,11 @@
     <p class="display-2">Edit a crash</p>
 </div>
 
+<div class="bg-dark text-white">
+    <div class="container-fluid">
+    </div>
+</div>
+
 <div class="row">
     <div class="col-3"></div>
 
@@ -103,7 +108,7 @@
                 &emsp;<label asp-for="Factor.MOTORCYCLE_INVOLVED"><i>Motorcycle Invovled?</i></label>
             </div>
             @* Improper Restraint *@
-            <div>
+            <div class="form-group">
                 <select asp-for="Factor.IMPROPER_RESTRAINT" value="@Model.Factor.IMPROPER_RESTRAINT">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
@@ -127,7 +132,7 @@
                 &emsp;<label asp-for="Factor.DUI"><i>Were they driving under the influence?</i></label>
             </div>
             @* Intersection *@
-            <div>
+            <div class="form-group">
                 <select asp-for="Factor.INTERSECTION_RELATED" value="@Model.Factor.INTERSECTION_RELATED">
                     <option value="0">No</option>
                     <option value="1">Yes</option>

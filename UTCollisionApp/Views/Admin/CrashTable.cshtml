@@ -9,14 +9,14 @@
     <p class="display-2">Search Crashes</p>
 </div>
 
-<div class="row">
-
+<div class="row container-fluid">
+    
     <div class="col-2 m-2">
         <h4 class="text-center">Filter by County</h4>
         <vc:counties></vc:counties>
     </div>
 
-    <div class="col-8">
+    <div class="col">
         <table class="table table-bordered table-striped mt-3">
             <thead class="bg-success">
                 <tr>
@@ -29,6 +29,7 @@
                     <th>Delete</th>
                 </tr>
             </thead>
+
 
             <tbody>
                 @* Load data from the tables here *@
@@ -50,7 +51,10 @@
                 }
             </tbody>
         </table>
-        <p><b>Page @Model.PageInfo.CurrentPage.ToString() of @Model.PageInfo.TotalPages.ToString() pages shown</b><br /><i>25 records per page</i></p>
+
+
+        <p><b>Page @Model.PageInfo.CurrentPage.ToString() of @Model.PageInfo.TotalPages.ToString()</b><br /><i>25 records per page</i></p>
+
 
         <div class="container-fluid text-center">
             <a asp-controller="Admin" asp-action="CrashTable" asp-route-pageNum="1">First Page</a>
@@ -63,7 +67,7 @@
     </div>
 
     <div class="col-2 m-2">
-        <h4 class="text-center">Detailed filters?</h4>
+        <vc:counties></vc:counties>
     </div>
 
 </div>
