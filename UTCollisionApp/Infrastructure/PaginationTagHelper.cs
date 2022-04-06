@@ -38,21 +38,43 @@ namespace UTCollisionApp.Infrastructure
 
             TagBuilder final = new TagBuilder("div");
 
-            for (int i = PageChanger.CurrentPage; i <= PageChanger.CurrentPage + 10; i++)
+            if (PageChanger.CurrentPage + 10 > PageChanger.TotalPages)
             {
-                TagBuilder tb = new TagBuilder("a");
-
-                tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
-                if (PageClassesEnabled)
+                for (int i = PageChanger.CurrentPage; i <= PageChanger.TotalPages; i++)
                 {
-                    tb.AddCssClass(PageClass);
-                    tb.AddCssClass(i == PageChanger.CurrentPage ? PageClassSelected : PageClassNormal);
-                }
-                tb.AddCssClass(PageClass);
-                tb.InnerHtml.Append(i.ToString());
+                    TagBuilder tb = new TagBuilder("a");
 
-                final.InnerHtml.AppendHtml(tb);
+                    tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
+                    if (PageClassesEnabled)
+                    {
+                        tb.AddCssClass(PageClass);
+                        tb.AddCssClass(i == PageChanger.CurrentPage ? PageClassSelected : PageClassNormal);
+                    }
+                    tb.AddCssClass(PageClass);
+                    tb.InnerHtml.Append(i.ToString());
+
+                    final.InnerHtml.AppendHtml(tb);
+                }
             }
+            else
+            {
+                for (int i = PageChanger.CurrentPage; i <= PageChanger.CurrentPage + 10; i++)
+                {
+                    TagBuilder tb = new TagBuilder("a");
+
+                    tb.Attributes["href"] = uh.Action(PageAction, new { pageNum = i });
+                    if (PageClassesEnabled)
+                    {
+                        tb.AddCssClass(PageClass);
+                        tb.AddCssClass(i == PageChanger.CurrentPage ? PageClassSelected : PageClassNormal);
+                    }
+                    tb.AddCssClass(PageClass);
+                    tb.InnerHtml.Append(i.ToString());
+
+                    final.InnerHtml.AppendHtml(tb);
+                }
+            }
+           
 
             tho.Content.AppendHtml(final.InnerHtml);
         }
