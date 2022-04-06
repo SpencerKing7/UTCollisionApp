@@ -208,9 +208,9 @@ namespace UTCollisionApp.Controllers
 
                 if (user != null)
                 {
-                    await SignInManager.SignOutAsync();
+                    await signInManager.SignOutAsync();
 
-                    if ((await SignInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
+                    if ((await signInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
                     {
                         return Redirect(loginModel?.ReturnUrl ?? "/Admin/AdminHome");
                     }
