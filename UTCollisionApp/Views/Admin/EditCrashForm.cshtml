@@ -28,7 +28,7 @@
             <div class="form-group">
 
                 <label asp-for="CRASH_DATETIME">Date of crash:</label>
-                <input class="form-control" asp-for="CRASH_DATETIME" value="@Model.CRASH_DATETIME" />
+                <input type="datetime" class="form-control" asp-for="CRASH_DATETIME" value="@Model.CRASH_DATETIME" />
 
                 <label asp-for="Location.CITY">City:</label>
                 <input class="form-control" asp-for="Location.CITY" value="@Model.Location.CITY" />
@@ -71,16 +71,16 @@
             @*Factors*@
             <br /><h3>Additional Factors</h3><br />
             @*Work zone*@
-            <div class="form-group" value="@Model.Factor.WORK_ZONE_RELATED">
-                <label asp-for="Factor.WORK_ZONE_RELATED">Yes</label>
-                <input type="radio" name="work" asp-for="Factor.WORK_ZONE_RELATED" value="1" />&emsp;
-                <label asp-for="Factor.WORK_ZONE_RELATED">No</label>
-                <input type="radio" name="work" asp-for="Factor.WORK_ZONE_RELATED" value="0" checked="checked" />
-                &emsp;<i>Work Zone Related?</i>
+            <div class="form-group">
+                <select asp-for="Factor.WORK_ZONE_RELATED" value="@Model.Factor.WORK_ZONE_RELATED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.WORK_ZONE_RELATED"><i>Work Zone Related?</i></label>
             </div>
             @* Pedestrian *@
             <div class="form-group">
-                <select asp-for="Factor.PEDESTRIAN_INVOLVED">
+                <select asp-for="Factor.PEDESTRIAN_INVOLVED" value="@Model.Factor.PEDESTRIAN_INVOLVED">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -88,7 +88,7 @@
             </div>
             @* Bicyclist *@
             <div class="form-group">
-                <select asp-for="Factor.BICYCLIST_INVOLVED">
+                <select asp-for="Factor.BICYCLIST_INVOLVED" value="@Model.Factor.BICYCLIST_INVOLVED">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -96,15 +96,15 @@
             </div>
             @* Motorcycle *@
             <div class="form-group">
-                <label asp-for="Factor.MOTORCYCLE_INVOLVED">Yes</label>
-                <input type="radio" name="motorbike" asp-for="Factor.MOTORCYCLE_INVOLVED" value="true" />&emsp;
-                <label asp-for="Factor.MOTORCYCLE_INVOLVED">No</label>
-                <input type="radio" name="motorbike" asp-for="Factor.MOTORCYCLE_INVOLVED" value="false" checked="checked" />
-                &emsp;<i>Motorcycle Invovled?</i>
+                <select asp-for="Factor.MOTORCYCLE_INVOLVED" value="@Model.Factor.MOTORCYCLE_INVOLVED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.MOTORCYCLE_INVOLVED"><i>Motorcycle Invovled?</i></label>
             </div>
             @* Improper Restraint *@
             <div>
-                <select asp-for="Factor.IMPROPER_RESTRAINT">
+                <select asp-for="Factor.IMPROPER_RESTRAINT" value="@Model.Factor.IMPROPER_RESTRAINT">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -112,7 +112,7 @@
             </div>
             @* Unrestrained *@
             <div class="form-group">
-                <select asp-for="Factor.UNRESTRAINED">
+                <select asp-for="Factor.UNRESTRAINED" value="@Model.Factor.UNRESTRAINED">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -120,15 +120,15 @@
             </div>
             @* DUI *@
             <div class="form-group">
-                <label asp-for="Factor.DUI">Yes</label>
-                <input type="radio" name="dui" asp-for="Factor.DUI" value="true" />&emsp;
-                <label asp-for="Factor.DUI">No</label>
-                <input type="radio" name="dui" asp-for="Factor.DUI" value="false" checked="checked" />
-                &emsp;<i>Were they driving under the influence?</i>
+                <select asp-for="Factor.DUI" value="@Model.Factor.DUI">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.DUI"><i>Were they driving under the influence?</i></label>
             </div>
             @* Intersection *@
             <div>
-                <select asp-for="Factor.INTERSECTION_RELATED">
+                <select asp-for="Factor.INTERSECTION_RELATED" value="@Model.Factor.INTERSECTION_RELATED">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -136,7 +136,7 @@
             </div>
             @* Wild Animal *@
             <div class="form-group">
-                <select asp-for="Factor.WILD_ANIMAL_RELATED">
+                <select asp-for="Factor.WILD_ANIMAL_RELATED" value="@Model.Factor.WILD_ANIMAL_RELATED">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -144,7 +144,7 @@
             </div>
             @* Domestic Animal *@
             <div class="form-group">
-                <select asp-for="Factor.DOMESTIC_ANIMAL_RELATED">
+                <select asp-for="Factor.DOMESTIC_ANIMAL_RELATED" value="@Model.Factor.DOMESTIC_ANIMAL_RELATED">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -152,7 +152,7 @@
             </div>
             @* Overturn *@
             <div class="form-group">
-                <select asp-for="Factor.OVERTURN_ROLLOVER">
+                <select asp-for="Factor.OVERTURN_ROLLOVER" value="@Model.Factor.OVERTURN_ROLLOVER">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -160,7 +160,7 @@
             </div>
             @* Commercial Motor Veh Invovled *@
             <div class="form-group">
-                <select asp-for="Factor.COMMERCIAL_MOTOR_VEH_INVOLVED">
+                <select asp-for="Factor.COMMERCIAL_MOTOR_VEH_INVOLVED" value="@Model.Factor.COMMERCIAL_MOTOR_VEH_INVOLVED">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -168,7 +168,7 @@
             </div>
             @* Teenage Driver *@
             <div class="form-group">
-                <select asp-for="Factor.TEENAGE_DRIVER_INVOLVED">
+                <select asp-for="Factor.TEENAGE_DRIVER_INVOLVED" value="@Model.Factor.TEENAGE_DRIVER_INVOLVED">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -176,7 +176,7 @@
             </div>
             @* Older Driver *@
             <div class="form-group">
-                <select asp-for="Factor.OLDER_DRIVER_INVOLVED">
+                <select asp-for="Factor.OLDER_DRIVER_INVOLVED" value="@Model.Factor.OLDER_DRIVER_INVOLVED">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -184,7 +184,7 @@
             </div>
             @* Night Dark Condition *@
             <div class="form-group">
-                <select asp-for="Factor.NIGHT_DARK_CONDITION">
+                <select asp-for="Factor.NIGHT_DARK_CONDITION" value="@Model.Factor.NIGHT_DARK_CONDITION">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -192,7 +192,7 @@
             </div>
             @* Single Vehicle *@
             <div class="form-group">
-                <select asp-for="Factor.SINGLE_VEHICLE">
+                <select asp-for="Factor.SINGLE_VEHICLE" value="@Model.Factor.SINGLE_VEHICLE">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -200,7 +200,7 @@
             </div>
             @* Distracted *@
             <div class="form-group">
-                <select asp-for="Factor.DISTRACTED_DRIVING">
+                <select asp-for="Factor.DISTRACTED_DRIVING" value="@Model.Factor.DISTRACTED_DRIVING">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -208,7 +208,7 @@
             </div>
             @* Drowsy *@
             <div class="form-group">
-                <select asp-for="Factor.DROWSY_DRIVING">
+                <select asp-for="Factor.DROWSY_DRIVING" value="@Model.Factor.DROWSY_DRIVING">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
@@ -216,7 +216,7 @@
             </div>
             @* Roadway Departure *@
             <div class="form-group">
-                <select asp-for="Factor.ROADWAY_DEPARTURE">
+                <select asp-for="Factor.ROADWAY_DEPARTURE" value="@Model.Factor.ROADWAY_DEPARTURE">
                     <option value="0">No</option>
                     <option value="1">Yes</option>
                 </select>
