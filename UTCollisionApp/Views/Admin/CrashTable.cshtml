@@ -9,14 +9,14 @@
     <p class="display-2">Search Crashes</p>
 </div>
 
-<div class="row">
-   
+<div class="row container-fluid">
+    
     <div class="col-2 m-2">
         <h4 class="text-center">Filter by County</h4>
         <vc:counties></vc:counties>
     </div>
 
-    <div class="col-8">
+    <div class="col">
         <table class="table table-bordered table-striped mt-3">
             <thead class="bg-success">
                 <tr>
@@ -29,6 +29,7 @@
                     <th>Delete</th>
                 </tr>
             </thead>
+
 
             <tbody>
                 @* Load data from the tables here *@
@@ -50,15 +51,28 @@
                 }
             </tbody>
         </table>
-        @*<div page-changer="@Model.PageInfo" page-action="CrashTable" page-classes-enabled="true" page-class="btn"
+
+
+        <p><b>Page @Model.PageInfo.CurrentPage.ToString() of @Model.PageInfo.TotalPages.ToString()</b><br /><i>25 records per page</i></p>
+
+
+        <div class="container-fluid text-center">
+            <a asp-controller="Admin" asp-action="CrashTable" asp-route-pageNum="1">First Page</a>
+            <div page-changer="@Model.PageInfo" page-action="CrashTable" page-classes-enabled="true" page-class="btn"
                  page-class-normal="btn-outline-dark" page-class-selected="btn-dark"
                  class="btn-group pull-right m-1">
-            </div>*@
+            </div>
+            <a asp-controller="Admin" asp-action="CrashTable" asp-route-pageNum="@Model.PageInfo.TotalPages">Last Page (@Model.PageInfo.TotalPages.ToString())</a>
+        </div>
     </div>
 
     <div class="col-2 m-2">
-        <h4 class="text-center">Detailed filters?</h4>
+        <vc:counties></vc:counties>
     </div>
-    
+
 </div>
+
+
+        
+    
 

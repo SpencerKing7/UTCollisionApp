@@ -44,21 +44,11 @@ namespace UTCollisionApp.Controllers
         public IActionResult Privacy()
         {
             //Button Viewbags
-            ViewBag.Button = "Sign Out";
-            ViewBag.Controller = "Home";
-            ViewBag.Action = "Index";
+            ViewBag.Button = "Admin Sign In";
+            ViewBag.Controller = "Admin";
+            ViewBag.Action = "AdminHome";
 
             return View();
-        }
-
-        public IActionResult SeverityCalc()
-        {
-            //Button Viewbags
-            ViewBag.Button = "Sign Out";
-            ViewBag.Controller = "Home";
-            ViewBag.Action = "Index";
-
-            return View(new SeverityPredictorData());
         }
     }
 }

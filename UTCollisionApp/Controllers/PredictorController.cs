@@ -17,10 +17,40 @@ namespace UTCollisionApp.Controllers
         {
             _session = session;
         }
+        
+        //[HttpGet]
+        //public IActionResult SeverityCalc()
+        //{
+        //    ViewBag.Button = "Admin Sign In";
+        //    ViewBag.Controller = "Admin";
+        //    ViewBag.Action = "AdminHome";
+
+        //    ViewBag.PredictionScore = 0;
+
+        //    return View(new SeverityPredictorData());
+        //}
+
+        [HttpGet]
+        public IActionResult SeverityCalc(Prediction prediction)
+        {
+            ViewBag.Button = "Admin Sign In";
+            ViewBag.Controller = "Admin";
+            ViewBag.Action = "AdminHome";
+
+            ViewBag.PredictionScore = prediction.PredictedSeverity;
+
+            return View(new SeverityPredictorData());
+        }
 
         [HttpGet]
         public IActionResult Results(Prediction p)
         {
+
+            //Button Viewbags
+            ViewBag.Button = "Admin Sign In";
+            ViewBag.Controller = "Admin";
+            ViewBag.Action = "AdminHome";
+
             return View(p);
         }
 
@@ -31,9 +61,13 @@ namespace UTCollisionApp.Controllers
                 NamedOnnxValue.CreateFromTensor("float_input", data.AsTensor())
             });
             Tensor<float> score = result.First().AsTensor<float>();
-            var prediction = new Prediction { PredictedSeverity = score.First() };
+            var roundedScore = score.First();
 
-            return RedirectToAction("Results", prediction);
+            roundedScore = (float)System.Math.Round(roundedScore, 2);
+
+            var prediction = new Prediction { PredictedSeverity = roundedScore };
+
+            return RedirectToAction("SeverityCalc", prediction);
         }
     }
 }
