@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
@@ -7,16 +8,21 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using UTCollisionApp.Models;
+using UTCollisionApp.Models.ViewModels;
 
 namespace UTCollisionApp.Controllers
 {
     public class HomeController : Controller
     {
+        private UserManager<IdentityUser> userManager;
+        private SignInManager<IdentityUser> SignInManager;
         private ICollisionRepository _repo { get; set; }
 
         //Constructor
-        public HomeController(ICollisionRepository temp)
+        public HomeController(ICollisionRepository temp, UserManager<IdentityUser> um, SignInManager<IdentityUser> sim)
         {
+            userManager = um;
+            SignInManager = sim;
             _repo = temp;
         }
 
@@ -25,7 +31,7 @@ namespace UTCollisionApp.Controllers
             //Button Viewbags
             ViewBag.Button = "Admin Sign In";
             ViewBag.Controller = "Admin";
-            ViewBag.Action = "AdminHome";
+            ViewBag.Action = "Login";
 
             //Stats Viewbags
             ViewBag.Deaths = _repo.Crashes
@@ -67,9 +73,58 @@ namespace UTCollisionApp.Controllers
             //Button Viewbags
             ViewBag.Button = "Admin Sign In";
             ViewBag.Controller = "Admin";
-            ViewBag.Action = "AdminHome";
+            ViewBag.Action = "Login";
 
             return View();
         }
+
+        [HttpGet]
+        public IActionResult CreateUser()
+        {
+            //Button Viewbags
+            ViewBag.Button = "Sign Out";
+            ViewBag.Controller = "Home";
+            ViewBag.Action = "Index";
+
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser (CreateUserViewModel model)
+        {
+            //Button Viewbags
+            ViewBag.Button = "Sign Out";
+            ViewBag.Controller = "Home";
+            ViewBag.Action = "Index";
+
+            if (ModelState.IsValid)
+            {
+                var user = new IdentityUser { UserName = model.UserName,  Email = model.Email};
+                var result = await userManager.CreateAsync(user, model.Password);
+
+                if(result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false);
+                    return RedirectToAction("Index", "Home");
+                }
+
+                foreach(var error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+
+            }
+            
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await SignInManager.SignOutAsync();
+            return RedirectToAction("index", "home");
+
+        }
+
     }
 }
