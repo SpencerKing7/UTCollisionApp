@@ -59,21 +59,68 @@ namespace UTCollisionApp.Controllers
             return RedirectToAction("AdminHome");
         }
 
-        public IActionResult CrashTable()
+        public IActionResult CrashTable(string county, int pageNum = 1)
         {
             //Button Viewbags
             ViewBag.Button = "Sign Out";
             ViewBag.Controller = "Home";
             ViewBag.Action = "Index";
 
+            //Pagination and Table Data
+            int pageSize = 25;
+
             var x = new CrashViewModel
             {
                 Crashes = _repo.Crashes
-                .Include( x => x.Location)
+                .Include(x => x.Location)
+                .Include(x => x.Factor)
+                .Where(x => x.Location.COUNTY_NAME == county || county == null)
                 .OrderByDescending(c => c.CRASH_DATETIME)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumCrashes = 
+                        (county == null
+                        ? _repo.Crashes.Count()
+                        : _repo.Crashes.Where(x => x.Location.COUNTY_NAME == county).Count()),
+                    CrashesPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
             };
 
             return View(x);
+        }
+
+        [HttpGet]
+        public IActionResult EditCrashForm(int CRASH_ID)
+        {
+            //Button Viewbags
+            ViewBag.Button = "Sign Out";
+            ViewBag.Controller = "Home";
+            ViewBag.Action = "Index";
+
+            //County Option Viewbag
+            ViewBag.Counties = _repo.Locations
+                .Select(x => x.COUNTY_NAME)
+                .Distinct()
+                .ToList();
+
+            var crash = _repo.Crashes
+                .Include(x => x.Location)
+                .Include(x => x.Factor)
+                .Single(x => x.CRASH_ID == CRASH_ID);
+
+            return View("EditCrashForm", crash);
+        }
+
+        [HttpPost]
+        public IActionResult EditCrashForm(Crash c)
+        {
+            _repo.SaveCrash(c);
+
+            return RedirectToAction("CrashTable");
         }
 
         [HttpGet]
@@ -81,7 +128,7 @@ namespace UTCollisionApp.Controllers
         {
             var crash = _repo.Crashes.Single(x => x.CRASH_ID == CRASH_ID);
 
-            return View("Delete", crash);
+            return View("DeleteCrash", crash);
         }
 
         [HttpPost]

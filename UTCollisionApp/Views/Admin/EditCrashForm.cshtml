@@ -14,13 +14,13 @@
 
     <div class="col-6">
 
-        <form method="post" asp-controller="Admin" asp-action="AddCrashForm">
+        <form method="post" asp-controller="Admin" asp-action="EditCrashForm">
 
             <div asp-validation-summary="All" class="text-danger"></div>
 
-            <input type="hidden" asp-for="CRASH_ID" value="" />
-            <input type="hidden" asp-for="Location.LOCATION_ID" value="" />
-            <input type="hidden" asp-for="Factor.FACTOR_ID" value="" />
+            <input type="hidden" asp-for="CRASH_ID" value="@Model.CRASH_ID" />
+            <input type="hidden" asp-for="Location.LOCATION_ID" value="@Model.Location.LOCATION_ID" />
+            <input type="hidden" asp-for="Factor.FACTOR_ID" value="@Model.Factor.FACTOR_ID" />
 
 
             @*Basic Info*@
@@ -28,10 +28,10 @@
             <div class="form-group">
 
                 <label asp-for="CRASH_DATETIME">Date of crash:</label>
-                <input class="form-control" asp-for="CRASH_DATETIME" value="" />
+                <input class="form-control" asp-for="CRASH_DATETIME" value="@Model.CRASH_DATETIME" />
 
                 <label asp-for="Location.CITY">City:</label>
-                <input class="form-control" asp-for="Location.CITY" />
+                <input class="form-control" asp-for="Location.CITY" value="@Model.Location.CITY" />
 
                 <label asp-for="Location.COUNTY_NAME">County:</label>
                 <select class="form-control" asp-for="Location.COUNTY_NAME">
@@ -44,7 +44,7 @@
 
                 <label asp-for="CRASH_SEVERITY_ID">Severity:</label>
                 <select class="form-control" asp-for="CRASH_SEVERITY_ID">
-                    <option value="">--Select Crash Severity--</option>
+                    <option value="@Model.CRASH_SEVERITY_ID">--Select Crash Severity--</option>
                     <option value="1">No Injury</option>
                     <option value="2">Possible Injury</option>
                     <option value="3">Suspected Minor Injury</option>
@@ -58,13 +58,13 @@
             <div class="form-group">
 
                 <label asp-for="Location.MAIN_ROAD_NAME">Road Name:</label>
-                <input class="form-control" asp-for="Location.MAIN_ROAD_NAME" />
+                <input class="form-control" asp-for="Location.MAIN_ROAD_NAME" value="@Model.Location.MAIN_ROAD_NAME" />
 
                 <label asp-for="Location.ROUTE">Route:</label>
-                <input class="form-control" asp-for="Location.ROUTE" />
+                <input class="form-control" asp-for="Location.ROUTE" value="@Model.Location.ROUTE" />
 
                 <label asp-for="Location.MILEPOINT">Mile Point:</label>
-                <input class="form-control" asp-for="Location.MILEPOINT" />
+                <input class="form-control" asp-for="Location.MILEPOINT" value="@Model.Location.MILEPOINT" />
             </div>
 
 

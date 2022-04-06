@@ -7,8 +7,10 @@
     <div class="container-fluid">
 
         <div class="row">
+
             <div class="navbar p-2">
                 <a class="nav-link float-end p-2 text-white" style="position:center">Statistics</a>
+
                 <a class="nav-link float-end p-2 text-white" style="position:center" asp-controller="Home" asp-action="SeverityCalc">Severvity Calculator</a>
                 <a class="nav-link float-end p-2 text-white" style="position:center" href="#contact">Contact Us</a>
             </div>
@@ -17,7 +19,7 @@
     </div>
 </div>
 
-<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+@*<div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <img class="d-block w-100" src="~/img/crash4.jpg" alt="First slide" style="height: 400px;">
@@ -37,17 +39,17 @@
         <span class="carousel-control-next-icon" aria-hidden="true"></span>
         <span class="sr-only">Next</span>
     </a>
-</div>
+</div>*@
 <br />
-<div class="text-center">
+<div class="text-center container-fluid">
     <h1 class="display-3">Utah State Collision Center</h1>
 </div>
 
 <br />
 
-<div class="row">
+<div class="row container-fluid">
     <div class="col-2">
-        <div class="card m-2 p-2">
+        <div class="card m-2">
             <p class="mb-2 text-center"><b>2019 Stats</b></p>
             <p class="bg-danger text-white m-2 p-2 mb-2 rounded-pill">Total Deaths: @ViewBag.Deaths</p>
             <p class="bg-warning text-white m-2 p-2 mb-2 rounded-pill">Total Injuries: @ViewBag.Injuries</p>
@@ -64,7 +66,7 @@
     </div>
 
     <div class="col-2">
-        <div class="card m-2 p-2">
+        <div class="card m-2">
             <h4 class="text-center" id="contact">Contact Barbra Freeman for additional information about the Traffic Records Program:</h4>
             <br />
             <p class="text-center"><b>Phone:</b><br />(801) 783-7250</p>
