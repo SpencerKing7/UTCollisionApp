@@ -21,7 +21,6 @@ namespace UTCollisionApp
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    //.UseUrls("http://*:80");
                 });
     }
 }
