@@ -9,6 +9,18 @@ html, body {
     overflow-x: hidden;
 }
 
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+}
+
+.centerImage {
+    text-align: center;
+    display: block;
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;
