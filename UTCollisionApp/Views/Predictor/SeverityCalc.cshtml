@@ -1,11 +1,12 @@
 ﻿@{
     ViewData["Title"] = "Severity Calculator";
+    
 }
 
 @model SeverityPredictorData
 
 <div class="text-center">
-    <h1 class="display-4 mt-4">Sales Price Predictor</h1>
+    <h1 class="display-4 mt-4">Severity Calculator</h1>
 </div>
 
 <div class="row">
@@ -13,7 +14,14 @@
     <div class="col-8 mt-3">
 
         <form method="post" asp-controller="Predictor" asp-action="predict" enctype="application/x-www-form-urlencoded">
-
+            <div class="row text-center">
+                <div class="col-4"></div>
+                    <div class="col-4 badge-primary mt-4 mb-5 p-3 rounded">
+                        <h3>Predicted Severity:</h3>
+                        <h3 id="Value">@ViewBag.PredictionScore</h3>
+                    </div>
+                <div class="col-4"></div>
+            </div>
             <ul asp-validation-summary="All" class="text-danger list-unstyled"></ul>
             <div class="row">
                 <div class="col-1"></div>
@@ -215,7 +223,7 @@
                         <label asp-for="Commercial_motor_veh_involved">Yes</label>
                         <input type="radio" name="commercial" asp-for="Commercial_motor_veh_involved" value="1" />&emsp;
                         <label asp-for="Commercial_motor_veh_involved">No</label>
-                        <input type="radio" name="commericial" asp-for="Commercial_motor_veh_involved" value="0" checked="checked" />
+                        <input type="radio" name="commercial" asp-for="Commercial_motor_veh_involved" value="0" checked="checked" />
                         &emsp;<i>Was a commercial motor vehicle involed?</i>
                     </div>
                     @* Teenage Driver *@
@@ -281,8 +289,6 @@
                 <button class="btn col-6 btn-outline-primary btn-primary mt-4 mb-5" type="submit">Calculate</button>
                 <div class="col-3"></div>
             </div>
-
-                
         </form>
     </div>
     <div class="col-3"></div>
