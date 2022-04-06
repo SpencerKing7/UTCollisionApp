@@ -30,6 +30,7 @@
                 </tr>
             </thead>
 
+
             <tbody>
                 @* Load data from the tables here *@
                 @foreach (Crash c in Model.Crashes)
@@ -50,6 +51,7 @@
                 }
             </tbody>
         </table>
+        
         <p><b>Page @Model.PageInfo.CurrentPage.ToString() of @Model.PageInfo.TotalPages.ToString() pages shown</b><br /><i>25 records per page</i></p>
 
         <div class="container-fluid text-center">
