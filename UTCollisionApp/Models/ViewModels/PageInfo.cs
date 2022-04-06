@@ -10,6 +10,7 @@ namespace UTCollisionApp.Models.ViewModels
         public int TotalNumCrashes { get; set; }
         public int CrashesPerPage { get; set; }
         public int CurrentPage { get; set; }
+        
 
         //How many pages?
         public int TotalPages => (int)Math.Ceiling((double)TotalNumCrashes / CrashesPerPage);
