@@ -71,12 +71,12 @@
             @*Factors*@
             <br /><h3>Additional Factors</h3><br />
             @*Work zone*@
-            <div class="form-group" value="@Model.Factor.WORK_ZONE_RELATED">
-                <label asp-for="Factor.WORK_ZONE_RELATED">Yes</label>
-                <input type="radio" name="work" asp-for="Factor.WORK_ZONE_RELATED" value="1" />&emsp;
-                <label asp-for="Factor.WORK_ZONE_RELATED">No</label>
-                <input type="radio" name="work" asp-for="Factor.WORK_ZONE_RELATED" value="0" checked="checked" />
-                &emsp;<i>Work Zone Related?</i>
+            <div class="form-group">
+                <select asp-for="Factor.WORK_ZONE_RELATED" value="@Model.Factor.WORK_ZONE_RELATED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.WORK_ZONE_RELATED"><i>Work Zone Related?</i></label>
             </div>
             @* Pedestrian *@
             <div class="form-group">
