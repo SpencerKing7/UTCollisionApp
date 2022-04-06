@@ -6,6 +6,17 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Security-Policy"
+          content="base-uri 'self';
+           	block-all-mixed-content;
+           	default-src 'self';
+           	img-src data: https:;
+           	object-src 'none';
+           	script-src 'self'
+                      	'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA='
+                      	'unsafe-eval';
+           	style-src 'self';
+           	upgrade-insecure-requests;">
     <title>@ViewData["Title"] - UT Collisions</title>
     <link rel="icon" type="image/x-icon" href="~/assets/logo.png" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -26,44 +37,28 @@
                 <div class="navbar-brand float-end p-3">
                     @if (signInManager.IsSignedIn(User))
                     {
-                        <li class="nav-item">
-                            <form method="post" asp-action="logout" asp-controller="home">
-                                <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
+                        <div class="nav-item">
+                            <form method="post" asp-action="Logout" asp-controller="Home">
+                                <button type="submit" class="btn btn-lg btn-crashLightGrey" style="width:auto">
                                     Logout @User.Identity.Name
                                 </button>
 
                             </form>
 
-                        </li>
+                        </div>
 
                     }
                     else
                     {
-                        <li class="nav-item">
-                            <a asp-action="login" asp-controller="home" class="nav-link">Login</a>
-                        </li>
-
+                        <div class="nav-item">
+                            <a asp-action="Login" asp-controller="Admin" class="btn btn-lg btn-crashLightGrey">Login</a>
+                        </div>
                     }
 
                 </div>
             </div>
         </div>
     </div>
-    @*<div class="bg-dark text-white">
-        <div class="container-fluid">
-
-            <div class="row">
-
-                <div class="navbar p-2">
-                    <a class="nav-link float-end p-2 text-white" style="position:center">Statistics</a>
-
-                    <a class="nav-link float-end p-2 text-white" style="position:center" asp-controller="Predictor" asp-action="SeverityCalc">Severvity Calculator</a>
-                    <a class="nav-link float-end p-2 text-white" style="position:center" href="#contact">Contact Us</a>
-                </div>
-
-            </div>
-        </div>
-    </div>*@
 
     <div class="row">
         <div class="col">
