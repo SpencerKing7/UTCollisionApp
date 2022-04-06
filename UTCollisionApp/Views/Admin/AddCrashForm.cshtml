@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "Add Crash";
 }
 
@@ -16,7 +16,7 @@
 
         <form method="post" asp-controller="Admin" asp-action="AddCrashForm">
 
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <ul asp-validation-summary="All" class="text-danger list-unstyled"></ul>
 
             <input type="hidden" asp-for="CRASH_ID" value="@ViewBag.CrashID" />
             <input type="hidden" asp-for="Location.LOCATION_ID" value="@ViewBag.LocationID" />
@@ -72,14 +72,15 @@
             <br /><h3>Additional Factors</h3><br />
             @*Work zone*@
             <div class="form-group">
-                <label asp-for="Factor.WORK_ZONE_RELATED">Yes</label>
-                <input type="radio" name="work" asp-for="Factor.WORK_ZONE_RELATED" value="true" />&emsp;
-                <label asp-for="Factor.WORK_ZONE_RELATED">No</label>
-                <input type="radio" name="work" asp-for="Factor.WORK_ZONE_RELATED" value="false" checked="checked" />
-                &emsp;<i>Work Zone Related?</i>
+                <select asp-for="Factor.WORK_ZONE_RELATED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.WORK_ZONE_RELATED"><i>Work Zone Related?</i></label>
             </div>
             @* Pedestrian *@
             <div class="form-group">
+              
                 <select asp-for="Factor.PEDESTRIAN_INVOLVED">
                     <option value="0">No</option>
                     <option value="1">Yes</option>

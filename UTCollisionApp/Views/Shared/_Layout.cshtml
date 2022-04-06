@@ -25,10 +25,10 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col navbar-brand">
-                        <a class="nav-link text-white" asp-controller="Home" asp-action="Index">
-                            @*<img src="~/img/fender-bender.png"/>*@
-                            <span class="display-4">UT Collision Home</span>
-                        </a>
+                    <a class="nav-link text-white" asp-controller="Home" asp-action="Index">
+                        @*<img src="~/img/fender-bender.png"/>*@
+                        <span class="display-4">UT Collision Home</span>
+                    </a>
                 </div>
                 <div class="navbar-brand float-end p-3">
                     <a class="nav-link text-white btn btn-lg btn-dark" style="position:center" asp-controller="@ViewBag.Controller" asp-action="@ViewBag.Action" >@ViewBag.Button</a>
@@ -46,11 +46,11 @@
         </div>
     </div>
 
-    <footer class="border-top footer text-muted">
+    @*<footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2022 - UTCollisionApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
-    </footer>
+    </footer>*@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
