@@ -43,18 +43,18 @@ namespace UTCollisionApp
 
             
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                .AddEntityFrameworkStores<AppIdentityDBContext>();
-            services.Configure<IdentityOptions>(options =>
+            services.AddIdentity<IdentityUser, IdentityRole> (options =>
             {
-                // Default Password settings.
+                //Password settings.
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = true;
                 options.Password.RequireUppercase = true;
                 options.Password.RequiredLength = 12;
-                options.Password.RequiredUniqueChars = 1;
-            });
+                options.Password.RequiredUniqueChars = 5;
+            }).AddEntityFrameworkStores<AppIdentityDBContext>();
+
+            
 
             services.AddScoped<ICollisionRepository, EFCollisionRepository>();
 
@@ -98,7 +98,7 @@ namespace UTCollisionApp
                 endpoints.MapDefaultControllerRoute();
             });
 
-            IdentitySeedData.EnsurePopulated(app);
+            
         }
     }
 }

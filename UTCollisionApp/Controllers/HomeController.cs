@@ -97,5 +97,13 @@ namespace UTCollisionApp.Controllers
             return View(model);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await SignInManager.SignOutAsync();
+            return RedirectToAction("index", "home");
+
+        }
+
     }
 }
