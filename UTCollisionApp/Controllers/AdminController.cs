@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -11,11 +12,15 @@ namespace UTCollisionApp.Controllers
 {
     public class AdminController : Controller
     {
+        private UserManager<IdentityUser> userManager;
+        private SignInManager<IdentityUser> SignInManager;
         private ICollisionRepository _repo { get; set; }
 
         //Constructor
-        public AdminController(ICollisionRepository temp)
+        public AdminController(ICollisionRepository temp, UserManager<IdentityUser> um, SignInManager<IdentityUser> sim)
         {
+            userManager = um;
+            SignInManager = sim;
             _repo = temp;
         }
 
@@ -140,5 +145,50 @@ namespace UTCollisionApp.Controllers
 
             return RedirectToAction("CrashTable");
         }
+
+        
+
+        
+
+        public IActionResult Login (string returnUrl)
+        {
+            //Button Viewbags
+            ViewBag.Button = "Sign Out";
+            ViewBag.Controller = "Home";
+            ViewBag.Action = "Index"; 
+
+            return View(new LoginModel { ReturnUrl = returnUrl });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login (LoginModel loginModel)
+        {
+            //Button Viewbags
+            ViewBag.Button = "Sign Out";
+            ViewBag.Controller = "Home";
+            ViewBag.Action = "Index";
+
+            if (ModelState.IsValid)
+            {
+                IdentityUser user = await userManager.FindByNameAsync(loginModel.Username);
+
+                if (user != null)
+                {
+                    await SignInManager.SignOutAsync();
+
+                    if ((await SignInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
+                    {
+                        return Redirect(loginModel?.ReturnUrl ?? "/AdminHome");
+                    }
+                }
+
+                
+            }
+            ModelState.AddModelError("", "Invalid Name or Password");
+            return View(loginModel);
+        }
+
+
+
     }
 }

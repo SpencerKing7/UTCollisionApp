@@ -1,6 +1,10 @@
 ﻿@{
     ViewData["Title"] = "Admin Home";
 }
+
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
+
 @model IEnumerable<Crash>
 <h1 class="text-center display-1 font-weight-bold">Welcome, User!</h1>
 

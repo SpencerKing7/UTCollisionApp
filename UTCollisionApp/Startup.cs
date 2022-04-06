@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -31,13 +33,23 @@ namespace UTCollisionApp
             services.AddDbContext<CollisionDbContext>(options =>
             {
                 options.UseMySql(Configuration["ConnectionStrings:UTCollisionsDbConnection"]);
+                
             });
+
+            services.AddDbContext<AppIdentityDBContext>(options =>
+                options.UseMySql(Configuration["ConnectionStrings:IdentityConnection"]));
+
+            
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDBContext>();
 
             services.AddScoped<ICollisionRepository, EFCollisionRepository>();
 
             services.AddSingleton<InferenceSession>(
               new InferenceSession("OnnxModels/severity_predictor.onnx")
             );
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,9 +67,10 @@ namespace UTCollisionApp
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseSession();
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -72,6 +85,8 @@ namespace UTCollisionApp
 
                 endpoints.MapDefaultControllerRoute();
             });
+
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 }

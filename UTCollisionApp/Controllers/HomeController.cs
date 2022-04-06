@@ -25,7 +25,7 @@ namespace UTCollisionApp.Controllers
             //Button Viewbags
             ViewBag.Button = "Admin Sign In";
             ViewBag.Controller = "Admin";
-            ViewBag.Action = "AdminHome";
+            ViewBag.Action = "Login";
 
             //Stats Viewbags
             ViewBag.Deaths = _repo.Crashes
@@ -43,11 +43,21 @@ namespace UTCollisionApp.Controllers
 
         public IActionResult Privacy()
         {
+            //Button Viewbags
+            ViewBag.Button = "Sign Out";
+            ViewBag.Controller = "Home";
+            ViewBag.Action = "Index";
+
             return View();
         }
 
         public IActionResult SeverityCalc()
         {
+            //Button Viewbags
+            ViewBag.Button = "Sign Out";
+            ViewBag.Controller = "Home";
+            ViewBag.Action = "Index";
+
             return View(new SeverityPredictorData());
         }
     }
