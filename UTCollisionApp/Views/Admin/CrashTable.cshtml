@@ -10,7 +10,7 @@
 </div>
 
 <div class="row">
-   
+
     <div class="col-2 m-2">
         <h4 class="text-center">Filter by County</h4>
         <vc:counties></vc:counties>
@@ -50,15 +50,17 @@
                 }
             </tbody>
         </table>
-        @*<div page-changer="@Model.PageInfo" page-action="CrashTable" page-classes-enabled="true" page-class="btn"
-                 page-class-normal="btn-outline-dark" page-class-selected="btn-dark"
-                 class="btn-group pull-right m-1">
-            </div>*@
     </div>
 
     <div class="col-2 m-2">
         <h4 class="text-center">Detailed filters?</h4>
     </div>
-    
+
 </div>
+
+<div page-changer="@Model.PageInfo" page-action="CrashTable" page-classes-enabled="true" page-class="btn"
+        page-class-normal="btn-outline-dark" page-class-selected="btn-dark"
+        class="btn-group pull-right m-1">
+</div>
+
 

@@ -38,7 +38,7 @@ namespace UTCollisionApp.Infrastructure
 
             TagBuilder final = new TagBuilder("div");
 
-            for (int i = 1; i <= PageChanger.TotalPages; i++)
+            for (int i = PageChanger.CurrentPage; i <= PageChanger.CurrentPage + 10; i++)
             {
                 TagBuilder tb = new TagBuilder("a");
 

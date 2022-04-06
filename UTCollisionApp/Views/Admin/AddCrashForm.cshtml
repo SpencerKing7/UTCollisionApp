@@ -1,4 +1,4 @@
-﻿@{
+@{
     ViewData["Title"] = "Add Crash";
 }
 
@@ -16,7 +16,7 @@
 
         <form method="post" asp-controller="Admin" asp-action="AddCrashForm">
 
-            <div asp-validation-summary="All" class="text-danger"></div>
+            <ul asp-validation-summary="All" class="text-danger list-unstyled"></ul>
 
             <input type="hidden" asp-for="CRASH_ID" value="@ViewBag.CrashID" />
             <input type="hidden" asp-for="Location.LOCATION_ID" value="@ViewBag.LocationID" />
@@ -72,139 +72,140 @@
             <br /><h3>Additional Factors</h3><br />
             @*Work zone*@
             <div class="form-group">
-                <label asp-for="Factor.WORK_ZONE_RELATED">Yes</label>
-                <input type="radio" name="work" asp-for="Factor.WORK_ZONE_RELATED" value="true" />&emsp;
-                <label asp-for="Factor.WORK_ZONE_RELATED">No</label>
-                <input type="radio" name="work" asp-for="Factor.WORK_ZONE_RELATED" value="false" checked="checked" />
-                &emsp;<i>Work Zone Related?</i>
+                <select asp-for="Factor.WORK_ZONE_RELATED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.WORK_ZONE_RELATED"><i>Work Zone Related?</i></label>
             </div>
             @* Pedestrian *@
             <div class="form-group">
-                <label asp-for="Factor.PEDESTRIAN_INVOLVED">Yes</label>
-                <input type="radio" name="ped" asp-for="Factor.PEDESTRIAN_INVOLVED" value="true" />&emsp;
-                <label asp-for="Factor.PEDESTRIAN_INVOLVED">No</label>
-                <input type="radio" name="ped" asp-for="Factor.PEDESTRIAN_INVOLVED" value="false" checked="checked" />
-                &emsp;<i>Pedestrian Involved?</i>
+              
+                <select asp-for="Factor.PEDESTRIAN_INVOLVED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.PEDESTRIAN_INVOLVED"><i>Pedestrian involved?</i></label>
             </div>
             @* Bicyclist *@
             <div class="form-group">
-                <label asp-for="Factor.BICYCLIST_INVOLVED">Yes</label>
-                <input type="radio" name="bike" asp-for="Factor.BICYCLIST_INVOLVED" value="true" />&emsp;
-                <label asp-for="Factor.BICYCLIST_INVOLVED">No</label>
-                <input type="radio" name="bike" asp-for="Factor.BICYCLIST_INVOLVED" value="false" checked="checked" />
-                &emsp;<i>Bicyclist Invovled?</i>
+                <select asp-for="Factor.BICYCLIST_INVOLVED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.BICYCLIST_INVOLVED"><i>Bicyclist Invovled?</i></label>
             </div>
             @* Improper Restraint *@
-            <div class="form-group">
-                <label asp-for="Factor.IMPROPER_RESTRAINT">Yes</label>
-                <input type="radio" name="restraint" asp-for="Factor.IMPROPER_RESTRAINT" value="true" />&emsp;
-                <label asp-for="Factor.IMPROPER_RESTRAINT">No</label>
-                <input type="radio" name="restraint" asp-for="Factor.IMPROPER_RESTRAINT" value="false" checked="checked" />
-                &emsp;<i>Improper Restraint? (Were they wearing a seatbelt correctly?)</i>
+            <div>
+                <select asp-for="Factor.IMPROPER_RESTRAINT">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.IMPROPER_RESTRAINT"><i>Improper Restraint? (Were they wearing a seatbelt incorrectly?)</i></label>
             </div>
             @* Unrestrained *@
             <div class="form-group">
-                <label asp-for="Factor.UNRESTRAINED">Yes</label>
-                <input type="radio" name="seatbelt" asp-for="Factor.UNRESTRAINED" value="true" />&emsp;
-                <label asp-for="Factor.UNRESTRAINED">No</label>
-                <input type="radio" name="seatbelt" asp-for="Factor.UNRESTRAINED" value="false" checked="checked" />
-                &emsp;<i>Did they have a seatbelt on?</i>
+                <select asp-for="Factor.UNRESTRAINED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.UNRESTRAINED"><i>Did they have a seatbelt on?</i></label>
             </div>
             @* Intersection *@
-            <div class="form-group">
-                <label asp-for="Factor.INTERSECTION_RELATED">Yes</label>
-                <input type="radio" name="intersection" asp-for="Factor.INTERSECTION_RELATED" value="true" />&emsp;
-                <label asp-for="Factor.INTERSECTION_RELATED">No</label>
-                <input type="radio" name="intersection" asp-for="Factor.INTERSECTION_RELATED" value="false" checked="checked" />
-                &emsp;<i>Intersection Related?</i>
+            <div>
+                <select asp-for="Factor.INTERSECTION_RELATED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.INTERSECTION_RELATED"><i>Intersection Related?</i></label>
             </div>
             @* Wild Animal *@
             <div class="form-group">
-                <label asp-for="Factor.WILD_ANIMAL_RELATED">Yes</label>
-                <input type="radio" name="wild" asp-for="Factor.WILD_ANIMAL_RELATED" value="true" />&emsp;
-                <label asp-for="Factor.WILD_ANIMAL_RELATED">No</label>
-                <input type="radio" name="wild" asp-for="Factor.WILD_ANIMAL_RELATED" value="false" checked="checked" />
-                &emsp;<i>Wild Animal Related?</i>
+                <select asp-for="Factor.WILD_ANIMAL_RELATED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.WILD_ANIMAL_RELATED"><i>Wild Animal Related?</i></label>
             </div>
             @* Domestic Animal *@
             <div class="form-group">
-                <label asp-for="Factor.DOMESTIC_ANIMAL_RELATED">Yes</label>
-                <input type="radio" name="domestic" asp-for="Factor.DOMESTIC_ANIMAL_RELATED" value="true" />&emsp;
-                <label asp-for="Factor.DOMESTIC_ANIMAL_RELATED">No</label>
-                <input type="radio" name="domestic" asp-for="Factor.DOMESTIC_ANIMAL_RELATED" value="false" checked="checked" />
-                &emsp;<i>Domestic Animal Related?</i>
+                <select asp-for="Factor.DOMESTIC_ANIMAL_RELATED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.DOMESTIC_ANIMAL_RELATED"><i>Domestic Animal Involved?</i></label>
             </div>
             @* Overturn *@
             <div class="form-group">
-                <label asp-for="Factor.OVERTURN_ROLLOVER">Yes</label>
-                <input type="radio" name="overturn" asp-for="Factor.OVERTURN_ROLLOVER" value="true" />&emsp;
-                <label asp-for="Factor.OVERTURN_ROLLOVER">No</label>
-                <input type="radio" name="overturn" asp-for="Factor.OVERTURN_ROLLOVER" value="false" checked="checked" />
-                &emsp;<i>Overturn Rollover?</i>
+                <select asp-for="Factor.OVERTURN_ROLLOVER">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.OVERTURN_ROLLOVER"><i>Overturn Rollover?</i></label>
             </div>
             @* Commercial Motor Veh Invovled *@
             <div class="form-group">
-                <label asp-for="Factor.COMMERCIAL_MOTOR_VEH_INVOLVED">Yes</label>
-                <input type="radio" name="commercial" asp-for="Factor.COMMERCIAL_MOTOR_VEH_INVOLVED" value="true" />&emsp;
-                <label asp-for="Factor.COMMERCIAL_MOTOR_VEH_INVOLVED">No</label>
-                <input type="radio" name="commericial" asp-for="Factor.COMMERCIAL_MOTOR_VEH_INVOLVED" value="false" checked="checked" />
-                &emsp;<i>Was a commercial motor vehicle involed?</i>
+                <select asp-for="Factor.COMMERCIAL_MOTOR_VEH_INVOLVED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.COMMERCIAL_MOTOR_VEH_INVOLVED"><i>Commericial Vehicle Involved?</i></label>
             </div>
             @* Teenage Driver *@
             <div class="form-group">
-                <label asp-for="Factor.TEENAGE_DRIVER_INVOLVED">Yes</label>
-                <input type="radio" name="teenager" asp-for="Factor.TEENAGE_DRIVER_INVOLVED" value="true" />&emsp;
-                <label asp-for="Factor.TEENAGE_DRIVER_INVOLVED">No</label>
-                <input type="radio" name="teenager" asp-for="Factor.TEENAGE_DRIVER_INVOLVED" value="false" checked="checked" />
-                &emsp;<i>Teenage Driver Involved?</i>
+                <select asp-for="Factor.TEENAGE_DRIVER_INVOLVED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.TEENAGE_DRIVER_INVOLVED"><i>Teenage Driver Involed?</i></label>
             </div>
             @* Older Driver *@
             <div class="form-group">
-                <label asp-for="Factor.OLDER_DRIVER_INVOLVED">Yes</label>
-                <input type="radio" name="older" asp-for="Factor.OLDER_DRIVER_INVOLVED" value="true" />&emsp;
-                <label asp-for="Factor.OLDER_DRIVER_INVOLVED">No</label>
-                <input type="radio" name="older" asp-for="Factor.OLDER_DRIVER_INVOLVED" value="false" checked="checked" />
-                &emsp;<i>Older Driver Involved? (Older than 64 yrs old)</i>
+                <select asp-for="Factor.OLDER_DRIVER_INVOLVED">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.OLDER_DRIVER_INVOLVED"><i>Older Driver Involved (64 and older)?</i></label>
             </div>
             @* Night Dark Condition *@
             <div class="form-group">
-                <label asp-for="Factor.NIGHT_DARK_CONDITION">Yes</label>
-                <input type="radio" name="night" asp-for="Factor.NIGHT_DARK_CONDITION" value="true" />&emsp;
-                <label asp-for="Factor.NIGHT_DARK_CONDITION">No</label>
-                <input type="radio" name="night" asp-for="Factor.NIGHT_DARK_CONDITION" value="false" checked="checked" />
-                &emsp;<i>Night/Dark Conditions?</i>
+                <select asp-for="Factor.NIGHT_DARK_CONDITION">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.NIGHT_DARK_CONDITION"><i>Night/Dark Conditions?</i></label>
             </div>
             @* Single Vehicle *@
             <div class="form-group">
-                <label asp-for="Factor.SINGLE_VEHICLE">Yes</label>
-                <input type="radio" name="single" asp-for="Factor.SINGLE_VEHICLE" value="true" />&emsp;
-                <label asp-for="Factor.SINGLE_VEHICLE">No</label>
-                <input type="radio" name="single" asp-for="Factor.SINGLE_VEHICLE" value="false" checked="checked" />
-                &emsp;<i>Single Vehicle Accident?</i>
+                <select asp-for="Factor.SINGLE_VEHICLE">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.SINGLE_VEHICLE"><i>Single Vehicle Involved?</i></label>
             </div>
             @* Distracted *@
             <div class="form-group">
-                <label asp-for="Factor.DISTRACTED_DRIVING">Yes</label>
-                <input type="radio" name="distracted" asp-for="Factor.DISTRACTED_DRIVING" value="true" />&emsp;
-                <label asp-for="Factor.DISTRACTED_DRIVING">No</label>
-                <input type="radio" name="distracted" asp-for="Factor.DISTRACTED_DRIVING" value="false" checked="checked" />
-                &emsp;<i>Distracted Driving?</i>
+                <select asp-for="Factor.DISTRACTED_DRIVING">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.DISTRACTED_DRIVING"><i>Distracted Driving?</i></label>
             </div>
             @* Drowsy *@
             <div class="form-group">
-                <label asp-for="Factor.DROWSY_DRIVING">Yes</label>
-                <input type="radio" name="drowsy" asp-for="Factor.DROWSY_DRIVING" value="true" />&emsp;
-                <label asp-for="Factor.DROWSY_DRIVING">No</label>
-                <input type="radio" name="drowsy" asp-for="Factor.DROWSY_DRIVING" value="false" checked="checked" />
-                &emsp;<i>Drowsy Driving?</i>
+                <select asp-for="Factor.DROWSY_DRIVING">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.DROWSY_DRIVING"><i>Drowsy Driving?</i></label>
             </div>
             @* Roadway Departure *@
             <div class="form-group">
-                <label asp-for="Factor.ROADWAY_DEPARTURE">Yes</label>
-                <input type="radio" name="departure" asp-for="Factor.ROADWAY_DEPARTURE" value="true" />&emsp;
-                <label asp-for="Factor.ROADWAY_DEPARTURE">No</label>
-                <input type="radio" name="departure" asp-for="Factor.ROADWAY_DEPARTURE" value="false" checked="checked" />
-                &emsp;<i>Roadway Departure?</i>
+                <select asp-for="Factor.ROADWAY_DEPARTURE">
+                    <option value="0">No</option>
+                    <option value="1">Yes</option>
+                </select>
+                &emsp;<label asp-for="Factor.ROADWAY_DEPARTURE"><i>Roadway Departure?</i></label>
             </div>
             <br />
             <button type="submit" class="btn btn-lg btn-info">Save Crash</button>
