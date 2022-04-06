@@ -36,7 +36,7 @@ namespace UTCollisionApp
             services.AddScoped<ICollisionRepository, EFCollisionRepository>();
 
             services.AddSingleton<InferenceSession>(
-              new InferenceSession("OnnxModels/severity_predictor.onnx")
+              new InferenceSession("severity_predictor.onnx")
             );
         }
 
