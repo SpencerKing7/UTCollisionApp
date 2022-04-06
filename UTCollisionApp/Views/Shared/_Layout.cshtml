@@ -6,17 +6,6 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy"
-          content="base-uri 'self';
-           	block-all-mixed-content;
-           	default-src 'self';
-           	img-src data: https:;
-           	object-src 'none';
-           	script-src 'self'
-                      	'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA='
-                      	'unsafe-eval';
-           	style-src 'self';
-           	upgrade-insecure-requests;">
     <title>@ViewData["Title"] - UT Collisions</title>
     <link rel="icon" type="image/x-icon" href="~/assets/logo.png" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -51,7 +40,7 @@
                     else
                     {
                         <li class="nav-item">
-                            <a asp-action="login" asp-controller="admin" class="nav-link">Login</a>
+                            <a asp-action="login" asp-controller="home" class="nav-link">Login</a>
                         </li>
 
                     }

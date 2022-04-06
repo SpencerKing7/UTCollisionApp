@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -52,9 +53,17 @@ namespace UTCollisionApp
                 options.Password.RequireUppercase = true;
                 options.Password.RequiredLength = 12;
                 options.Password.RequiredUniqueChars = 5;
-            }).AddEntityFrameworkStores<AppIdentityDBContext>();
+            })
+                .AddRoles<IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDBContext>();
 
-            
+            services.AddAuthorization(options =>
+            {
+                options.FallbackPolicy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .Build();
+            });
+
 
             services.AddScoped<ICollisionRepository, EFCollisionRepository>();
 
@@ -62,6 +71,9 @@ namespace UTCollisionApp
               new InferenceSession("severity_predictor.onnx")
             );
             services.AddSession();
+
+
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

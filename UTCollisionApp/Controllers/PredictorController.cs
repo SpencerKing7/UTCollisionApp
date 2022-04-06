@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.ML.OnnxRuntime;
@@ -9,6 +10,7 @@ using UTCollisionApp.Models;
 
 namespace UTCollisionApp.Controllers
 {
+    [AllowAnonymous]
     public class PredictorController : Controller
     {
         private InferenceSession _session;

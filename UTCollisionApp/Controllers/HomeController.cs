@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -12,6 +13,7 @@ using UTCollisionApp.Models.ViewModels;
 
 namespace UTCollisionApp.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
         private UserManager<IdentityUser> userManager;
@@ -76,6 +78,44 @@ namespace UTCollisionApp.Controllers
             ViewBag.Action = "Login";
 
             return View();
+        }
+
+        public IActionResult Login(string returnUrl)
+        {
+            //Button Viewbags
+            ViewBag.Button = "Sign Out";
+            ViewBag.Controller = "Home";
+            ViewBag.Action = "Index";
+
+            return View(new LoginModel { ReturnUrl = returnUrl });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginModel loginModel)
+        {
+            //Button Viewbags
+            ViewBag.Button = "Sign Out";
+            ViewBag.Controller = "Home";
+            ViewBag.Action = "Index";
+
+            if (ModelState.IsValid)
+            {
+                IdentityUser user = await userManager.FindByNameAsync(loginModel.Username);
+
+                if (user != null)
+                {
+                    await SignInManager.SignOutAsync();
+
+                    if ((await SignInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
+                    {
+                        return Redirect(loginModel?.ReturnUrl ?? "/");
+                    }
+                }
+
+
+            }
+            ModelState.AddModelError("", "Invalid Name or Password");
+            return View(loginModel);
         }
 
         [HttpGet]
