@@ -21,6 +21,11 @@ namespace UTCollisionApp.Controllers
         [HttpGet]
         public IActionResult Results(Prediction p)
         {
+            //Button Viewbags
+            ViewBag.Button = "Admin Sign In";
+            ViewBag.Controller = "Admin";
+            ViewBag.Action = "AdminHome";
+
             return View(p);
         }
 
