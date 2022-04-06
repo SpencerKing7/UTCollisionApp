@@ -28,6 +28,8 @@ namespace UTCollisionApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
+
             services.AddControllersWithViews();
 
             services.AddDbContext<CollisionDbContext>(options =>
@@ -43,6 +45,16 @@ namespace UTCollisionApp
 
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDBContext>();
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Default Password settings.
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 12;
+                options.Password.RequiredUniqueChars = 1;
+            });
 
             services.AddScoped<ICollisionRepository, EFCollisionRepository>();
 

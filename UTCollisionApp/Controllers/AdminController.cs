@@ -178,7 +178,7 @@ namespace UTCollisionApp.Controllers
 
                     if ((await SignInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
                     {
-                        return Redirect(loginModel?.ReturnUrl ?? "/AdminHome");
+                        return Redirect(loginModel?.ReturnUrl ?? "/Admin/AdminHome");
                     }
                 }
 
@@ -187,6 +187,9 @@ namespace UTCollisionApp.Controllers
             ModelState.AddModelError("", "Invalid Name or Password");
             return View(loginModel);
         }
+
+
+
 
 
 

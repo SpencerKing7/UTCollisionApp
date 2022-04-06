@@ -20,14 +20,14 @@
     </div>
 
     <div class="m-1 p-1">
-        
+
         <div class="text-danger" asp-validation-summary="All"></div>
 
         <form method="post" asp-controller="Admin" asp-action="Login">
 
             <div class="form-group">
                 <label asp-for="Username">UserName:</label>
-                <input asp-for="Username" class="form-control"/>
+                <input asp-for="Username" class="form-control" />
             </div>
 
             <div class="form-group">
@@ -37,11 +37,13 @@
 
             <button class="btn btn-primary" type="submit">Login</button>
 
-            <input type="hidden" asp-for="ReturnUrl"/>
+            <input type="hidden" asp-for="ReturnUrl" />
 
         </form>
     </div>
-
+    <a class="nav-link text-white" asp-controller="Home" asp-action="CreateUser">
+        <span class="display-4">Create User?</span>
+    </a>
 
 </body>
 

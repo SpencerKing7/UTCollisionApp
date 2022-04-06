@@ -37,6 +37,7 @@ namespace UTCollisionApp.Models
             {
                 user = new IdentityUser(adminUser);
 
+                
                 user.Email = "admin@yeet.com";
                 user.PhoneNumber = "555-1234";
 
