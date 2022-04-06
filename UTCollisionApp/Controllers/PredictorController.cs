@@ -9,10 +9,7 @@ using UTCollisionApp.Models;
 
 namespace UTCollisionApp.Controllers
 {
-    [ApiController]
-    [Route("/predict")]
-
-    public class PredictorController : ControllerBase
+    public class PredictorController : Controller
     {
         private InferenceSession _session;
 
@@ -21,23 +18,13 @@ namespace UTCollisionApp.Controllers
             _session = session;
         }
 
-        [HttpPost]
-        [Consumes("application/json")]
-        public ActionResult Predict(SeverityPredictorData data)
+        [HttpGet]
+        public IActionResult Results(Prediction p)
         {
-            var result = _session.Run(new List<NamedOnnxValue>
-            {
-                NamedOnnxValue.CreateFromTensor("float_input", data.AsTensor())
-            });
-            Tensor<float> score = result.First().AsTensor<float>();
-            var prediction = new Prediction { PredictedSeverity = score.First() };
-            result.Dispose();
-            return Ok(prediction);
+            return View(p);
         }
 
-        [HttpPost]
-        [Consumes("application/x-www-form-urlencoded")]
-        public ActionResult PredictForm([FromForm] SeverityPredictorData data)
+        public IActionResult Predict(SeverityPredictorData data)
         {
             var result = _session.Run(new List<NamedOnnxValue>
             {
@@ -45,8 +32,8 @@ namespace UTCollisionApp.Controllers
             });
             Tensor<float> score = result.First().AsTensor<float>();
             var prediction = new Prediction { PredictedSeverity = score.First() };
-            result.Dispose();
-            return Ok(prediction);
+
+            return RedirectToAction("Results", prediction);
         }
     }
 }
