@@ -4,50 +4,36 @@
 
 @model LoginModel
 
-<html>
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col">
+            <div class="m-1 p-1">
 
-<head>
-    <meta name"viewport" content="width=device-width"/>
-    <title>Login</title>
-    <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />
+                <h3>Please Enter Username and Password</h3>
 
-</head>
+                <form method="post" asp-controller="Admin" asp-action="Login">
+                    <div asp-validation-summary="All" class="text-danger list-unstyled"></div>
+                    <div class="form-group">
+                        <label asp-for="Username">Username:</label>
+                        <input asp-for="Username" class="form-control" />
+                    </div>
 
-<body>
-    <div class="bg-dark text-white p-2">
-        <span class="navbar-brand m-l-2"></span>
+                    <div class="form-group">
+                        <label asp-for="Password">Password:</label>
+                        <input asp-for="Password" class="form-control" />
+                    </div>
 
-    </div>
+                    <button class="btn btn-sm btn-primary" type="submit">Login</button>
 
-    <div class="m-1 p-1">
+                    <input type="hidden" asp-for="ReturnUrl" />
 
-        <div class="text-danger" asp-validation-summary="All"></div>
-
-        <form method="post" asp-controller="Admin" asp-action="Login">
-
-            <div class="form-group">
-                <label asp-for="Username">UserName:</label>
-                <input asp-for="Username" class="form-control" />
+                </form>
             </div>
-
-            <div class="form-group">
-                <label asp-for="Password">Password:</label>
-                <input asp-for="Password" class="form-control" />
+            <div>
+                <div class="nav-item">
+                    <a asp-action="createuser" asp-controller="home" class="btn btn-sm btn-crashLightGrey">Create User</a>
+                </div>
             </div>
-
-            <button class="btn btn-primary" type="submit">Login</button>
-
-            <input type="hidden" asp-for="ReturnUrl" />
-
-        </form>
+        </div>
+        <div class="col-3"></div>
     </div>
-    <div>
-        <li class="nav-item">
-            <a asp-action="createuser" asp-controller="home" class="nav-link">Create User</a>
-        </li>
-    </div>
-
-</body>
-
-
-</html>

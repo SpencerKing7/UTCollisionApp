@@ -37,44 +37,28 @@
                 <div class="navbar-brand float-end p-3">
                     @if (signInManager.IsSignedIn(User))
                     {
-                        <li class="nav-item">
-                            <form method="post" asp-action="logout" asp-controller="home">
-                                <button type="submit" class="nav-link btn btn-link py-0" style="width:auto">
+                        <div class="nav-item">
+                            <form method="post" asp-action="Logout" asp-controller="Home">
+                                <button type="submit" class="btn btn-lg btn-crashLightGrey" style="width:auto">
                                     Logout @User.Identity.Name
                                 </button>
 
                             </form>
 
-                        </li>
+                        </div>
 
                     }
                     else
                     {
-                        <li class="nav-item">
-                            <a asp-action="login" asp-controller="admin" class="nav-link">Login</a>
-                        </li>
-
+                        <div class="nav-item">
+                            <a asp-action="Login" asp-controller="Admin" class="btn btn-lg btn-crashLightGrey">Login</a>
+                        </div>
                     }
 
                 </div>
             </div>
         </div>
     </div>
-    @*<div class="bg-dark text-white">
-        <div class="container-fluid">
-
-            <div class="row">
-
-                <div class="navbar p-2">
-                    <a class="nav-link float-end p-2 text-white" style="position:center">Statistics</a>
-
-                    <a class="nav-link float-end p-2 text-white" style="position:center" asp-controller="Predictor" asp-action="SeverityCalc">Severvity Calculator</a>
-                    <a class="nav-link float-end p-2 text-white" style="position:center" href="#contact">Contact Us</a>
-                </div>
-
-            </div>
-        </div>
-    </div>*@
 
     <div class="row">
         <div class="col">

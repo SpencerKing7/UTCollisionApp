@@ -152,10 +152,7 @@ namespace UTCollisionApp.Controllers
             return RedirectToAction("CrashTable");
         }
 
-        
-
-        
-
+        [HttpGet]
         public IActionResult Login (string returnUrl)
         {
             //Button Viewbags
@@ -193,11 +190,5 @@ namespace UTCollisionApp.Controllers
             ModelState.AddModelError("", "Invalid Name or Password");
             return View(loginModel);
         }
-
-
-
-
-
-
     }
 }
