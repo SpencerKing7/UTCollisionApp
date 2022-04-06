@@ -59,7 +59,7 @@ namespace UTCollisionApp.Controllers
             return RedirectToAction("AdminHome");
         }
 
-        public IActionResult CrashTable(int pageNum = 1)
+        public IActionResult CrashTable(string county, int pageNum = 1)
         {
             //Button Viewbags
             ViewBag.Button = "Sign Out";
@@ -74,13 +74,17 @@ namespace UTCollisionApp.Controllers
                 Crashes = _repo.Crashes
                 .Include(x => x.Location)
                 .Include(x => x.Factor)
+                .Where(x => x.Location.COUNTY_NAME == county || county == null)
                 .OrderByDescending(c => c.CRASH_DATETIME)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
 
                 PageInfo = new PageInfo
                 {
-                    TotalNumCrashes = _repo.Crashes.Count(),
+                    TotalNumCrashes = 
+                        (county == null
+                        ? _repo.Crashes.Count()
+                        : _repo.Crashes.Where(x => x.Location.COUNTY_NAME == county).Count()),
                     CrashesPerPage = pageSize,
                     CurrentPage = pageNum
                 }
