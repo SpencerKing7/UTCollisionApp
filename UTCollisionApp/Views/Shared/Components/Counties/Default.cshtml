@@ -2,13 +2,87 @@
 }
 
 @model IEnumerable<string>
+@*<div class="d-grid gap-2">
+        <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="" asp-route-pageNum="1" class="btn btn-block btn-outline-secondary">ALL CRASHES</a>
 
-<div class="d-grid gap-2">
-    <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="" asp-route-pageNum="1" class="btn btn-block btn-outline-secondary">ALL CRASHES</a>
+        @foreach (string c in Model)
+        {
+            <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="@c" asp-route-pageNum="1"
+               class="btn btn-block @(ViewBag.SelectedCategory == c ? "btn-dark" : "btn-outline-secondary")">@c</a>
+        }
+    </div>*@
 
-    @foreach (string c in Model)
-    {
-        <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="@c" asp-route-pageNum="1"
-           class="btn btn-block @(ViewBag.SelectedCategory == c ? "btn-dark" : "btn-outline-secondary")">@c</a>
-    }
+<div class="row">
+    <div class="col-4">
+        @* County *@
+        <h4 class="text-center">Filter by County</h4>
+        <div class="dropdown text-center">
+            <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @if (ViewBag.County != null)
+                {
+                    <span>@ViewBag.County</span>
+                }
+                else
+                {
+                    <span>Select County</span>
+                }
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="" asp-route-pageNum="1" class="dropdown-item">ALL CRASHES</a>
+                @foreach (string c in Model)
+                {
+                    <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="@c" asp-route-pageNum="1"
+                       class="dropdown-item">@c</a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        @* Severity *@
+        <h4 class="text-center">Filter by Severity</h4>
+        <div class="dropdown text-center">
+            <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @if (ViewBag.County != null)
+                {
+                    <span>@ViewBag.County</span>
+                }
+                else
+                {
+                    <span>Select Severity Level</span>
+                }
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="" asp-route-pageNum="1" class="dropdown-item">ALL CRASHES</a>
+                @foreach (string c in Model)
+                {
+                    <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="@c" asp-route-pageNum="1"
+                       class="dropdown-item">@c</a>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <h4 class="text-center">Filter by Date</h4>
+        <div class="dropdown text-center">
+            <button class="btn btn-secondary dropdown-toggle m-2" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                @if (ViewBag.County != null)
+                {
+                    <span>@ViewBag.County</span>
+                }
+                else
+                {
+                    <span>Select Year</span>
+                }
+                    
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="" asp-route-pageNum="1" class="dropdown-item">ALL CRASHES</a>
+                @foreach (string c in Model)
+                {
+                    <a asp-controller="Admin" asp-action="CrashTable" asp-route-county="@c" asp-route-pageNum="1"
+                       class="dropdown-item">@c</a>
+                }
+            </div>
+        </div>
+    </div>
 </div>
