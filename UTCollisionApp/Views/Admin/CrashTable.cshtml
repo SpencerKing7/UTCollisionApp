@@ -4,16 +4,26 @@
 
 @model CrashViewModel
 
-
+@* Title *@
 <div class="text-center">
     <p class="display-2">Search Crashes</p>
 </div>
 
+@* Filtering *@
+<div class="row">
+    <div class="col">
+        <div class="card m-2">
+            <vc:counties></vc:counties>
+        </div>
+    </div>
+</div>
+
+@* Crash Table *@
 <div class="row container-fluid">
     
     <div class="col-2 m-2">
-        <h4 class="text-center">Filter by County</h4>
-        <vc:counties></vc:counties>
+        @*<h4 class="text-center">Filter by County</h4>
+        <vc:counties></vc:counties>*@
     </div>
 
     <div class="col">
@@ -35,39 +45,37 @@
                 @* Load data from the tables here *@
                 @foreach (Crash c in Model.Crashes)
                 {
-                    <tr>
-                        <td>@c.Location.CITY</td>
-                        <td>@c.Location.COUNTY_NAME</td>
-                        <td>@c.CRASH_DATETIME</td>
-                        <td>@c.CRASH_SEVERITY_ID</td>
-                        <td>@c.Location.ROUTE</td>
-                        <td>
-                            <a class="btn btn-warning btn-sm" asp-controller="Admin" asp-action="EditCrashForm" asp-route-CRASH_ID="@c.CRASH_ID">Edit</a>
-                        </td>
-                        <td>
-                            <a class="btn btn-danger btn-sm" asp-controller="Admin" asp-action="DeleteCrash" asp-route-CRASH_ID="@c.CRASH_ID">Delete</a>
-                        </td>
-                    </tr>
+                <tr>
+                    <td>@c.Location.COUNTY_NAME</td>
+                    <td>@c.Location.CITY</td>
+                    <td>@c.CRASH_DATETIME</td>
+                    <td>@c.CRASH_SEVERITY_ID</td>
+                    <td>@c.Location.ROUTE</td>
+                    <td>
+                        <a class="btn btn-warning btn-sm" asp-controller="Admin" asp-action="EditCrashForm" asp-route-CRASH_ID="@c.CRASH_ID">Edit</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-danger btn-sm" asp-controller="Admin" asp-action="DeleteCrash" asp-route-CRASH_ID="@c.CRASH_ID">Delete</a>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>
 
-
-        <p><b>Page @Model.PageInfo.CurrentPage.ToString() of @Model.PageInfo.TotalPages.ToString()</b><br /><i>25 records per page</i></p>
-
+        <p><b>Page @Model.PageInfo.CurrentPage.ToString() of @Model.PageInfo.TotalPages.ToString()</b><br /><i>15 records per page</i></p>
 
         <div class="container-fluid text-center">
-            <a asp-controller="Admin" asp-action="CrashTable" asp-route-pageNum="1">First Page</a>
+            <a asp-controller="Admin" asp-action="CrashTable" asp-route-pageNum="1">First page ... </a>
             <div page-changer="@Model.PageInfo" page-action="CrashTable" page-classes-enabled="true" page-class="btn"
                  page-class-normal="btn-outline-dark" page-class-selected="btn-dark"
                  class="btn-group pull-right m-1">
             </div>
-            <a asp-controller="Admin" asp-action="CrashTable" asp-route-pageNum="@Model.PageInfo.TotalPages">Last Page (@Model.PageInfo.TotalPages.ToString())</a>
+            <a asp-controller="Admin" asp-action="CrashTable" asp-route-pageNum="@Model.PageInfo.TotalPages">... Last page (@Model.PageInfo.TotalPages.ToString())</a>
         </div>
     </div>
 
     <div class="col-2 m-2">
-        <vc:counties></vc:counties>
+        
     </div>
 
 </div>
