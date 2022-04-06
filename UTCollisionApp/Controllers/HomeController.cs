@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -12,17 +13,19 @@ using UTCollisionApp.Models.ViewModels;
 
 namespace UTCollisionApp.Controllers
 {
+    [AllowAnonymous]
     public class HomeController : Controller
     {
-        private UserManager<IdentityUser> userManager;
-        private SignInManager<IdentityUser> SignInManager;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
+
         private ICollisionRepository _repo { get; set; }
 
         //Constructor
         public HomeController(ICollisionRepository temp, UserManager<IdentityUser> um, SignInManager<IdentityUser> sim)
         {
-            userManager = um;
-            SignInManager = sim;
+            this.userManager = um;
+            this.signInManager = sim;
             _repo = temp;
         }
 
@@ -47,6 +50,27 @@ namespace UTCollisionApp.Controllers
             return View();
         }
 
+        public IActionResult Statistics()
+        {
+            //Button Viewbags
+            ViewBag.Button = "Admin Sign In";
+            ViewBag.Controller = "Admin";
+            ViewBag.Action = "AdminHome";
+
+            //Stats Viewbags
+            ViewBag.Deaths = _repo.Crashes
+                .Where(x => x.CRASH_SEVERITY_ID == 5 && x.CRASH_DATETIME.ToString().Contains("2019"))
+                .Count();
+            ViewBag.Injuries = _repo.Crashes
+                .Where(x => (x.CRASH_SEVERITY_ID == 2 || x.CRASH_SEVERITY_ID == 3 || x.CRASH_SEVERITY_ID == 4) && x.CRASH_DATETIME.ToString().Contains("2019"))
+                .Count();
+            ViewBag.Accidents = _repo.Crashes
+                .Where(x => x.CRASH_DATETIME.ToString().Contains("2019"))
+                .Count();
+
+            return View();
+        }
+
         public IActionResult Privacy()
         {
             //Button Viewbags
@@ -55,6 +79,44 @@ namespace UTCollisionApp.Controllers
             ViewBag.Action = "Login";
 
             return View();
+        }
+
+        public IActionResult Login(string returnUrl)
+        {
+            //Button Viewbags
+            ViewBag.Button = "Sign Out";
+            ViewBag.Controller = "Home";
+            ViewBag.Action = "Index";
+
+            return View(new LoginModel { ReturnUrl = returnUrl });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginModel loginModel)
+        {
+            //Button Viewbags
+            ViewBag.Button = "Sign Out";
+            ViewBag.Controller = "Home";
+            ViewBag.Action = "Index";
+
+            if (ModelState.IsValid)
+            {
+                IdentityUser user = await userManager.FindByNameAsync(loginModel.Username);
+
+                if (user != null)
+                {
+                    await signInManager.SignOutAsync();
+
+                    if ((await signInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
+                    {
+                        return Redirect(loginModel?.ReturnUrl ?? "/");
+                    }
+                }
+
+
+            }
+            ModelState.AddModelError("", "Invalid Name or Password");
+            return View(loginModel);
         }
 
         [HttpGet]
@@ -83,7 +145,7 @@ namespace UTCollisionApp.Controllers
 
                 if(result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false);
+                    await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -100,7 +162,7 @@ namespace UTCollisionApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            await SignInManager.SignOutAsync();
+            await signInManager.SignOutAsync();
             return RedirectToAction("index", "home");
 
         }

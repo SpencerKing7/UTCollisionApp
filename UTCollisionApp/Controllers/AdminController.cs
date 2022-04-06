@@ -12,15 +12,17 @@ namespace UTCollisionApp.Controllers
 {
     public class AdminController : Controller
     {
-        private UserManager<IdentityUser> userManager;
-        private SignInManager<IdentityUser> SignInManager;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
+        private readonly RoleManager<IdentityRole> roleManager;
         private ICollisionRepository _repo { get; set; }
 
         //Constructor
-        public AdminController(ICollisionRepository temp, UserManager<IdentityUser> um, SignInManager<IdentityUser> sim)
+        public AdminController(ICollisionRepository temp, UserManager<IdentityUser> um, SignInManager<IdentityUser> sim, RoleManager<IdentityRole> rm)
         {
-            userManager = um;
-            SignInManager = sim;
+            this.roleManager = rm;
+            this.userManager = um;
+            this.signInManager = sim;
             _repo = temp;
         }
 
@@ -145,6 +147,38 @@ namespace UTCollisionApp.Controllers
 
             return RedirectToAction("CrashTable");
         }
+        [HttpGet]
+        public IActionResult CreateRole()
+        {
+            return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateRole(CreateRoleViewModel model)
+        {
+            if(ModelState.IsValid)
+            {
+                IdentityRole identityRole = new IdentityRole
+                {
+                    Name = model.RoleName
+                };
+
+                IdentityResult result = await roleManager.CreateAsync(identityRole);
+
+                if(result.Succeeded)
+                {
+                    return RedirectToAction("AdminHome", "Admin");
+                }
+
+                foreach (IdentityError error in result.Errors)
+                {
+                    ModelState.AddModelError("", error.Description);
+                }
+            }
+
+            
+
+            return View(model);
+        }
 
         
 
@@ -194,4 +228,5 @@ namespace UTCollisionApp.Controllers
 
 
     }
+
 }
