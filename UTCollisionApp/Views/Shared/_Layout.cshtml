@@ -1,9 +1,12 @@
-﻿<!DOCTYPE html>
+﻿@inject SignInManager<IdentityUser> signInManager;
+
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy"
+    @*<meta http-equiv="Content-Security-Policy"
           content="base-uri 'self';
            	block-all-mixed-content;
            	default-src 'self';
@@ -13,7 +16,7 @@
                       	'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA='
                       	'unsafe-eval';
            	style-src 'self';
-           	upgrade-insecure-requests;">
+           	upgrade-insecure-requests;">*@
     <title>@ViewData["Title"] - UT Collisions</title>
     <link rel="icon" type="image/x-icon" href="~/assets/logo.png" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -22,7 +25,7 @@
 </head>
 <body>
 
-    <div class="navdark text-white">
+    <div class="navdark text-white p-2">
         <div class="container-fluid">
             <div class="row">
                 <div class="col navbar-brand">
@@ -31,27 +34,39 @@
                         <span class="display-4">UT Collision Home</span>
                     </a>
                 </div>
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    <div class="nav-item">
+                        <a class="btn btn-lg btn-crashLightGrey" asp-controller="Admin" asp-action="AdminHome">
+                            Admin Home
+                        </a>
+                    </div>
+                }
                 <div class="navbar-brand float-end p-3">
-                    <a class="nav-link text-white btn btn-lg btn-crashLightGrey" style="position:center" asp-controller="@ViewBag.Controller" asp-action="@ViewBag.Action">@ViewBag.Button</a>
+                    @if (signInManager.IsSignedIn(User))
+                    {
+                        <div class="nav-item">
+                            <form method="post" asp-action="Logout" asp-controller="Home">
+                                <button type="submit" class="btn btn-lg btn-crashLightGrey" style="width:auto">
+                                    Logout @User.Identity.Name
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    }
+                    else
+                    {
+                        <div class="nav-item">
+                            <a asp-action="Login" asp-controller="Home" class="btn btn-lg btn-crashLightGrey">Login</a>
+                        </div>
+                    }
+
                 </div>
             </div>
         </div>
     </div>
-    @*<div class="bg-dark text-white">
-        <div class="container-fluid">
-
-            <div class="row">
-
-                <div class="navbar p-2">
-                    <a class="nav-link float-end p-2 text-white" style="position:center">Statistics</a>
-
-                    <a class="nav-link float-end p-2 text-white" style="position:center" asp-controller="Predictor" asp-action="SeverityCalc">Severvity Calculator</a>
-                    <a class="nav-link float-end p-2 text-white" style="position:center" href="#contact">Contact Us</a>
-                </div>
-
-            </div>
-        </div>
-    </div>*@
 
     <div class="row">
         <div class="col">

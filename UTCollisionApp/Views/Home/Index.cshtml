@@ -25,6 +25,12 @@
             <p class="bg-warning text-white m-2 p-2 mb-2 rounded-pill">Total Injuries: @ViewBag.Injuries</p>
             <p class="bg-success text-white m-2 p-2 mb-2 rounded-pill">Total Accidents: @ViewBag.Accidents</p>
         </div>
+        <div class="card m-3">
+            <h4 class="text-left"id="contact" style="font-size:40px;"><span class="display-4 font-weight-bolder"><b>Y</b></span>our</h4>
+            <h4 class="text-left" id="contact" style="font-size:40px;"><span class="display-4 font-weight-bolder"><b>E</b></span>veryday</h4>
+            <h4 class="text-left" id="contact" style="font-size:40px;"><span class="display-4 font-weight-bolder"><b>E</b></span>valuation</h4>
+            <h4 class="text-left" id="contact" style="font-size:40px;"><span class="display-4 font-weight-bolder"><b>T</b></span>ool (for crashes)</h4>
+        </div>
     </div>
 
     <div class="col-6">
@@ -53,16 +59,17 @@
 
     <div class="col-3">
         <div class="text-center m-3">
-            <a class="p-2 text-white btn btn-lg btn-crashBlue btn-block">Statistics</a><br />
-            <a class="p-2 text-white btn btn-lg btn-crashBlue btn-block" asp-controller="Predictor" asp-action="SeverityCalc">Severvity Calculator</a><br />
-            <a class="p-2 text-white btn btn-lg btn-crashBlue btn-block" href="#contact">Contact Us</a>
+
+            <a class="p-2 text-white btn btn-lg btn-info btn-block" asp-action="Statistics">Statistics</a><br />
+            <a class="p-2 text-white btn btn-lg btn-info btn-block" asp-controller="Predictor" asp-action="SeverityCalc">Severvity Calculator</a><br />
+            <a class="p-2 text-white btn btn-lg btn-info btn-block" href="#contact">Contact Us</a>
         </div>
 
         <div class="card m-3">
             <h4 class="text-center" id="contact">Contact Barbra Freeman for additional information about the Traffic Records Program:</h4>
             <br />
-            <p class="text-center"><b>Phone:</b><br />(801) 783-7250</p>
-            <p class="text-center"><b>Email:</b><br /><a href="mailto:befreeman@utah.gov" target="_blank">bafreeman@utah.gov</a></p>
+            <p class="text-center" style="font-size:20px;"><b>Phone:</b><br />(801) 783-7250</p>
+            <p class="text-center" style="font-size:20px;"><b>Email:</b><br /><a href="mailto:befreeman@utah.gov" target="_blank">bafreeman@utah.gov</a></p>
         </div>
     </div>
 </div>
@@ -80,7 +87,7 @@
     <div class="col-2"></div>
 
     <div class="col-8">
-        <h3>What is the problem?</h3>
+        <h3>Statistics</h3>
         <p class="mb-0">
             Utah has a unique set of challenges when it comes to motor vehicle accidents.
             For example, although alcohol is still a problem, it may be less of a problem in Utah than distracted driving.
