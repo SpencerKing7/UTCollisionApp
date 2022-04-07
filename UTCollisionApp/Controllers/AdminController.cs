@@ -99,6 +99,19 @@ namespace UTCollisionApp.Controllers
             return View(x);
         }
 
+        public IActionResult Details(int CRASH_ID)
+        {
+            var crash = _repo.Crashes
+                .Include(x => x.Location)
+                .Include(x => x.Factor)
+                .Single(x => x.CRASH_ID == CRASH_ID);
+
+
+
+            return View("Details", crash);
+        }
+
+
         [HttpGet]
         public IActionResult EditCrashForm(int CRASH_ID)
         {
