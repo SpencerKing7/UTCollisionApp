@@ -1,10 +1,16 @@
 ﻿@{
     ViewData["Title"] = "Admin Home";
 }
-@model IEnumerable<Crash>
-<h1 class="text-center display-1 font-weight-bold">Welcome, User!</h1>
+@inject SignInManager<IdentityUser> signInManager;
+@using Microsoft.AspNetCore.Authorization
+@attribute [Authorize]
 
-<br /><br /><br />
+@model IEnumerable<Crash>
+<h1 class="text-center display-1 font-weight-bold">Welcome, @User.Identity.Name!</h1>
+
+<br />
+<br />
+<br />
 
 <div class="row">
     <div class="col-1"></div>
@@ -24,4 +30,6 @@
     <div class="col-1"></div>
 </div>
 
-<br /><br /><br />
+<br />
+<br />
+<br />

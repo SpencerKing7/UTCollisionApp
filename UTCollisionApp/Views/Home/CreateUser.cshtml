@@ -1,0 +1,51 @@
+﻿@{
+    ViewData["Title"] = "New User";
+}
+
+@model CreateUserViewModel
+
+    <div class="row">
+        <div class="col-3"></div>
+
+        <div class="col">
+            <div class="m-1 p-1">
+
+                <h3>Please enter a username, email, and password to create your account</h3>
+
+                
+
+                <form method="post" asp-controller="Home" asp-action="CreateUser">
+                    <div asp-validation-summary="All" class="text-danger"></div>
+
+                    <div class="form-group">
+                        <label asp-for="UserName">UserName:</label>
+                        <input asp-for="UserName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Email">Email:</label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Password">Password:</label>
+                        <input asp-for="Password" class="form-control" />
+                        <span asp-validation-for="Password" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="ConfirmPassword">Confirm Password:</label>
+                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                    </div>
+
+                    <button class="btn btn-primary" type="submit">Create User</button>
+
+                    <input type="hidden" asp-for="ReturnUrl" />
+
+                </form>
+            </div>
+        </div>
+
+        <div class="col-3"></div>
+    </div>
