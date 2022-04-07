@@ -77,7 +77,14 @@ namespace UTCollisionApp
 
             services.AddSingleton<DataProtectionPurposeStrings>();
 
-            services.AddSession();  
+            services.AddSession();
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.LoginPath = new PathString("/Home/Login");
+                options.AccessDeniedPath = new PathString("/Home/AccessDenied");
+                
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
