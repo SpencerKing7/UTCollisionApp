@@ -34,6 +34,15 @@
                         <span class="display-4">UT Collision Home</span>
                     </a>
                 </div>
+                @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                {
+                    <div class="nav-item">
+                        <a class="nav-link" asp-controller="Admin" asp-action="AdminHome">
+                            Admin Home
+                        </a>
+
+                    </div>
+                }
                 <div class="navbar-brand float-end p-3">
                     @if (signInManager.IsSignedIn(User))
                     {

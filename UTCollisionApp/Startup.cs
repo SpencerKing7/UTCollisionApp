@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -46,6 +48,7 @@ namespace UTCollisionApp
 
             services.AddIdentity<IdentityUser, IdentityRole> (options =>
             {
+                
                 //Password settings.
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
@@ -71,7 +74,13 @@ namespace UTCollisionApp
               new InferenceSession("severity_predictor.onnx")
             );
 
-            services.AddSession();            
+            services.AddSession();
+            services.Configure<CookieAuthenticationOptions>(options =>
+            {
+                options.LoginPath = new PathString("/Home/Login");
+                options.AccessDeniedPath = new PathString("/Home/AccessDenied");
+                
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
