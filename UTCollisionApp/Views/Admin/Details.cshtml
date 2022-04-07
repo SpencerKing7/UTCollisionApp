@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Details";
+}
+
+@model Crash
+    <div class="text-center">
+        <p class="display-2">Details</p>
+    </div>
+    <div class="col-2 m-2">
+        <a class="btn btn-sm btn-crashBlue" asp-controller="Admin" asp-action="CrashTable">Back</a>
+    </div>
+    <div class="text-center">
+        <h1>Crash details for Crash @Model.CRASH_ID</h1>
+
+        <h4>Date: @Model.CRASH_DATETIME</h4><br />
+        <h4>County: @Model.Location.COUNTY_NAME</h4><br />
+        <h4>City: @Model.Location.CITY</h4><br />
+        <h4>Crash Severity: @Model.CRASH_SEVERITY_ID</h4><br />
+
+        <h4>Factors:</h4>
+        <h6>If the factor is 1 then it was involved, if it is 0 then it was not involved.</h6><br />
+
+        <p>Route: @Model.Location.ROUTE</p>
+        <p>Milepoint: @Model.Location.MILEPOINT</p>
+        <p>Main Road Name: @Model.Location.MAIN_ROAD_NAME</p>
+        <p>Work Zone Related? @Model.Factor.WORK_ZONE_RELATED</p>
+        <p>Pedestrian Involved? @Model.Factor.PEDESTRIAN_INVOLVED</p>
+        <p>Bicyclist Involved? @Model.Factor.BICYCLIST_INVOLVED</p>
+        <p>Motorcycle Involved? @Model.Factor.MOTORCYCLE_INVOLVED</p>
+        <p>Were they wearing their seatbelt incorrectly? @Model.Factor.IMPROPER_RESTRAINT</p>
+        <p>Were they wearing a seatbelt? @Model.Factor.UNRESTRAINED</p>
+        <p>DUI? @Model.Factor.DUI</p>
+        <p>Intersection Related? @Model.Factor.INTERSECTION_RELATED</p>
+        <p>Wild Animal Related? @Model.Factor.WILD_ANIMAL_RELATED</p>
+        <p>Domestic Animal Related? @Model.Factor.DOMESTIC_ANIMAL_RELATED</p>
+        <p>Overturn Rollover? @Model.Factor.OVERTURN_ROLLOVER</p>
+        <p>Commercial Vehicle Involved? @Model.Factor.COMMERCIAL_MOTOR_VEH_INVOLVED</p>
+        <p>Teenage Driver Involved? @Model.Factor.TEENAGE_DRIVER_INVOLVED</p>
+        <p>Older Driver Involved? @Model.Factor.OLDER_DRIVER_INVOLVED</p>
+        <p>Night/Dark Conditions? @Model.Factor.NIGHT_DARK_CONDITION</p>
+        <p>Single Vehicle? @Model.Factor.SINGLE_VEHICLE</p>
+        <p>Distracted Driving? @Model.Factor.DISTRACTED_DRIVING</p>
+        <p>Drowsy Driving? @Model.Factor.DROWSY_DRIVING</p>
+        <p>Roadway Departure? @Model.Factor.ROADWAY_DEPARTURE</p>
+    </div>
+
+
+
+
