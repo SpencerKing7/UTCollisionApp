@@ -16,8 +16,8 @@ namespace UTCollisionApp.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
-        private UserManager<IdentityUser> userManager;
-        private SignInManager<IdentityUser> signInManager;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
         private ICollisionRepository _repo { get; set; }
 
         //Constructor
