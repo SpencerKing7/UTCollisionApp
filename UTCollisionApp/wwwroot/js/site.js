@@ -5,21 +5,6 @@
 function removeDiv() {
     document.getElementById("cookie").style.display = "none";
 }
-
-<<<<<<< HEAD
-function confirmDelete(uniqueId, isDeleteClicked) {
-    var deleteSpan = 'deleteSpan_' + uniqueId;
-    var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
-
-    if (isDeleteClicked) {
-        $('#' + deleteSpan).hide();
-        $('#' + confirmDeleteSpan).show();
-    } else {
-        $('#' + deleteSpan).show();
-        $('#' + confirmDeleteSpan).hide();
-    }
-}
-=======
 $('.close-div').click(function () {
     $(this).parent().parent().remove();
 });
@@ -41,4 +26,4 @@ if (localStorage['sitename.nofullscreen'] == "true") {
 $(document).ready(function () {
     if (localStorage['nofullscreen'] == 'true') $('.fullscreen').hide();
 });
->>>>>>> a953a44591742537e02842686c675007b1942d48
+
