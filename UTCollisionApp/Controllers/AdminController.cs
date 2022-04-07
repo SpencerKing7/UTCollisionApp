@@ -183,7 +183,7 @@ namespace UTCollisionApp.Controllers
 
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Admin", "ListRoles");
+                    return RedirectToAction("ListRoles");
                 }
 
                 foreach (IdentityError error in result.Errors)
