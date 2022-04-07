@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    @*<meta http-equiv="Content-Security-Policy"
+    <meta http-equiv="Content-Security-Policy"
           content="base-uri 'self';
            	block-all-mixed-content;
            	default-src 'self';
@@ -16,7 +16,7 @@
                       	'sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA='
                       	'unsafe-eval';
            	style-src 'self';
-           	upgrade-insecure-requests;">*@
+           	upgrade-insecure-requests;">
     <title>@ViewData["Title"] - UT Collisions</title>
     <link rel="icon" type="image/x-icon" href="~/assets/logo.png" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -36,6 +36,20 @@
                 </div>
                 @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
+                    <ul>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Manage
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" asp-controller="Admin"
+                                   asp-action="ListUsers">Users</a>
+                                <a class="dropdown-item" asp-controller="Admin"
+                                   asp-action="ListRoles">Roles</a>
+                            </div>
+                        </li>
+                    </ul>
                     <div class="nav-item">
                         <a class="btn btn-lg btn-crashLightGrey" asp-controller="Admin" asp-action="AdminHome">
                             Admin Home

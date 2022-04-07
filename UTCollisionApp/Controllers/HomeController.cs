@@ -16,15 +16,15 @@ namespace UTCollisionApp.Controllers
     [AllowAnonymous]
     public class HomeController : Controller
     {
-        private UserManager<IdentityUser> userManager;
-        private SignInManager<IdentityUser> SignInManager;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
         private ICollisionRepository _repo { get; set; }
 
         //Constructor
         public HomeController(ICollisionRepository temp, UserManager<IdentityUser> um, SignInManager<IdentityUser> sim)
         {
             userManager = um;
-            SignInManager = sim;
+            signInManager = sim;
             _repo = temp;
         }
 
@@ -104,9 +104,9 @@ namespace UTCollisionApp.Controllers
 
                 if (user != null)
                 {
-                    await SignInManager.SignOutAsync();
+                    await signInManager.SignOutAsync();
 
-                    if ((await SignInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
+                    if ((await signInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
                     {
                         return Redirect(loginModel?.ReturnUrl ?? "/");
                     }
@@ -144,7 +144,15 @@ namespace UTCollisionApp.Controllers
 
                 if(result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false);
+                    // If the user is signed in and in the Admin role, then it is
+                    // the Admin user that is creating a new user. So redirect the
+                    // Admin user to ListRoles action
+                    if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
+                    {
+                        return RedirectToAction("ListUsers", "Admin");
+                    }
+
+                    await signInManager.SignInAsync(user, isPersistent: false);
                     return RedirectToAction("Index", "Home");
                 }
 
@@ -161,7 +169,7 @@ namespace UTCollisionApp.Controllers
         [HttpPost]
         public async Task<IActionResult> Logout()
         {
-            await SignInManager.SignOutAsync();
+            await signInManager.SignOutAsync();
             return RedirectToAction("index", "home");
 
         }
