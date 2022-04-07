@@ -37,17 +37,20 @@ namespace UTCollisionApp
 
             services.AddControllersWithViews();
 
+            // Database Connections
+            string crash = Environment.GetEnvironmentVariable("RDS_CONNECTION_STRING_CRASH");
+            string identity = Environment.GetEnvironmentVariable("RDS_CONNECTION_STRING_IDENTITY");
+
             services.AddDbContext<CollisionDbContext>(options =>
             {
-                options.UseMySql(Configuration["ConnectionStrings:UTCollisionsDbConnection"]);
+                options.UseMySql(crash);
                 
             });
 
             services.AddDbContext<AppIdentityDBContext>(options =>
-                options.UseMySql(Configuration["ConnectionStrings:IdentityConnection"]));
+                options.UseMySql(identity));
 
-            
-
+            // Identity
             services.AddIdentity<IdentityUser, IdentityRole> (options =>
             {
                 
