@@ -5,3 +5,40 @@
 function removeDiv() {
     document.getElementById("cookie").style.display = "none";
 }
+
+<<<<<<< HEAD
+function confirmDelete(uniqueId, isDeleteClicked) {
+    var deleteSpan = 'deleteSpan_' + uniqueId;
+    var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+
+    if (isDeleteClicked) {
+        $('#' + deleteSpan).hide();
+        $('#' + confirmDeleteSpan).show();
+    } else {
+        $('#' + deleteSpan).show();
+        $('#' + confirmDeleteSpan).hide();
+    }
+}
+=======
+$('.close-div').click(function () {
+    $(this).parent().parent().remove();
+});
+
+function supports_storage() {
+    try {
+        return 'localStorage' in window && window['localStorage'] !== null;
+    } catch (e) {
+        return false;
+    }
+}
+
+if (supports_storage()) localStorage['sitename.nofullscreen'] = true;
+
+if (localStorage['sitename.nofullscreen'] == "true") {
+    //go right to #page
+}
+
+$(document).ready(function () {
+    if (localStorage['nofullscreen'] == 'true') $('.fullscreen').hide();
+});
+>>>>>>> a953a44591742537e02842686c675007b1942d48
