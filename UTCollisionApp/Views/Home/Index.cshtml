@@ -15,6 +15,9 @@
         </div>
     </div>
 </div>-->
+@*<script>
+    alert("We use cookies to personalize content.\t<a asp-action='Privacy'>Learn more</a>");
+</script>*@
 
 @* Stat Summary/Picture Carousel/Contact *@
 <div class="row crashDarkGrey p-3">
@@ -128,7 +131,7 @@
 <br />
 <br />
 
-<div id="cookie" class="d-flex justify-content-center mt-5 sticky-bottom">
+<div id="cookie" class="d-flex justify-content-center mt-5 fullscreen">
     <div class="card p-3 cookie">
         <span>
             We use cookies to personalize content.<br />
@@ -136,11 +139,8 @@
         <a asp-action="Privacy">Learn more<i class="fa fa-angle-right ml-2"></i></a>
 
         <div class="mt-4 text-right">
-            <span class="mr-3 decline">Decline</span>
-            <button class="btn btn-light btn-sm" type="button" href="#" onclick="removeDiv()">Allow cookies</button>
+            <button class="mr-3 decline close-div" type="button" href="#">Decline</button>
+            <button class="btn btn-dark btn-sm close-div" type="button" href="#" onclick="removeDiv()">Allow cookies</button>
         </div>
     </div>
 </div>
-
-
-
