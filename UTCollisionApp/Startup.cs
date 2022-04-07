@@ -115,6 +115,13 @@ namespace UTCollisionApp
 
                 endpoints.MapDefaultControllerRoute();
             });
+
+            app.Use(async (ctx, next) => 
+            { 
+                ctx.Response.Headers.Add("Content-Security-Policy", 
+                                        "default-src 'self'"); 
+                await next(); 
+            });
         }
     }
 }
