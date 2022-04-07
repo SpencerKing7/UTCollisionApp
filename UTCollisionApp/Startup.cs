@@ -77,6 +77,7 @@ namespace UTCollisionApp
 
             services.AddSingleton<DataProtectionPurposeStrings>();
 
+            services.AddDistributedMemoryCache();
             services.AddSession();
 
             services.ConfigureApplicationCookie(options =>
