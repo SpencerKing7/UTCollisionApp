@@ -16,6 +16,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using UTCollisionApp.Models;
+using UTCollisionApp.Security;
 
 namespace UTCollisionApp
 {
@@ -74,13 +75,9 @@ namespace UTCollisionApp
               new InferenceSession("severity_predictor.onnx")
             );
 
-            services.AddSession();
-            services.Configure<CookieAuthenticationOptions>(options =>
-            {
-                options.LoginPath = new PathString("/Home/Login");
-                options.AccessDeniedPath = new PathString("/Home/AccessDenied");
-                
-            });
+            services.AddSingleton<DataProtectionPurposeStrings>();
+
+            services.AddSession();  
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
