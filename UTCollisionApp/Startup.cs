@@ -14,6 +14,7 @@ using Microsoft.ML.OnnxRuntime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using UTCollisionApp.Models;
 using UTCollisionApp.Security;
@@ -80,6 +81,7 @@ namespace UTCollisionApp
 
             services.AddSingleton<DataProtectionPurposeStrings>();
 
+            services.AddDistributedMemoryCache();
             services.AddSession();
 
             services.ConfigureApplicationCookie(options =>
