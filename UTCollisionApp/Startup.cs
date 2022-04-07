@@ -113,6 +113,13 @@ namespace UTCollisionApp
             app.UseAuthentication();
             app.UseAuthorization();
 
+            app.Use(async (ctx, next) =>
+            {
+                ctx.Response.Headers.Add("Content-Security-Policy",
+                                        "default-src 'self'");
+                await next();
+            });
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute("Counties",
@@ -126,12 +133,7 @@ namespace UTCollisionApp
                 endpoints.MapDefaultControllerRoute();
             });
 
-            app.Use(async (ctx, next) => 
-            { 
-                ctx.Response.Headers.Add("Content-Security-Policy", 
-                                        "default-src 'self'"); 
-                await next(); 
-            });
+            
         }
     }
 }
