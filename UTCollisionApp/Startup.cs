@@ -117,12 +117,12 @@ namespace UTCollisionApp
                 endpoints.MapDefaultControllerRoute();
             });
 
-            app.Use(async (ctx, next) => 
-            { 
-                ctx.Response.Headers.Add("Content-Security-Policy", 
-                                        "default-src 'self'"); 
-                await next(); 
-            });
+            //app.Use(async (ctx, next) =>
+            //{
+            //    ctx.Response.Headers.Add("Content-Security-Policy",
+            //                            "default-src 'none'; script-src 'self'; connect-src 'self'; img-src 'self'; style-src 'self';base-uri 'self';form-action 'self'");
+            //    await next();
+            //});
         }
     }
 }
