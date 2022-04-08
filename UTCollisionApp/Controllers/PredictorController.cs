@@ -18,9 +18,9 @@ namespace UTCollisionApp.Controllers
         public InferenceSession _countySession;
         public PredictorController()
         {
-            _severitySession = new InferenceSession("severity_predictor.onnx");
-            _citySession = new InferenceSession("city_predictor.onnx");
-            _countySession = new InferenceSession("county_predictor.onnx");
+            _severitySession = new InferenceSession("wwwroot/severity_predictor.onnx"); 
+             _citySession = new InferenceSession("wwwroot/city_predictor.onnx");
+            _countySession = new InferenceSession("wwwroot/county_predictor.onnx");
 
             //_severitySession.ModelMetadata.GraphName = 'test';
             //_citySession.ModelMetadata.GraphName = 'test';
