@@ -19,14 +19,22 @@
     color: #453d45;
 }
 
-a{
+.manager{
     color: white;
 }
 
-    a:hover {
-        color: #a7cbd5;
-        text-decoration: none;
-    }
+.manager:hover {
+    color: #a7cbd5;
+    text-decoration: none;
+}
+
+email {
+    color: #71777d;
+}
+
+email:hover {
+    color: #453d45;
+}
 
 /*CRASH BLUE -- Styles*/
 

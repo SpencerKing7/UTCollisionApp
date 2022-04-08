@@ -102,7 +102,7 @@ namespace UTCollisionApp
             //);
 
             services.AddSingleton<InferenceSession>(
-              new InferenceSession("severity_predictor.onnx")
+              new InferenceSession("wwwroot/severity_predictor.onnx")
             );
 
             services.AddSingleton<DataProtectionPurposeStrings>();

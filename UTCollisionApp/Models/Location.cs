@@ -15,7 +15,9 @@ namespace UTCollisionApp.Models
         public float MILEPOINT { get; set; }
         public float LAT_UTM_Y { get; set; }
         public float LONG_UTM_X { get; set; }
+        
         public string MAIN_ROAD_NAME { get; set; }
+
         public string CITY { get; set; }
         [Required(ErrorMessage ="Please choose a county where crash occured")]
         public string COUNTY_NAME { get; set; }
