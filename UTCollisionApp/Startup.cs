@@ -133,7 +133,6 @@ namespace UTCollisionApp
                 endpoints.MapDefaultControllerRoute();
             });
 
-            
         }
     }
 }
