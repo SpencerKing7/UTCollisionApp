@@ -60,6 +60,8 @@ namespace UTCollisionApp.Controllers
             return View(new Crash());
         }
 
+        //Add a crash through our crash form
+        //Takes you back to admin home afterwards
         [HttpPost]
         public IActionResult AddCrashForm(Crash c)
         {
@@ -105,6 +107,7 @@ namespace UTCollisionApp.Controllers
             return View(x);
         }
 
+        //View all details about a specific crash
         public IActionResult Details(int CRASH_ID)
         {
             var crash = _repo.Crashes
@@ -117,7 +120,7 @@ namespace UTCollisionApp.Controllers
             return View("Details", crash);
         }
 
-
+        //Edit a crash
         [HttpGet]
         public IActionResult EditCrashForm(int CRASH_ID)
         {
@@ -148,6 +151,7 @@ namespace UTCollisionApp.Controllers
             return RedirectToAction("CrashTable");
         }
 
+        //Delete a crash, directs to confirmation page
         [HttpGet]
         public IActionResult DeleteCrash(int CRASH_ID)
         {
@@ -165,6 +169,7 @@ namespace UTCollisionApp.Controllers
 
             return RedirectToAction("CrashTable");
         }
+        //Create a role to sign in
         [HttpGet]
         public IActionResult CreateRole()
         {
@@ -236,6 +241,7 @@ namespace UTCollisionApp.Controllers
             return View(loginModel);
         }
 
+        //Lists the type of roles we have and who is there
         [HttpGet]
         public IActionResult ListRoles()
         {
@@ -243,6 +249,7 @@ namespace UTCollisionApp.Controllers
             return View(roles);
         }
 
+        //Edit a role for a user
         [HttpGet]
         public async Task<IActionResult> EditRole(string id)
         {
@@ -309,6 +316,7 @@ namespace UTCollisionApp.Controllers
 
         }
 
+        //Edit a user in a role
         [HttpGet]
         public async Task<IActionResult> EditUsersInRole(string roleId)
         {
@@ -454,6 +462,8 @@ namespace UTCollisionApp.Controllers
             }
 
         }
+
+        //Delete a user
         [HttpPost]
         public async Task<IActionResult> DeleteUser(string id)
         {

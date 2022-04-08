@@ -19,14 +19,22 @@
     color: #453d45;
 }
 
-a{
+.manager{
     color: white;
 }
 
-    a:hover {
-        color: #a7cbd5;
-        text-decoration: none;
-    }
+.manager:hover {
+    color: #a7cbd5;
+    text-decoration: none;
+}
+
+email {
+    color: #71777d;
+}
+
+email:hover {
+    color: #453d45;
+}
 
 /*CRASH BLUE -- Styles*/
 
@@ -186,3 +194,15 @@ a.text-crashLightGrey:hover, a.text-crashLightGrey:focus {
 ul {
    list-style: none;
 }
+
+
+/*#footer {
+    position: fixed;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    bottom: 500px;
+    margin-top: -180px;*/
+    /*width: 100%;*/
+   /* display: block;*/
+    /*height: 180px;;*/ /* Footer height */
+/*}*/

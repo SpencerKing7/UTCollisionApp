@@ -18,8 +18,8 @@ namespace UTCollisionApp.Controllers
         public InferenceSession _countySession;
         public PredictorController()
         {
-            _severitySession = new InferenceSession("wwwroot/severity_predictor.onnx");
-            _citySession = new InferenceSession("wwwroot/city_predictor.onnx");
+            _severitySession = new InferenceSession("wwwroot/severity_predictor.onnx"); 
+             _citySession = new InferenceSession("wwwroot/city_predictor.onnx");
             _countySession = new InferenceSession("wwwroot/county_predictor.onnx");
 
             //_severitySession.ModelMetadata.GraphName = 'test';
@@ -27,6 +27,7 @@ namespace UTCollisionApp.Controllers
             //_countySession.ModelMetadata.GraphName = 'test';
         }
 
+        //For our severity predictor
         [HttpGet]
         public IActionResult SeverityCalc(Prediction prediction)
         {
@@ -39,6 +40,7 @@ namespace UTCollisionApp.Controllers
             return View(new SeverityPredictorData());
         }
 
+        //For our crash locator
         [HttpGet]
         public IActionResult CrashLocator(CityPrediction cp)
         {
@@ -53,6 +55,7 @@ namespace UTCollisionApp.Controllers
             return View(new CityPredictorData());
         }
 
+        //For our county locator
         [HttpGet]
         public IActionResult CountyLocator(CountyPrediction cp)
         {

@@ -34,9 +34,8 @@ namespace UTCollisionApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            
 
-            services.AddControllersWithViews();
+            
 
             // Database Connections (WE COULDN'T GET THE ENVIRONMENTAL VARIABLES WORKING..... BUT ALL THE CONFIGURATION AND CODE IS THERE FOR IT TO WORK)
             //string crash = Environment.GetEnvironmentVariable("RDSConnectionStringCrash");
@@ -78,10 +77,14 @@ namespace UTCollisionApp
                 options.HttpsPort = 5001;
             });
             // Identity
+
             services.AddIdentity<IdentityUser, IdentityRole> (options =>
             {
-                
+
                 //Password settings.
+                options.SignIn.RequireConfirmedAccount = false;
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = true;
@@ -89,8 +92,12 @@ namespace UTCollisionApp
                 options.Password.RequiredLength = 12;
                 options.Password.RequiredUniqueChars = 5;
             })
+
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDBContext>();
+
+            
+            services.AddControllersWithViews();
 
             services.AddAuthorization(options =>
             {
@@ -118,6 +125,19 @@ namespace UTCollisionApp
 
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+           
+            
+
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = "240324621296-pf44ihsoana3tgi6oo3boon0okbfog2n.apps.googleusercontent.com";
+                    options.ClientSecret = "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";
+                });
 
             services.ConfigureApplicationCookie(options =>
             {
