@@ -187,19 +187,14 @@ ul {
    list-style: none;
 }
 
-#page-container {
-    position: relative;
-    min-height: 100vh;
-}
 
-#content-wrap {
-    padding-bottom: 2.5rem; /* Footer height */
-}
-
-#footer {
+/*#footer {
     position: fixed;
-    bottom: 0;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    bottom: 500px;
+    margin-top: -180px;*/
     /*width: 100%;*/
-    display: block;
-    height: 10px; /* Footer height */
-}
+   /* display: block;*/
+    /*height: 180px;;*/ /* Footer height */
+/*}*/
