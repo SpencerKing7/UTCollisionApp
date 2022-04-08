@@ -13,24 +13,19 @@ namespace UTCollisionApp.Controllers
     [AllowAnonymous]
     public class PredictorController : Controller
     {
-        private InferenceSession _session;
-
-        public PredictorController(InferenceSession session)
+        public InferenceSession _severitySession;
+        public InferenceSession _citySession;
+        public InferenceSession _countySession;
+        public PredictorController()
         {
-            _session = session;
+            _severitySession = new InferenceSession("severity_predictor.onnx");
+            _citySession = new InferenceSession("city_predictor.onnx");
+            _countySession = new InferenceSession("county_predictor.onnx");
+
+            //_severitySession.ModelMetadata.GraphName = 'test';
+            //_citySession.ModelMetadata.GraphName = 'test';
+            //_countySession.ModelMetadata.GraphName = 'test';
         }
-        
-        //[HttpGet]
-        //public IActionResult SeverityCalc()
-        //{
-        //    ViewBag.Button = "Admin Sign In";
-        //    ViewBag.Controller = "Admin";
-        //    ViewBag.Action = "AdminHome";
-
-        //    ViewBag.PredictionScore = 0;
-
-        //    return View(new SeverityPredictorData());
-        //}
 
         [HttpGet]
         public IActionResult SeverityCalc(Prediction prediction)
@@ -45,7 +40,7 @@ namespace UTCollisionApp.Controllers
         }
 
         [HttpGet]
-        public IActionResult Results(Prediction p)
+        public IActionResult CrashLocator(CityPrediction cp)
         {
 
             //Button Viewbags
@@ -53,16 +48,32 @@ namespace UTCollisionApp.Controllers
             ViewBag.Controller = "Admin";
             ViewBag.Action = "AdminHome";
 
-            return View(p);
+            ViewBag.PredictedCity = cp.PredictedCity;
+
+            return View(new CityPredictorData());
+        }
+
+        [HttpGet]
+        public IActionResult CountyLocator(CountyPrediction cp)
+        {
+
+            //Button Viewbags
+            ViewBag.Button = "Admin Sign In";
+            ViewBag.Controller = "Admin";
+            ViewBag.Action = "AdminHome";
+
+            ViewBag.PredictedCounty = cp.PredictedCounty;
+
+            return View(new CountyPredictorData());
         }
 
         public IActionResult Predict(SeverityPredictorData data)
         {
-            var result = _session.Run(new List<NamedOnnxValue>
+            var severityResult = _severitySession.Run(new List<NamedOnnxValue>
             {
                 NamedOnnxValue.CreateFromTensor("float_input", data.AsTensor())
             });
-            Tensor<float> score = result.First().AsTensor<float>();
+            Tensor<float> score = severityResult.First().AsTensor<float>();
             var roundedScore = score.First();
 
             roundedScore = (float)System.Math.Round(roundedScore, 2);
@@ -70,6 +81,38 @@ namespace UTCollisionApp.Controllers
             var prediction = new Prediction { PredictedSeverity = roundedScore };
 
             return RedirectToAction("SeverityCalc", prediction);
+        }
+
+        public IActionResult Citypredict(CityPredictorData data)
+        {
+            var CityResult = _citySession.Run(new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor("float_input", data.AsTensor())
+            });
+            Tensor<string> score = CityResult.First().AsTensor<string>();
+            var Score = score.First();
+
+            //roundedScore = (float)System.Math.Round(roundedScore, 2);
+
+            var prediction = new CityPrediction { PredictedCity = Score };
+
+            return RedirectToAction("CrashLocator", prediction);
+        }
+
+        public IActionResult CountyPredict(CountyPredictorData data)
+        {
+            var countyResult = _countySession.Run(new List<NamedOnnxValue>
+            {
+                NamedOnnxValue.CreateFromTensor("float_input", data.AsTensor())
+            });
+            Tensor<string> score = countyResult.First().AsTensor<string>();
+            var Score = score.First();
+
+            //roundedScore = (float)System.Math.Round(roundedScore, 2);
+
+            var prediction = new CountyPrediction { PredictedCounty = Score };
+
+            return RedirectToAction("CountyLocator", prediction);
         }
     }
 }
