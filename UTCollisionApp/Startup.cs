@@ -35,32 +35,15 @@ namespace UTCollisionApp
         public void ConfigureServices(IServiceCollection services)
         {
 
-            
-
-            // Database Connections (WE COULDN'T GET THE ENVIRONMENTAL VARIABLES WORKING..... BUT ALL THE CONFIGURATION AND CODE IS THERE FOR IT TO WORK)
-            //string crash = Environment.GetEnvironmentVariable("RDSConnectionStringCrash");
-            //string identity = Environment.GetEnvironmentVariable("RDSConnectionStringIdentity");
-
-            //services.AddDbContext<CollisionDbContext>(options =>
-            //{
-            //    options.UseMySql(Environment.GetEnvironmentVariable("RDSConnectionStringCrash"));
-            //});
-
-            //services.AddDbContext<AppIdentityDBContext>(options =>
-            //{
-            //    options.UseMySql(Environment.GetEnvironmentVariable("RDSConnectionStringIdentity"));
-            //});
-
             services.AddDbContext<CollisionDbContext>(options =>
             {
-                options.UseMySql(Configuration["ConnectionStrings:UTCollisionsDbConnection"]);
+                options.UseMySql(Environment.GetEnvironmentVariable("RDSConnectionStringCrash"));
             });
 
             services.AddDbContext<AppIdentityDBContext>(options =>
             {
-                options.UseMySql(Configuration["ConnectionStrings:IdentityConnection"]);
+                options.UseMySql(Environment.GetEnvironmentVariable("RDSConnectionStringIdentity"));
             });
-
 
 
             services.AddHsts(options =>
@@ -74,7 +57,7 @@ namespace UTCollisionApp
             services.AddHttpsRedirection(options =>
             {
                 options.RedirectStatusCode = (int)HttpStatusCode.TemporaryRedirect;
-                options.HttpsPort = 5001;
+                options.HttpsPort = 443;
             });
             // Identity
 
@@ -109,14 +92,6 @@ namespace UTCollisionApp
 
             services.AddScoped<ICollisionRepository, EFCollisionRepository>();
 
-            //services.AddSingleton<InferenceSession>(
-            //  new InferenceSession("city_predictor.onnx")
-            //);
-
-            //services.AddSingleton<InferenceSession>(
-            //  new InferenceSession("county_predictor.onnx")
-            //);
-
             services.AddSingleton<InferenceSession>(
               new InferenceSession("wwwroot/severity_predictor.onnx")
             );
@@ -135,8 +110,8 @@ namespace UTCollisionApp
                     IConfigurationSection googleAuthNSection =
                         Configuration.GetSection("Authentication:Google");
 
-                    options.ClientId = "240324621296-pf44ihsoana3tgi6oo3boon0okbfog2n.apps.googleusercontent.com";
-                    options.ClientSecret = "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";
+                    options.ClientId = Environment.GetEnvironmentVariable("AuthClientID");
+                    options.ClientSecret = Environment.GetEnvironmentVariable("AuthClientSecret");
                     
                 });
 
@@ -157,7 +132,7 @@ namespace UTCollisionApp
                 app.UseHsts();
             }
             
-            app.UseHttpsRedirection();
+            
             app.UseStaticFiles();
             app.UseSession();
             app.UseRouting();
@@ -165,12 +140,12 @@ namespace UTCollisionApp
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.Use(async (ctx, next) =>
-            {
-                ctx.Response.Headers.Add("Content-Security-Policy",
-                                        "default-src 'self'");
-                await next();
-            });
+            //app.Use(async (ctx, next) =>
+            //{
+            //    ctx.Response.Headers.Add("Content-Security-Policy",
+            //                            "default-src 'self'");
+            //    await next();
+            //});
 
             app.UseEndpoints(endpoints =>
             {
