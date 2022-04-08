@@ -1,12 +1,11 @@
-﻿@inject SignInManager<IdentityUser> signInManager;
-
+@inject SignInManager<IdentityUser> signInManager;
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    @*<meta http-equiv="Content-Security-Policy"
+    <meta http-equiv="Content-Security-Policy"
           content="base-uri 'self';
            	block-all-mixed-content;
            	default-src 'self';
@@ -15,7 +14,7 @@
             form-action 'self';
            	script-src 'self';
            	style-src 'self';
-           	upgrade-insecure-requests;">*@
+           	upgrade-insecure-requests;">
     <title>@ViewData["Title"] - UT Collisions</title>
     <link rel="icon" type="image/x-icon" href="~/assets/logo.png" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -23,7 +22,6 @@
     <link href="~/css/MyStyles.css" rel="stylesheet" />
 </head>
 <body>
-
     <div class="navdark text-white p-2">
         <div class="container-fluid">
             <div class="row">
@@ -35,11 +33,14 @@
                 </div>
                 @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
-                    <div class="navbar-brand float-end p-2">
-
-                    <ul>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink"
+                    <div class="nav-item">
+                        <a class="btn btn-lg btn-crashLightGrey" asp-controller="Admin" asp-action="AdminHome">
+                            Admin Home
+                        </a>
+                    </div>
+                    <div>
+                        <div class="nav-item dropdown">
+                            <a class="dropdown-toggle btn btn-lg btn-crashLightGrey ml-2" href="#" id="navbarDropdownMenuLink"
                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Manage
                             </a>
@@ -49,42 +50,29 @@
                                 <a class="dropdown-item" asp-controller="Admin"
                                    asp-action="ListRoles">Roles</a>
                             </div>
-                        </li>
-                    </ul>
-                    <div class="nav-item">
-
-                        <a class="btn btn-lg btn-crashLightGrey" asp-controller="Admin" asp-action="AdminHome">
-                            Admin Home
-                        </a>
+                        </div>
+                    </div>
+                    
+                }
+                @if (signInManager.IsSignedIn(User))
+                {
+                    <div class="nav-item ml-2">
+                        <form method="post" asp-action="Logout" asp-controller="Home">
+                            <button type="submit" class="btn btn-lg btn-crashLightGrey" style="width:auto">
+                                Logout @User.Identity.Name
+                            </button>
+                        </form>
                     </div>
                 }
-                <div class="navbar-brand float-end p-2">
-                    @if (signInManager.IsSignedIn(User))
-                    {
-                        <div class="nav-item">
-                            <form method="post" asp-action="Logout" asp-controller="Home">
-                                <button type="submit" class="btn btn-lg btn-crashLightGrey" style="width:auto">
-                                    Logout @User.Identity.Name
-                                </button>
-
-                            </form>
-
-                        </div>
-
-                    }
-                    else
-                    {
-                        <div class="nav-item">
-                            <a asp-action="Login" asp-controller="Home" class="btn btn-lg btn-crashLightGrey">Login</a>
-                        </div>
-                    }
-
-                </div>
+                else
+                {
+                    <div class="nav-item ml-2">
+                        <a asp-action="Login" asp-controller="Home" class="btn btn-lg btn-crashLightGrey">Login</a>
+                    </div>
+                }
             </div>
-            }
         </div>
     </div>
-
     <div class="row">
         <div class="col">
             <div>
@@ -92,13 +80,11 @@
             </div>
         </div>
     </div>
-
     @*<footer class="border-top footer text-muted">
             <div class="container">
                 &copy; 2022 - UTCollisionApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
         </footer>*@
-
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -106,7 +92,5 @@
     {
         @RenderSection("Scripts", required: true)
     }
-
-
 </body>
 </html>
