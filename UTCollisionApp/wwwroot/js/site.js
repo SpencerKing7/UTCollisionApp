@@ -1,7 +1,23 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿const delement = document.getElementById("deleteSpan")
+const celement = document.getElementById("confirmDeleteSpan")
 
-// Write your JavaScript code.
-function removeDiv() {
-    document.getElementById("cookie").style.display = "none";
+delement.addEventListener("click", confirmDelete)
+celement.addEventListener("click", confirmDelete)
+
+function confirmDelete(uniqueId, isTrue) {
+
+    document.getElementById("deleteSpan" = 'deleteSpan_' + uniqueId);
+    document.getElementById("confirmDeleteSpan" = 'confirmDeleteSpan_' + uniqueId);
+
+    if (isTrue) {
+        $('#' + deleteSpan).hide();
+        $('#' + confirmDeleteSpan).show();
+    } else {
+        $('#' + deleteSpan).show();
+        $('#' + confirmDeleteSpan).hide();
+    }
 }
+
+
+
+
