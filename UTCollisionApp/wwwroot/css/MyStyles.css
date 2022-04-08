@@ -166,3 +166,7 @@ button.bg-crashLightGrey:focus {
 a.text-crashLightGrey:hover, a.text-crashLightGrey:focus {
     color: #0f6674 !important;
 }
+
+ul {
+   list-style: none;
+}
