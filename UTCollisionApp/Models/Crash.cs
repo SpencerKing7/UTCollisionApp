@@ -10,6 +10,8 @@ namespace UTCollisionApp.Models
         [Required]
         public int CRASH_ID { get; set; }
         public DateTime CRASH_DATETIME { get; set; }
+
+        [Range(1,5, ErrorMessage = "Please enter correct value")]
         public int CRASH_SEVERITY_ID { get; set; }
 
         // Foreign Location Key
