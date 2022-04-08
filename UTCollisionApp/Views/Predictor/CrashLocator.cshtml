@@ -1,0 +1,243 @@
+﻿@{
+    ViewData["Title"] = "Crash Locator";
+    
+}
+
+@model CityPredictorData
+
+<div class="text-center">
+    <h1 class="display-4 mt-4">City Locator: @ViewBag.PredictedCity</h1>
+</div>
+<div class="row">
+    <div class="col-1"></div>
+    <a class="p-2 col-2 text-white btn btn-lg btn-crashBlue btn-block" asp-controller="Predictor" asp-action="CountyLocator">Switch to County</a>
+</div>
+<div class="row">
+    <div class="col mt-3">
+
+        <form method="post" asp-controller="Predictor" asp-action="citypredict" enctype="application/x-www-form-urlencoded">
+            <ul asp-validation-summary="All" class="text-danger list-unstyled"></ul>
+            <div class="row">
+                <div class="col-2"></div>
+                <div class="col-8"><h3>Crash Factors</h3><br /></div>
+                <div class="col-2"><h3>Crash Map</h3><br /></div>
+            </div>
+            <div class="row">
+                <div class="col-2"></div>
+                    <div class="col-4">
+
+                        @*Factors*@
+
+                        @*Work zone*@
+                        <div class="form-group">
+                            <label asp-for="Crash_Severity_ID">Crash Severity</label>
+                            <select asp-for="Crash_Severity_ID">
+                                <option value="1" selected>No Injury</option>
+                                <option value="2">Possible Injury</option>
+                                <option value="3">Suspected Minor Injury</option>
+                                <option value="4">Suspected Serious Injury</option>
+                                <option value="5">Fatal</option>
+                            </select>
+                        </div>
+                        @* County_name_SALT_LAKE *@
+                        <div class="form-group">
+                            <label asp-for="County_Name_Salt_Lake">Yes</label>
+                            <input type="radio" name="County_name_SALT_LAKE" asp-for="County_Name_Salt_Lake" value="0" />&emsp;
+                            <label asp-for="County_Name_Salt_Lake">No</label>
+                            <input type="radio" name="County_name_SALT_LAKE" asp-for="County_Name_Salt_Lake" value="1" checked="checked" />
+                            &emsp;<i>Salt Lake County?</i>
+                        </div>
+                        @* County_name_UTAH *@
+                        <div class="form-group">
+                            <label asp-for="County_Name_Utah">Yes</label>
+                            <input type="radio" name="County_name_UTAH" asp-for="County_Name_Utah" value="0" />&emsp;
+                            <label asp-for="County_Name_Utah">No</label>
+                            <input type="radio" name="County_name_UTAH" asp-for="County_Name_Utah" value="1" checked="checked" />
+                            &emsp;<i>Utah County?</i>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Work_zone_related">Yes</label>
+                            <input type="radio" name="work" asp-for="Work_zone_related" value="1" />&emsp;
+                            <label asp-for="Work_zone_related">No</label>
+                            <input type="radio" name="work" asp-for="Work_zone_related" value="0" checked="checked" />
+                            &emsp;<i>Work Zone Related?</i>
+                        </div>
+                        @* Pedestrian *@
+                        <div class="form-group">
+                            <label asp-for="Pedestrian_involved">Yes</label>
+                            <input type="radio" name="ped" asp-for="Pedestrian_involved" value="1" />&emsp;
+                            <label asp-for="Pedestrian_involved">No</label>
+                            <input type="radio" name="ped" asp-for="Pedestrian_involved" value="0" checked="checked" />
+                            &emsp;<i>Pedestrian Involved?</i>
+                        </div>
+                        @* Bicyclist *@
+                        <div class="form-group">
+                            <label asp-for="Bicyclist_involved">Yes</label>
+                            <input type="radio" name="bike" asp-for="Bicyclist_involved" value="1" />&emsp;
+                            <label asp-for="Bicyclist_involved">No</label>
+                            <input type="radio" name="bike" asp-for="Bicyclist_involved" value="0" checked="checked" />
+                            &emsp;<i>Bicyclist Invovled?</i>
+                        </div>
+                        @* Motorcycle *@
+                        <div class="form-group">
+                            <label asp-for="Motorcycle_involved">Yes</label>
+                            <input type="radio" name="motorbike" asp-for="Motorcycle_involved" value="1" />&emsp;
+                            <label asp-for="Motorcycle_involved">No</label>
+                            <input type="radio" name="motorbike" asp-for="Motorcycle_involved" value="0" checked="checked" />
+                            &emsp;<i>Motorcycle Invovled?</i>
+                        </div>
+                        @* Improper Restraint *@
+                        <div class="form-group">
+                            <label asp-for="Improper_restraint">Yes</label>
+                            <input type="radio" name="restraint" asp-for="Improper_restraint" value="1" />&emsp;
+                            <label asp-for="Improper_restraint">No</label>
+                            <input type="radio" name="restraint" asp-for="Improper_restraint" value="0" checked="checked" /><br />
+                            &emsp;<i>Improper Restraint? (Were they wearing a seatbelt correctly?)</i>
+                        </div>
+                        @* Unrestrained *@
+                        <div class="form-group">
+                            <label asp-for="Unrestrained">Yes</label>
+                            <input type="radio" name="seatbelt" asp-for="Unrestrained" value="1" />&emsp;
+                            <label asp-for="Unrestrained">No</label>
+                            <input type="radio" name="seatbelt" asp-for="Unrestrained" value="0" checked="checked" />
+                            &emsp;<i>Did they have a seatbelt on?</i>
+                        </div>
+
+                        @* Intersection *@
+                        <div class="form-group">
+                            <label asp-for="Intersection_related">Yes</label>
+                            <input type="radio" name="intersection" asp-for="Intersection_related" value="1" />&emsp;
+                            <label asp-for="Intersection_related">No</label>
+                            <input type="radio" name="intersection" asp-for="Intersection_related" value="0" checked="checked" />
+                            &emsp;<i>Intersection Related?</i>
+                        </div>
+
+
+                        @* Wild Animal *@
+                        <div class="form-group">
+                            <label asp-for="Wild_animal_related">Yes</label>
+                            <input type="radio" name="wild" asp-for="Wild_animal_related" value="1" />&emsp;
+                            <label asp-for="Wild_animal_related">No</label>
+                            <input type="radio" name="wild" asp-for="Wild_animal_related" value="0" checked="checked" />
+                            &emsp;<i>Wild Animal Related?</i>
+                        </div>
+
+                    </div>
+                    <div class="col-4">
+                        @* Domestic Animal *@
+                        <div class="form-group">
+                            <label asp-for="Domestic_animal_related">Yes</label>
+                            <input type="radio" name="domestic" asp-for="Domestic_animal_related" value="1" />&emsp;
+                            <label asp-for="Domestic_animal_related">No</label>
+                            <input type="radio" name="domestic" asp-for="Domestic_animal_related" value="0" checked="checked" />
+                            &emsp;<i>Domestic Animal Related?</i>
+                        </div>
+                        @* Overturn *@
+                        <div class="form-group">
+                            <label asp-for="Overturn_rollover">Yes</label>
+                            <input type="radio" name="overturn" asp-for="Overturn_rollover" value="1" />&emsp;
+                            <label asp-for="Overturn_rollover">No</label>
+                            <input type="radio" name="overturn" asp-for="Overturn_rollover" value="0" checked="checked" />
+                            &emsp;<i>Overturn Rollover?</i>
+                        </div>
+                        @* Commercial Motor Veh Invovled *@
+                        <div class="form-group">
+                            <label asp-for="Commercial_motor_veh_involved">Yes</label>
+                            <input type="radio" name="commercial" asp-for="Commercial_motor_veh_involved" value="1" />&emsp;
+                            <label asp-for="Commercial_motor_veh_involved">No</label>
+                            <input type="radio" name="commercial" asp-for="Commercial_motor_veh_involved" value="0" checked="checked" />
+                            &emsp;<i>Was a commercial motor vehicle involed?</i>
+                        </div>
+                        @* Teenage Driver *@
+                        <div class="form-group">
+                            <label asp-for="Teenage_driver_involved">Yes</label>
+                            <input type="radio" name="teenager" asp-for="Teenage_driver_involved" value="1" />&emsp;
+                            <label asp-for="Teenage_driver_involved">No</label>
+                            <input type="radio" name="teenager" asp-for="Teenage_driver_involved" value="0" checked="checked" />
+                            &emsp;<i>Teenage Driver Involved?</i>
+                        </div>
+                        @* Older Driver *@
+                        <div class="form-group">
+                            <label asp-for="Older_driver_involved">Yes</label>
+                            <input type="radio" name="older" asp-for="Older_driver_involved" value="1" />&emsp;
+                            <label asp-for="Older_driver_involved">No</label>
+                            <input type="radio" name="older" asp-for="Older_driver_involved" value="0" checked="checked" /><br />
+                            &emsp;<i>Older Driver Involved? (Older than 64 yrs old)</i>
+                        </div>
+                        @* Night Dark Condition *@
+                        <div class="form-group">
+                            <label asp-for="Night_dark_condition">Yes</label>
+                            <input type="radio" name="night" asp-for="Night_dark_condition" value="1" />&emsp;
+                            <label asp-for="Night_dark_condition">No</label>
+                            <input type="radio" name="night" asp-for="Night_dark_condition" value="0" checked="checked" />
+                            &emsp;<i>Night/Dark Conditions?</i>
+                        </div>
+                        @* Single Vehicle *@
+                        <div class="form-group">
+                            <label asp-for="Single_vehicle">Yes</label>
+                            <input type="radio" name="single" asp-for="Single_vehicle" value="1" />&emsp;
+                            <label asp-for="Single_vehicle">No</label>
+                            <input type="radio" name="single" asp-for="Single_vehicle" value="0" checked="checked" />
+                            &emsp;<i>Single Vehicle Accident?</i>
+                        </div>
+                        @* Distracted *@
+                        <div class="form-group">
+                            <label asp-for="Distracted_driving">Yes</label>
+                            <input type="radio" name="distracted" asp-for="Distracted_driving" value="1" />&emsp;
+                            <label asp-for="Distracted_driving">No</label>
+                            <input type="radio" name="distracted" asp-for="Distracted_driving" value="0" checked="checked" />
+                            &emsp;<i>Distracted Driving?</i>
+                        </div>
+                        @* Drowsy *@
+                        <div class="form-group">
+                            <label asp-for="Drowsy_driving">Yes</label>
+                            <input type="radio" name="drowsy" asp-for="Drowsy_driving" value="1" />&emsp;
+                            <label asp-for="Drowsy_driving">No</label>
+                            <input type="radio" name="drowsy" asp-for="Drowsy_driving" value="0" checked="checked" />
+                            &emsp;<i>Drowsy Driving?</i>
+                        </div>
+                        @* Roadway Departure *@
+                        <div class="form-group">
+                            <label asp-for="Roadway_departure">Yes</label>
+                            <input type="radio" name="departure" asp-for="Roadway_departure" value="1" />&emsp;
+                            <label asp-for="Roadway_departure">No</label>
+                            <input type="radio" name="departure" asp-for="Roadway_departure" value="0" checked="checked" />
+                            &emsp;<i>Roadway Departure?</i>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        @if (ViewBag.PredictedCity == null || ViewBag.PredictedCity == "")
+                        {
+                            <img src="~/img/UtahMap/UtahMap.jpg" />
+                        }
+                        @if (ViewBag.PredictedCity == "PROVO")
+                        {
+                            <img src="~/img/UtahMap/UtahMap-Provo.jpg" />
+                        }
+                        @if (ViewBag.PredictedCity == "SALT LAKE CITY")
+                        {
+                            <img src="~/img/UtahMap/UtahMap-SaltLake.jpg" />
+                        }
+                        @if (ViewBag.PredictedCity == "WEST VALLEY CITY")
+                        {
+                            <img src="~/img/UtahMap/UtahMap-WestValley.jpg" />
+                        }
+                        @if (ViewBag.PredictedCity == "WEST JORDAN")
+                        {
+                            <img src="~/img/UtahMap/UtahMap-WestJordan.jpg" />
+                        }
+                        @if (ViewBag.PredictedCity == "SANDY")
+                        {
+                            <img src="~/img/UtahMap/UtahMap-Sandy.jpg" />
+                        }
+
+                    </div>
+                </div>
+                <div class="row text-center">
+                    <div class="col-3"></div>
+                    <button class="btn col-9 btn-outline-crashBlue btn-crashBlue mt-4 mb-5" type="submit">Locate</button>
+                </div>
+</form>
+    </div>
+    <div class="col-3"></div>
+</div>

@@ -16,15 +16,15 @@
     </div>
 </div>-->
 @* Stat Summary/Picture Carousel/Contact *@
-<div class="row navdark">
+<div class="row crashDarkGrey font-weight-bold p-3">
     <div class="col-3">
-        <div class="card m-3">
+        <div class="card text-center m-3">
             <h4 class="text-center"><b>2019 Stats</b></h4>
             <p class="bg-danger text-white m-2 p-2 mb-2 rounded-pill">Total Deaths: @ViewBag.Deaths</p>
             <p class="bg-warning text-white m-2 p-2 mb-2 rounded-pill">Total Injuries: @ViewBag.Injuries</p>
             <p class="bg-success text-white m-2 p-2 mb-2 rounded-pill">Total Accidents: @ViewBag.Accidents</p>
         </div>
-        <div class="card m-3">
+        <div class="card m-3 text-center">
             <h4 class="text-center" id="stats">The crash statistics below are provided to heighten awareness about traffic safety issues.</h4>
             <p style="font-size:20px;">Those who want to be more involed or have any questions should contact Barbra Freeman for additional information.</p>
         </div>
@@ -56,9 +56,11 @@
 
     <div class="col-3">
         <div class="text-center m-3">
-            <a class="p-2 text-white btn btn-lg btn-info btn-block">Statistics</a><br />
-            <a class="p-2 text-white btn btn-lg btn-info btn-block" asp-controller="Predictor" asp-action="SeverityCalc">Severvity Calculator</a><br />
-            <a class="p-2 text-white btn btn-lg btn-info btn-block" href="#contact">Contact Us</a>
+
+            <a class="p-2 text-white btn btn-lg btn-crashBlue btn-block" asp-action="Statistics">Statistics</a><br />
+            <a class="p-2 text-white btn btn-lg btn-crashBlue btn-block" asp-controller="Predictor" asp-action="SeverityCalc">Severvity Calculator</a><br />
+            <a class="p-2 text-white btn btn-lg btn-crashBlue btn-block" asp-controller="Predictor" asp-action="CrashLocator">Crash Locator</a><br />
+            <a class="p-2 text-white btn btn-lg btn-crashBlue btn-block" href="#contact">Contact Us</a>
         </div>
 
         <div class="card m-3">
@@ -88,7 +90,7 @@
         <h3>What is the problem?</h3>
         <p>This chart shows the % of Total Crashes by Severity.</p>
         <p>By looking at this chart we see that about 70% crashes have no injury, which is a positive thing. However, it's important to remember that 
-        a crash in Utah happening <b>every 8 minutes</b>, a person is injured in a crash <b>every 20 minutes</b>, and a person dies in a crash <b>every 33 hours</b>.</p>
+        a crash in Utah happens <b>every 8 minutes</b>, a person is injured in a crash <b>every 20 minutes</b>, and a person dies in a crash <b>every 33 hours</b>.</p>
         <center><img src="~/img/CrashSeverity.png" /></center><br /><br />
         <p>The cart below shows crashes by driver age.</p>
         <p>It's easy to see that younger drivers are involed in more crashes. It is also alarming that drivers under the age of 15 are involved in crashes.</p>
