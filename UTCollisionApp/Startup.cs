@@ -94,6 +94,14 @@ namespace UTCollisionApp
             services.AddScoped<ICollisionRepository, EFCollisionRepository>();
 
             services.AddSingleton<InferenceSession>(
+              new InferenceSession("city_predictor.onnx")
+            );
+
+            services.AddSingleton<InferenceSession>(
+              new InferenceSession("county_predictor.onnx")
+            );
+
+            services.AddSingleton<InferenceSession>(
               new InferenceSession("severity_predictor.onnx")
             );
 
@@ -147,7 +155,6 @@ namespace UTCollisionApp
                 endpoints.MapDefaultControllerRoute();
             });
 
-            
         }
     }
 }

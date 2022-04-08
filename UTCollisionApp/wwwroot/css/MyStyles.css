@@ -11,6 +11,10 @@
     background-color: #a7cbd5;
 }
 
+.crashTextBlue {
+    color: #a7cbd5;
+}
+
 /*CRASH BLUE -- Styles*/
 
 .btn-crashBlue {
@@ -29,7 +33,7 @@
 
 
 .btn-outline-crashBlue {
-    color: #a7cbd5;
+    color: #fff;
     border-color: #a7cbd5;
 }
 
