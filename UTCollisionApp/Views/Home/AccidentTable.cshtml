@@ -1,0 +1,79 @@
+﻿@{
+    ViewData["Title"] = "Search";
+}
+
+@model CrashViewModel
+
+@* Title *@
+<div class="text-center">
+    <p class="display-2">Search Crashes</p>
+</div>
+
+@* Filtering *@
+<div class="row">
+    <div class="col">
+        <div class="card m-2">
+            <vc:accidents></vc:accidents>
+        </div>
+    </div>
+</div>
+
+@* Crash Table *@
+<div class="row container-fluid">
+    <div class="col-2 m-2">
+
+    </div>
+    <div class="col">
+        <table class="table table-bordered table-striped mt-3">
+            <thead class="bg-crashBlue">
+                <tr>
+                    <th>City</th>
+                    <th>County</th>
+                    <th>Date</th>
+                    <th>Severity</th>
+                    <th>Route</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+
+
+            <tbody>
+                @* Load data from the tables here *@
+                @foreach (Crash c in Model.Crashes)
+                {
+                <tr>
+                    <td>@c.Location.COUNTY_NAME</td>
+                    <td>@c.Location.CITY</td>
+                    <td>@c.CRASH_DATETIME</td>
+                    <td>@c.CRASH_SEVERITY_ID</td>
+                    <td>@c.Location.ROUTE</td>
+                    <td>
+                        <a class="btn btn-crashLightGrey btn-sm" asp-controller="Home" asp-action="Details" asp-route-CRASH_ID="@c.CRASH_ID">Details</a>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+
+        <p><b>Page @Model.PageInfo.CurrentPage.ToString() of @Model.PageInfo.TotalPages.ToString()</b><br /><i>15 records per page</i></p>
+
+        <div class="container-fluid text-center">
+            <a asp-controller="Home" asp-action="AccidentTable" asp-route-page="1">First page ... </a>
+            <div page-changer="@Model.PageInfo" page-action="AccidentTable" page-classes-enabled="true" page-class="btn"
+                 page-class-normal="btn-outline-dark" page-class-selected="btn-dark"
+                 class="btn-group pull-right m-1">
+            </div>
+            <a asp-controller="Home" asp-action="AccidentTable" asp-route-page="@Model.PageInfo.TotalPages">... Last page (@Model.PageInfo.TotalPages.ToString())</a>
+        </div>
+    </div>
+
+    <div class="col-2 m-2">
+        
+    </div>
+
+</div>
+
+
+        
+    
+

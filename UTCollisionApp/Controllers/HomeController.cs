@@ -70,6 +70,52 @@ namespace UTCollisionApp.Controllers
             return View();
         }
 
+        public IActionResult AccidentTable(string county, int pageNum = 1)
+        {
+            //Button Viewbags
+            ViewBag.Button = "Sign Out";
+            ViewBag.Controller = "Home";
+            ViewBag.Action = "Index";
+
+            //Pagination and Table Data
+            int pageSize = 25;
+
+            var x = new CrashViewModel
+            {
+                Crashes = _repo.Crashes
+                .Include(x => x.Location)
+                .Include(x => x.Factor)
+                .Where(x => x.Location.COUNTY_NAME == county || county == null)
+                .OrderByDescending(c => c.CRASH_DATETIME)
+                .Skip((pageNum - 1) * pageSize)
+                .Take(pageSize),
+
+                PageInfo = new PageInfo
+                {
+                    TotalNumCrashes =
+                        (county == null
+                        ? _repo.Crashes.Count()
+                        : _repo.Crashes.Where(x => x.Location.COUNTY_NAME == county).Count()),
+                    CrashesPerPage = pageSize,
+                    CurrentPage = pageNum
+                }
+            };
+
+            return View(x);
+        }
+
+        public IActionResult Details(int CRASH_ID)
+        {
+            var crash = _repo.Crashes
+                .Include(x => x.Location)
+                .Include(x => x.Factor)
+                .Single(x => x.CRASH_ID == CRASH_ID);
+
+
+
+            return View("Details", crash);
+        }
+
         public IActionResult Privacy()
         {
             //Button Viewbags
