@@ -144,18 +144,22 @@ namespace UTCollisionApp
 
             app.UseEndpoints(endpoints =>
             {
+                // Admin County Filering
                 endpoints.MapControllerRoute("Counties",
-                    "{county}/Page{pageNum}/{severity?}",
+                    "Admin/CrashTable/{county}/PageNum{pageNum}/{severity?}",
                     new { Controller = "Admin", action = "CrashTable", pageNum = 1 });
+                
+                // Normal User Filtering
+                endpoints.MapControllerRoute("Counties",
+                    "Home/AccidentTable/{counties}/PageNum{page}/{severity?}",
+                    new { Controller = "Home", action = "AccidentTable", pageNum = 1 });
 
+                // Admin Pagination
                 endpoints.MapControllerRoute("Paging",
                     "CrashesPage{pageNum}",
                     new { Controller = "Admin", action = "CrashTable", pageNum = 1 });
 
-                endpoints.MapControllerRoute("Counties",
-                    "{counties}/PageNum{page}/{severity?}",
-                    new { Controller = "Home", action = "AccidentTable", pageNum = 1 });
-
+                // Normal User Pagination
                 endpoints.MapControllerRoute("Paging",
                     "AccidentsPage{page}",
                     new { Controller = "Home", action = "AccidentTable", pageNum = 1 });
