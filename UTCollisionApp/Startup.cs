@@ -181,7 +181,7 @@ namespace UTCollisionApp
                 
                 // Normal User Filtering
                 endpoints.MapControllerRoute("Counties",
-                    "Home/AccidentTable/{counties}/PageNum{page}/{severity?}",
+                    "Home/AccidentTable/{counties}/PageNum{pageNum}/{severity?}",
                     new { Controller = "Home", action = "AccidentTable", pageNum = 1 });
 
                 // Admin Pagination
