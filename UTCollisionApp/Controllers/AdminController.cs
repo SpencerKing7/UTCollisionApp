@@ -65,7 +65,17 @@ namespace UTCollisionApp.Controllers
         [HttpPost]
         public IActionResult AddCrashForm(Crash c)
         {
-            _repo.CreateCrash(c);
+
+            if (ModelState.IsValid)
+            {
+                _repo.CreateCrash(c);
+            }
+
+            else
+            {
+                return RedirectToAction("AddCrashForm");
+            }
+                
 
             return RedirectToAction("AdminHome");
         }
@@ -115,8 +125,6 @@ namespace UTCollisionApp.Controllers
                 .Include(x => x.Factor)
                 .Single(x => x.CRASH_ID == CRASH_ID);
 
-
-
             return View("Details", crash);
         }
 
@@ -146,7 +154,14 @@ namespace UTCollisionApp.Controllers
         [HttpPost]
         public IActionResult EditCrashForm(Crash c)
         {
-            _repo.SaveCrash(c);
+            if (ModelState.IsValid)
+            {
+                _repo.SaveCrash(c);
+            }
+            else
+            {
+                return RedirectToAction("EditCrashForm", c.CRASH_ID);
+            }
 
             return RedirectToAction("CrashTable");
         }
