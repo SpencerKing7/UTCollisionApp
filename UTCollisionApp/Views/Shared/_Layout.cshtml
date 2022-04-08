@@ -49,7 +49,7 @@
                             </div>
                         </li>
                     </ul>
-                    <div class="nav-item">
+                    <div class="nav-item m-3">
                         <a class="btn btn-lg btn-crashLightGrey" asp-controller="Admin" asp-action="AdminHome">
                             Admin Home
                         </a>
@@ -59,7 +59,7 @@
                 
                 @if (signInManager.IsSignedIn(User))
                 {
-                    <div class="nav-item">
+                    <div class="nav-item m-3">
                         <form method="post" asp-action="Logout" asp-controller="Home">
                             <button type="submit" class="btn btn-lg btn-crashLightGrey" style="width:auto">
                                 Logout @User.Identity.Name
