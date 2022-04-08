@@ -126,8 +126,8 @@ namespace UTCollisionApp
                     IConfigurationSection googleAuthNSection =
                         Configuration.GetSection("Authentication:Google");
 
-                    options.ClientId = googleAuthNSection["ClientId"];
-                    options.ClientSecret = googleAuthNSection["ClientSecret"];
+                    options.ClientId = "240324621296-pf44ihsoana3tgi6oo3boon0okbfog2n.apps.googleusercontent.com";
+                    options.ClientSecret = "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";
                 });
 
             services.ConfigureApplicationCookie(options =>
