@@ -143,31 +143,44 @@ namespace UTCollisionApp.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginModel loginModel)
+        public async Task<IActionResult> Login(LoginModel model, string returnUrl)
         {
-            
+            model.ExternalLogins =
+                (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
             {
-                IdentityUser user = await userManager.FindByNameAsync(loginModel.Username);
+                var user = await userManager.FindByEmailAsync(model.Email);
 
-                if (user != null)
+                if (user != null && !user.EmailConfirmed &&
+                            (await userManager.CheckPasswordAsync(user, model.Password)))
                 {
-                    await signInManager.SignOutAsync();
+                    ModelState.AddModelError(string.Empty, "Email not confirmed yet");
+                    return View(model);
+                }
 
-                    if ((await signInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
+                var result = await signInManager.PasswordSignInAsync(model.Email,
+                                        model.Password, false, false);
+
+                if (result.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
-                        return Redirect(loginModel?.ReturnUrl ?? "/");
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "home");
                     }
                 }
 
-
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
             }
-            ModelState.AddModelError("", "Invalid Name or Password");
-            return View(loginModel);
+
+            return View(model);
         }
         [HttpPost]
-        public async Task<IActionResult> ExternalLogin(string provider, string returnUrl)
+        public IActionResult ExternalLogin(string provider, string returnUrl)
         {
             var redirectUrl = Url.Action("ExternalLoginCallback", "Home",
                 new { ReturnUrl = returnUrl });
@@ -245,11 +258,8 @@ namespace UTCollisionApp.Controllers
                     return LocalRedirect(returnUrl);
                 }
 
-                // If we cannot find the user email we cannot continue
-                ViewBag.ErrorTitle = $"Email claim not received from: {info.LoginProvider}";
-                ViewBag.ErrorMessage = "Please contact support on Pragim@PragimTech.com";
 
-                return View("Error");
+                return View("Login");
             }
         }
 
