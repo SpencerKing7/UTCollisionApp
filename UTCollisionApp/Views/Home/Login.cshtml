@@ -5,37 +5,70 @@
 
 @model LoginModel
 
-    <div class="row">
-        <div class="col-3"></div>
-        <div class="col">
-            <div class="">
+<div class="row">
+    <div class="col-3"></div>
+    <div class="col">
+        <div class="">
+            <h3 class="display-4 mt-4 mb-4 text-center">Please Enter Username and Password</h3>
+            <div style="font-size:large">
+                <form method="post" asp-controller="Home" asp-action="Login">
+                    <div asp-validation-summary="All" class="text-danger list-unstyled"></div>
+                    <div class="form-group">
+                        <label asp-for="Username">Username:</label>
+                        <input asp-for="Username" class="form-control" />
+                    </div>
 
-                <h3 class="display-4 mt-4 mb-4">Please Enter Username and Password</h3>
-                <div style="font-size:large">
-                    <form method="post" asp-controller="Home" asp-action="Login">
-                        <div asp-validation-summary="All" class="text-danger list-unstyled"></div>
-                        <div class="form-group">
-                            <label asp-for="Username">Username:</label>
-                            <input asp-for="Username" class="form-control" />
-                        </div>
+                    <div class="form-group">
+                        <label asp-for="Password">Password:</label>
+                        <input asp-for="Password" class="form-control" />
+                    </div>
 
-                        <div class="form-group">
-                            <label asp-for="Password">Password:</label>
-                            <input asp-for="Password" class="form-control" />
-                        </div>
+                    <button class="btn btn-lg btn-crashBlue" type="submit">Login</button>
 
-                        <button class="btn btn-lg btn-crashBlue" type="submit">Login</button>
+                    <input type="hidden" asp-for="ReturnUrl" />
 
-                        <input type="hidden" asp-for="ReturnUrl" />
-
-                    </form>
-                </div>
+                </form>
             </div>
-            <div>
-                <div class="nav-item mt-3">
-                    <a asp-action="createuser" asp-controller="home" class="btn btn-lg btn-crashLightGrey">Create User</a>
-                </div>
+            
+            <div class="nav-item mt-3">
+                <a asp-action="createuser" asp-controller="home" class="btn btn-lg btn-crashLightGrey">Create User</a>
             </div>
         </div>
-        <div class="col-3"></div>
     </div>
+    <div class="col-3"></div>    
+</div>
+<div class="row mt-5">
+    <div class="col-3"></div>
+    <div class="col">
+        <h1>External Login</h1>
+        <hr />
+        @{
+            if (Model.ExternalLogins.Count == 0)
+            { 
+                <div> No external logins configured</div>
+
+            }
+            else
+            { 
+                <form method="post" asp-action="ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl">
+                    <div>
+
+                        @foreach (var provider in Model.ExternalLogins)
+                        {
+                            <button type="submit" class="btn btn-lg btn-crashBlue"
+                                    name="provider" value="@provider.Name"
+                                    title="Log in using your @provider.DisplayName account">
+                                @provider.DisplayName
+                            </button>
+                        }
+                    </div>
+                </form>
+            }
+            
+            
+         }
+    </div>
+                
+    <div class="col-3"></div>
+</div>
+s

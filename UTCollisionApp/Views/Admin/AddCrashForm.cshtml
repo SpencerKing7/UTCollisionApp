@@ -5,7 +5,7 @@
 @model Crash
 
 <div class="text-center">
-    <p class="display-2">Add a crash</p>
+    <p class="display-2 mt-3">Add a crash</p>
 </div>
 
 
@@ -35,7 +35,6 @@
 
                 <label asp-for="Location.COUNTY_NAME">County:</label>
                 <select class="form-control" asp-for="Location.COUNTY_NAME">
-                    <option value="">--Select County--</option>
                     @foreach (var l in ViewBag.Counties)
                     {
                         <option value="@l">@l</option>
@@ -208,8 +207,7 @@
                 &emsp;<label asp-for="Factor.ROADWAY_DEPARTURE"><i>Roadway Departure?</i></label>
             </div>
             <br />
-            <button type="submit" class="btn btn-lg btn-crashBlue">Save Crash</button>
-            <br /><br />
+            <button type="submit" class="btn btn-lg btn-crashBlue mb-5">Save Crash</button>
         </form>
     </div>
 

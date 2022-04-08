@@ -65,29 +65,40 @@ namespace UTCollisionApp.Controllers
         [HttpPost]
         public IActionResult AddCrashForm(Crash c)
         {
-            _repo.CreateCrash(c);
+
+            if (ModelState.IsValid)
+            {
+                _repo.CreateCrash(c);
+            }
+
+            else
+            {
+                return RedirectToAction("AddCrashForm");
+            }
+                
 
             return RedirectToAction("AdminHome");
         }
 
-        //Displays all crashes
-        //Also includes page counting to divide evenly
-        public IActionResult CrashTable(string county, int pageNum = 1)
+        public IActionResult CrashTable(string level, string county, int pageNum = 1)
         {
             //Button Viewbags
             ViewBag.Button = "Sign Out";
             ViewBag.Controller = "Home";
             ViewBag.Action = "Index";
 
+            ViewBag.County = county;
+            ViewBag.Severity = level;
+
             //Pagination and Table Data
-            int pageSize = 25;
+            int pageSize = 15;
 
             var x = new CrashViewModel
             {
                 Crashes = _repo.Crashes
                 .Include(x => x.Location)
                 .Include(x => x.Factor)
-                .Where(x => x.Location.COUNTY_NAME == county || county == null)
+                .Where(x => (x.Location.COUNTY_NAME == county || county == null) && (x.CRASH_SEVERITY_ID.ToString() == level || level == null))
                 .OrderByDescending(c => c.CRASH_DATETIME)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
@@ -113,8 +124,6 @@ namespace UTCollisionApp.Controllers
                 .Include(x => x.Location)
                 .Include(x => x.Factor)
                 .Single(x => x.CRASH_ID == CRASH_ID);
-
-
 
             return View("Details", crash);
         }
@@ -145,7 +154,14 @@ namespace UTCollisionApp.Controllers
         [HttpPost]
         public IActionResult EditCrashForm(Crash c)
         {
-            _repo.SaveCrash(c);
+            if (ModelState.IsValid)
+            {
+                _repo.SaveCrash(c);
+            }
+            else
+            {
+                return RedirectToAction("EditCrashForm", c.CRASH_ID);
+            }
 
             return RedirectToAction("CrashTable");
         }

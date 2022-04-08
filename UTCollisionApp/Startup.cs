@@ -34,13 +34,22 @@ namespace UTCollisionApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             
 
-            services.AddControllersWithViews();
-
-            // Database Connections
+            // Database Connections (WE COULDN'T GET THE ENVIRONMENTAL VARIABLES WORKING..... BUT ALL THE CONFIGURATION AND CODE IS THERE FOR IT TO WORK)
             //string crash = Environment.GetEnvironmentVariable("RDSConnectionStringCrash");
             //string identity = Environment.GetEnvironmentVariable("RDSConnectionStringIdentity");
+
+            //services.AddDbContext<CollisionDbContext>(options =>
+            //{
+            //    options.UseMySql(Environment.GetEnvironmentVariable("RDSConnectionStringCrash"));
+            //});
+
+            //services.AddDbContext<AppIdentityDBContext>(options =>
+            //{
+            //    options.UseMySql(Environment.GetEnvironmentVariable("RDSConnectionStringIdentity"));
+            //});
 
             services.AddDbContext<CollisionDbContext>(options =>
             {
@@ -53,8 +62,7 @@ namespace UTCollisionApp
             });
 
 
-            //services.AddDbContext<AppIdentityDBContext>(options =>
-            //    options.UseMySql(identity));
+
             services.AddHsts(options =>
             {
                 options.Preload = true;
@@ -69,10 +77,14 @@ namespace UTCollisionApp
                 options.HttpsPort = 5001;
             });
             // Identity
+
             services.AddIdentity<IdentityUser, IdentityRole> (options =>
             {
-                
+
                 //Password settings.
+                options.SignIn.RequireConfirmedAccount = false;
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
                 options.Password.RequireDigit = true;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireNonAlphanumeric = true;
@@ -80,8 +92,12 @@ namespace UTCollisionApp
                 options.Password.RequiredLength = 12;
                 options.Password.RequiredUniqueChars = 5;
             })
+
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDBContext>();
+
+            
+            services.AddControllersWithViews();
 
             services.AddAuthorization(options =>
             {
@@ -102,13 +118,27 @@ namespace UTCollisionApp
             //);
 
             services.AddSingleton<InferenceSession>(
-              new InferenceSession("severity_predictor.onnx")
+              new InferenceSession("wwwroot/severity_predictor.onnx")
             );
 
             services.AddSingleton<DataProtectionPurposeStrings>();
 
             services.AddDistributedMemoryCache();
             services.AddSession();
+
+           
+            
+
+            services.AddAuthentication()
+                .AddGoogle(options =>
+                {
+                    IConfigurationSection googleAuthNSection =
+                        Configuration.GetSection("Authentication:Google");
+
+                    options.ClientId = "240324621296-pf44ihsoana3tgi6oo3boon0okbfog2n.apps.googleusercontent.com";
+                    options.ClientSecret = "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";
+                    
+                });
 
             services.ConfigureApplicationCookie(options =>
             {
@@ -135,23 +165,23 @@ namespace UTCollisionApp
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //app.Use(async (ctx, next) =>
-            //{
-            //    ctx.Response.Headers.Add("Content-Security-Policy",
-            //                            "default-src 'self'");
-            //    await next();
-            //});
+            app.Use(async (ctx, next) =>
+            {
+                ctx.Response.Headers.Add("Content-Security-Policy",
+                                        "default-src 'self'");
+                await next();
+            });
 
             app.UseEndpoints(endpoints =>
             {
                 // Admin County Filering
                 endpoints.MapControllerRoute("Counties",
-                    "Admin/CrashTable/{county}/PageNum{pageNum}/{severity?}",
+                    "Admin/CrashTable/{county}/PageNum{pageNum}/{level?}",
                     new { Controller = "Admin", action = "CrashTable", pageNum = 1 });
                 
                 // Normal User Filtering
                 endpoints.MapControllerRoute("Counties",
-                    "Home/AccidentTable/{counties}/PageNum{page}/{severity?}",
+                    "Home/AccidentTable/{counties}/PageNum{pageNum}/{severity?}",
                     new { Controller = "Home", action = "AccidentTable", pageNum = 1 });
 
                 // Admin Pagination

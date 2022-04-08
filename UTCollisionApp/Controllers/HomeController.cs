@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using UTCollisionApp.Models;
 using UTCollisionApp.Models.ViewModels;
@@ -70,22 +71,25 @@ namespace UTCollisionApp.Controllers
             return View();
         }
 
-        public IActionResult AccidentTable(string counties, int pageNum = 1)
+        public IActionResult AccidentTable(string severity, string counties, int pageNum = 1)
         {
             //Button Viewbags
             ViewBag.Button = "Sign Out";
             ViewBag.Controller = "Home";
             ViewBag.Action = "Index";
 
+            ViewBag.County = counties;
+            ViewBag.Severity = severity;
+
             //Pagination and Table Data
-            int pageSize = 25;
+            int pageSize = 15;
 
             var x = new CrashViewModel
             {
                 Crashes = _repo.Crashes
                 .Include(x => x.Location)
                 .Include(x => x.Factor)
-                .Where(x => x.Location.COUNTY_NAME == counties || counties == null)
+                .Where(x => (x.Location.COUNTY_NAME == counties || counties == null) && (x.CRASH_SEVERITY_ID.ToString() == severity || severity == null)) 
                 .OrderByDescending(c => c.CRASH_DATETIME)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
@@ -126,44 +130,139 @@ namespace UTCollisionApp.Controllers
 
             return View();
         }
-
-        public IActionResult Login(string returnUrl)
+        [HttpGet]
+        public async Task<IActionResult> Login(string returnUrl)
         {
-            //Button Viewbags
-            ViewBag.Button = "Sign Out";
-            ViewBag.Controller = "Home";
-            ViewBag.Action = "Index";
+            LoginModel model = new LoginModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
 
-            return View(new LoginModel { ReturnUrl = returnUrl });
+            return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Login(LoginModel loginModel)
+        public async Task<IActionResult> Login(LoginModel model, string returnUrl)
         {
-            //Button Viewbags
-            ViewBag.Button = "Sign Out";
-            ViewBag.Controller = "Home";
-            ViewBag.Action = "Index";
+            model.ExternalLogins =
+                (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
             {
-                IdentityUser user = await userManager.FindByNameAsync(loginModel.Username);
+                var user = await userManager.FindByNameAsync(model.Username);
 
-                if (user != null)
+                /*if (user != null && !user.EmailConfirmed &&
+                            (await userManager.CheckPasswordAsync(user, model.Password)))
                 {
-                    await signInManager.SignOutAsync();
+                    ModelState.AddModelError(string.Empty, "Email not confirmed yet");
+                    return View(model);
+                }*/
 
-                    if ((await signInManager.PasswordSignInAsync(user, loginModel.Password, false, false)).Succeeded)
+                var result = await signInManager.PasswordSignInAsync(model.Username,
+                                        model.Password, false, false);
+
+                if (result.Succeeded)
+                {
+                    if (!string.IsNullOrEmpty(returnUrl) && Url.IsLocalUrl(returnUrl))
                     {
-                        return Redirect(loginModel?.ReturnUrl ?? "/");
+                        return Redirect(returnUrl);
+                    }
+                    else
+                    {
+                        return RedirectToAction("index", "home");
                     }
                 }
 
-
+                ModelState.AddModelError(string.Empty, "Invalid Login Attempt");
             }
-            ModelState.AddModelError("", "Invalid Name or Password");
-            return View(loginModel);
+
+            return View(model);
         }
+        [HttpPost]
+        public IActionResult ExternalLogin(string provider, string returnUrl)
+        {
+            var redirectUrl = Url.Action("ExternalLoginCallback", "Home",
+                new { ReturnUrl = returnUrl });
+
+            var properties = signInManager
+                .ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            return new ChallengeResult(provider, properties);
+        }
+
+         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
+            {
+            returnUrl = returnUrl ?? Url.Content("~/");
+
+            LoginModel loginViewModel = new LoginModel
+            {
+                ReturnUrl = returnUrl,
+                ExternalLogins =
+                        (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList()
+            };
+
+            if (remoteError != null)
+            {
+                ModelState
+                    .AddModelError(string.Empty, $"Error from external provider: {remoteError}");
+
+                return View("Login", loginViewModel);
+            }
+
+            // Get the login information about the user from the external login provider
+            var info = await signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                ModelState
+                    .AddModelError(string.Empty, "Error loading external login information.");
+
+                return View("Login", loginViewModel);
+            }
+
+            // If the user already has a login (i.e if there is a record in AspNetUserLogins
+            // table) then sign-in the user with this external login provider
+            var signInResult = await signInManager.ExternalLoginSignInAsync(info.LoginProvider,
+                info.ProviderKey, isPersistent: false, bypassTwoFactor: false);
+
+            if (signInResult.Succeeded)
+            {
+                return LocalRedirect(returnUrl);
+            }
+            // If there is no record in AspNetUserLogins table, the user may not have
+            // a local account
+            else
+            {
+                // Get the email claim value
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+
+                if (email != null)
+                {
+                    // Create a new user without password if we do not have a user already
+                    var user = await userManager.FindByEmailAsync(email);
+
+                    if (user == null)
+                    {
+                        user = new IdentityUser
+                        {
+                            UserName = info.Principal.FindFirstValue(ClaimTypes.Email),
+                            Email = info.Principal.FindFirstValue(ClaimTypes.Email)
+                        };
+
+                        await userManager.CreateAsync(user);
+                    }
+
+                    // Add a login (i.e insert a row for the user in AspNetUserLogins table)
+                    await userManager.AddLoginAsync(user, info);
+                    await signInManager.SignInAsync(user, isPersistent: false);
+
+                    return LocalRedirect(returnUrl);
+                }
+
+
+                return View("Login");
+            }
+        }
+
 
         [HttpGet]
         public IActionResult CreateUser()
