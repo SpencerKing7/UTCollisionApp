@@ -80,13 +80,13 @@ namespace UTCollisionApp
 
             services.AddScoped<ICollisionRepository, EFCollisionRepository>();
 
-            services.AddSingleton<InferenceSession>(
-              new InferenceSession("city_predictor.onnx")
-            );
+            //services.AddSingleton<InferenceSession>(
+            //  new InferenceSession("city_predictor.onnx")
+            //);
 
-            services.AddSingleton<InferenceSession>(
-              new InferenceSession("county_predictor.onnx")
-            );
+            //services.AddSingleton<InferenceSession>(
+            //  new InferenceSession("county_predictor.onnx")
+            //);
 
             services.AddSingleton<InferenceSession>(
               new InferenceSession("severity_predictor.onnx")
@@ -137,6 +137,14 @@ namespace UTCollisionApp
                 endpoints.MapControllerRoute("Paging",
                     "CrashesPage{pageNum}",
                     new { Controller = "Admin", action = "CrashTable", pageNum = 1 });
+
+                endpoints.MapControllerRoute("Counties",
+                    "{counties}/PageNum{page}/{severity?}",
+                    new { Controller = "Home", action = "AccidentTable", pageNum = 1 });
+
+                endpoints.MapControllerRoute("Paging",
+                    "AccidentsPage{page}",
+                    new { Controller = "Home", action = "AccidentTable", pageNum = 1 });
 
                 endpoints.MapDefaultControllerRoute();
             });
