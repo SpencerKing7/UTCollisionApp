@@ -1,4 +1,4 @@
-﻿@inject SignInManager<IdentityUser> signInManager;
+﻿@*@inject SignInManager<IdentityUser> signInManager*@
 
 
 <!DOCTYPE html>
@@ -6,6 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <meta http-equiv="Content-Security-Policy"
           content="base-uri 'self';
            	block-all-mixed-content;
@@ -27,12 +28,13 @@
     <div class="navdark text-white p-2">
         <div class="container-fluid">
             <div class="row">
-                <div class="col navbar-brand">
+                <div class="col navbar-brand m-lg-2">
                     <a class="nav-link text-white" asp-controller="Home" asp-action="Index">
                         @*<img src="~/img/fender-bender.png"/>*@
                         <span class="display-4">UT Collision Home</span>
                     </a>
                 </div>
+
                 @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
                     <ul style="list-style-type:none">
@@ -77,10 +79,9 @@
                     </div>
                 }
 
-                
             </div>
         </div>
-    </div>
+</div>
 
     <div class="row">
         <div class="col">
