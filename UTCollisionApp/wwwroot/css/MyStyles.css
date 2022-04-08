@@ -170,3 +170,20 @@ a.text-crashLightGrey:hover, a.text-crashLightGrey:focus {
 ul {
    list-style: none;
 }
+
+#page-container {
+    position: relative;
+    min-height: 100vh;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem; /* Footer height */
+}
+
+#footer {
+    position: fixed;
+    bottom: 0;
+    /*width: 100%;*/
+    display: block;
+    height: 10px; /* Footer height */
+}

@@ -70,6 +70,7 @@ namespace UTCollisionApp.Controllers
             return View();
         }
 
+        //This is for those who are not admin users so they can still view all the crashes
         public IActionResult AccidentTable(string county, int pageNum = 1)
         {
             //Button Viewbags
@@ -104,6 +105,7 @@ namespace UTCollisionApp.Controllers
             return View(x);
         }
 
+        //View details about a specific crash
         public IActionResult Details(int CRASH_ID)
         {
             var crash = _repo.Crashes

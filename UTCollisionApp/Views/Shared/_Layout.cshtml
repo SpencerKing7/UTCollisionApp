@@ -1,12 +1,9 @@
-﻿@*@inject SignInManager<IdentityUser> signInManager*@
-
-
+﻿@inject SignInManager<IdentityUser> signInManager;
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
     <meta http-equiv="Content-Security-Policy"
           content="base-uri 'self';
            	block-all-mixed-content;
@@ -24,17 +21,15 @@
     <link href="~/css/MyStyles.css" rel="stylesheet" />
 </head>
 <body>
-
     <div class="navdark text-white p-2">
         <div class="container-fluid">
             <div class="row">
-                <div class="col navbar-brand m-lg-2">
+                <div class="col navbar-brand">
                     <a class="nav-link text-white" asp-controller="Home" asp-action="Index">
                         @*<img src="~/img/fender-bender.png"/>*@
                         <span class="display-4">UT Collision Home</span>
                     </a>
                 </div>
-
                 @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
                     <ul style="list-style-type:none">
@@ -56,9 +51,7 @@
                             Admin Home
                         </a>
                     </div>
-                 
                 }
-                
                 @if (signInManager.IsSignedIn(User))
                 {
                     <div class="nav-item">
@@ -66,11 +59,8 @@
                             <button type="submit" class="btn btn-lg btn-crashLightGrey" style="width:auto">
                                 Logout @User.Identity.Name
                             </button>
-
                         </form>
-
                     </div>
-
                 }
                 else
                 {
@@ -78,11 +68,9 @@
                         <a asp-action="Login" asp-controller="Home" class="btn btn-lg btn-crashLightGrey">Login</a>
                     </div>
                 }
-
             </div>
         </div>
-</div>
-
+    </div>
     <div class="row">
         <div class="col">
             <div>
@@ -90,13 +78,11 @@
             </div>
         </div>
     </div>
-
-    @*<footer class="border-top footer text-muted">
+    <footer class="border-top text-muted">
             <div class="container">
-                &copy; 2022 - UTCollisionApp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                &copy; 2022 - UTCollision - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
             </div>
-        </footer>*@
-
+        </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
@@ -104,7 +90,5 @@
     {
         @RenderSection("Scripts", required: true)
     }
-
-
 </body>
 </html>

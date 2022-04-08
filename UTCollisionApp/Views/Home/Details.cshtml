@@ -10,8 +10,11 @@
         <a class="btn btn-sm btn-crashBlue" asp-controller="Home" asp-action="AccidentTable">Back</a>
     </div>
     <div class="text-center">
+
+        @*Title*@
         <h1>Details for Crash @Model.CRASH_ID</h1>
 
+        @*Location and basic info*@
         <h4>Date: @Model.CRASH_DATETIME</h4><br />
         <h4>County: @Model.Location.COUNTY_NAME</h4><br />
         <h4>City: @Model.Location.CITY</h4><br />
@@ -20,6 +23,7 @@
         <h4>Milepoint: @Model.Location.MILEPOINT</h4><br />
         <h4>Main Road Name: @Model.Location.MAIN_ROAD_NAME</h4><br />
         
+        @*Factors*@
         <h4>Factors:</h4>
         <h6>If the factor is 1 then it was involved, if it is 0 then it was not involved.</h6><br />
 
