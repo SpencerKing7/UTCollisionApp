@@ -1,38 +1,15 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿const delement = document.getElementById("deleteSpan")
+const celement = document.getElementById("confirmDeleteSpan")
 
-// Write your JavaScript code.
-function removeDiv() {
-    document.getElementById("cookie").style.display = "none";
-}
-$('.close-div').click(function () {
-    $(this).parent().parent().remove();
-});
+delement.addEventListener("click", confirmDelete)
+celement.addEventListener("click", confirmDelete)
 
-function supports_storage() {
-    try {
-        return 'localStorage' in window && window['localStorage'] !== null;
-    } catch (e) {
-        return false;
-    }
-}
+function confirmDelete(uniqueId, isTrue) {
 
-if (supports_storage()) localStorage['sitename.nofullscreen'] = true;
+    document.getElementById("deleteSpan" = 'deleteSpan_' + uniqueId);
+    document.getElementById("confirmDeleteSpan" = 'confirmDeleteSpan_' + uniqueId);
 
-if (localStorage['sitename.nofullscreen'] == "true") {
-    //go right to #page
-}
-
-$(document).ready(function () {
-    if (localStorage['nofullscreen'] == 'true') $('.fullscreen').hide();
-});
-
-
-function confirmDelete(uniqueId, isDeleteClicked) {
-    var deleteSpan = 'deleteSpan_' + uniqueId;
-    var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
-
-    if (isDeleteClicked) {
+    if (isTrue) {
         $('#' + deleteSpan).hide();
         $('#' + confirmDeleteSpan).show();
     } else {
@@ -40,3 +17,7 @@ function confirmDelete(uniqueId, isDeleteClicked) {
         $('#' + confirmDeleteSpan).hide();
     }
 }
+
+
+
+

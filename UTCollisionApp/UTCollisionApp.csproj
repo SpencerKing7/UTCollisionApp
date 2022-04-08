@@ -2,7 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <UserSecretsId>ac53aaa9-a97c-4679-80d5-c89c358279b1</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -20,8 +19,9 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.ML.OnnxRuntime" Version="1.11.0" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
-    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.2.7" />
+
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.2" />
+
   </ItemGroup>
 
   <ItemGroup>
