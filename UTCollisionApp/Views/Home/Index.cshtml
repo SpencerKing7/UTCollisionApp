@@ -25,16 +25,16 @@
         data-website-uuid="d829ff2a-a6f1-4f2e-b42f-6e28fe670b33"></script>
 
 @* Stat Summary/Picture Carousel/Contact *@
-<div class="row crashDarkGrey p-3">
+<div class="row crashDarkGrey font-weight-bold p-3">
     <div class="col-3">
-        <div class="card m-3">
+        <div class="card text-center m-3">
             <h4 class="text-center"><b>2019 Stats</b></h4>
             <p class="bg-danger text-white m-2 p-2 mb-2 rounded-pill">Total Deaths: @ViewBag.Deaths</p>
             <p class="bg-warning text-white m-2 p-2 mb-2 rounded-pill">Total Injuries: @ViewBag.Injuries</p>
             <p class="bg-success text-white m-2 p-2 mb-2 rounded-pill">Total Accidents: @ViewBag.Accidents</p>
         </div>
-        <div class="card m-3">
-            <h4 class="text-left" id="contact" style="font-size:40px;"><span class="display-4 font-weight-bolder"><b>Y</b></span>our</h4>
+        <div class="card m-3 mt-4 pl-3">
+            <h4 class="text-left"id="contact" style="font-size:40px;"><span class="display-4 font-weight-bolder"><b>Y</b></span>our</h4>
             <h4 class="text-left" id="contact" style="font-size:40px;"><span class="display-4 font-weight-bolder"><b>E</b></span>veryday</h4>
             <h4 class="text-left" id="contact" style="font-size:40px;"><span class="display-4 font-weight-bolder"><b>E</b></span>valuation</h4>
             <h4 class="text-left" id="contact" style="font-size:40px;"><span class="display-4 font-weight-bolder"><b>T</b></span>ool (for crashes)</h4>
@@ -68,9 +68,10 @@
     <div class="col-3">
         <div class="text-center m-3">
 
-            <a class="p-2 text-white btn btn-lg btn-info btn-block" asp-action="Statistics">Statistics</a><br />
-            <a class="p-2 text-white btn btn-lg btn-info btn-block" asp-controller="Predictor" asp-action="SeverityCalc">Severvity Calculator</a><br />
-            <a class="p-2 text-white btn btn-lg btn-info btn-block" href="#contact">Contact Us</a>
+            <a class="p-2 text-white btn btn-lg btn-crashBlue btn-block" asp-action="Statistics">Statistics</a><br />
+            <a class="p-2 text-white btn btn-lg btn-crashBlue btn-block" asp-controller="Predictor" asp-action="SeverityCalc">Severvity Calculator</a><br />
+            <a class="p-2 text-white btn btn-lg btn-crashBlue btn-block" asp-controller="Predictor" asp-action="CrashLocator">Crash Locator</a><br />
+            <a class="p-2 text-white btn btn-lg btn-crashBlue btn-block" href="#contact">Contact Us</a>
         </div>
 
         <div class="card m-3">
@@ -108,7 +109,7 @@
             yet there was an 8% increase in fatalities from the year before. In March of 2021, UDOT and DPS launched a new campaign to combat the rising number of fatalities despite fewer vehicles on the road.
             Researchers saw that Utahns believed their dangerous actions were acceptable behind the wheel. Their campaign name "Our lies are costing lives"
             is to help raise awareness about the five deadly driving behaviors:
-            <ol>
+            <ol class="mt-2">
                 <li>Distracted driving</li>
                 <li>Aggressive driving, which includes driving too fast</li>
                 <li>Drowsy driving</li>

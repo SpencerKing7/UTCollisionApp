@@ -16,7 +16,7 @@
         <form method="post" asp-controller="Predictor" asp-action="predict" enctype="application/x-www-form-urlencoded">
             <div class="row text-center">
                 <div class="col-4"></div>
-                    <div class="col-4 badge-primary mt-4 mb-5 p-3 rounded">
+                    <div class="col-4 badge-crashBlue mt-4 mb-5 p-3 rounded">
                         <h3>Predicted Severity:</h3>
                         <h3 id="Value">@ViewBag.PredictionScore</h3>
                     </div>
@@ -286,7 +286,7 @@
             </div>
             <div class="row text-center">
                 <div class="col-3"></div>
-                <button class="btn col-6 btn-outline-primary btn-primary mt-4 mb-5" type="submit">Calculate</button>
+                <button class="btn col-6 btn-outline-crashBlue btn-crashBlue mt-4 mb-5" type="submit">Calculate</button>
                 <div class="col-3"></div>
             </div>
         </form>

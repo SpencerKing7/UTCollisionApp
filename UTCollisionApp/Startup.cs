@@ -14,6 +14,7 @@ using Microsoft.ML.OnnxRuntime;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using UTCollisionApp.Models;
@@ -54,7 +55,19 @@ namespace UTCollisionApp
 
             //services.AddDbContext<AppIdentityDBContext>(options =>
             //    options.UseMySql(identity));
+            services.AddHsts(options =>
+            {
+                options.Preload = true;
+                options.IncludeSubDomains = true;
+                options.MaxAge = TimeSpan.FromDays(60);
+                
+            });
 
+            services.AddHttpsRedirection(options =>
+            {
+                options.RedirectStatusCode = (int)HttpStatusCode.TemporaryRedirect;
+                options.HttpsPort = 5001;
+            });
             // Identity
             services.AddIdentity<IdentityUser, IdentityRole> (options =>
             {
@@ -81,6 +94,14 @@ namespace UTCollisionApp
             services.AddScoped<ICollisionRepository, EFCollisionRepository>();
 
             services.AddSingleton<InferenceSession>(
+              new InferenceSession("city_predictor.onnx")
+            );
+
+            services.AddSingleton<InferenceSession>(
+              new InferenceSession("county_predictor.onnx")
+            );
+
+            services.AddSingleton<InferenceSession>(
               new InferenceSession("severity_predictor.onnx")
             );
 
@@ -103,6 +124,7 @@ namespace UTCollisionApp
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseHsts();
             }
             
             app.UseHttpsRedirection();
