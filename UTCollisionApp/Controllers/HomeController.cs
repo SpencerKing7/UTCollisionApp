@@ -150,16 +150,16 @@ namespace UTCollisionApp.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = await userManager.FindByEmailAsync(model.Email);
+                var user = await userManager.FindByNameAsync(model.Username);
 
-                if (user != null && !user.EmailConfirmed &&
+                /*if (user != null && !user.EmailConfirmed &&
                             (await userManager.CheckPasswordAsync(user, model.Password)))
                 {
                     ModelState.AddModelError(string.Empty, "Email not confirmed yet");
                     return View(model);
-                }
+                }*/
 
-                var result = await signInManager.PasswordSignInAsync(model.Email,
+                var result = await signInManager.PasswordSignInAsync(model.Username,
                                         model.Password, false, false);
 
                 if (result.Succeeded)
