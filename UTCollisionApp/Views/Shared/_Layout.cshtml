@@ -36,13 +36,13 @@
                 </div>
                 @if (signInManager.IsSignedIn(User) && User.IsInRole("Admin"))
                 {
-                    <div class="nav-item">
+                    <div class="navbar-brand float-end p-2">
                         <a class="btn btn-lg btn-crashLightGrey" asp-controller="Admin" asp-action="AdminHome">
                             Admin Home
                         </a>
                     </div>
                 }
-                <div class="navbar-brand float-end p-3">
+                <div class="navbar-brand float-end p-2">
                     @if (signInManager.IsSignedIn(User))
                     {
                         <div class="nav-item">
