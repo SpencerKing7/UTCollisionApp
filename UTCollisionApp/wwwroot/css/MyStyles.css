@@ -15,6 +15,19 @@
     color: #a7cbd5;
 }
 
+.crashTextGrey {
+    color: #453d45;
+}
+
+a{
+    color: white;
+}
+
+    a:hover {
+        color: #a7cbd5;
+        text-decoration: none;
+    }
+
 /*CRASH BLUE -- Styles*/
 
 .btn-crashBlue {
@@ -31,6 +44,9 @@
     border-color: #76c4db;
 }
 
+.bigtext{
+    font-size: 30px;
+}
 
 .btn-outline-crashBlue {
     color: #fff;
