@@ -6,52 +6,59 @@
     ViewBag.Title = "All Roles";
 }
 
-<h1>All Roles</h1>
+<div class="row mt-4">
+    <div class="col-2"></div>
+    <div class="col">
+        <h1>All Roles</h1>
 
-@if (Model.Any())
-{
-    <a class="btn btn-primary mb-3" style="width:auto" asp-action="CreateRole"
-       asp-controller="Admin">Add new role</a>
+        @if (Model.Any())
+        {
+            <a class="btn btn-crashBlue mb-3" style="width:auto" asp-action="CreateRole"
+               asp-controller="Admin">Add new role</a>
 
-    foreach (var role in Model)
-    {
-        <div class="card mb-3">
-            <div class="card-header">
-                Role Id : @role.Id
+            foreach (var role in Model)
+            {
+                <div class="card mb-3">
+                    <div class="card-header">
+                        Role Id : @role.Id
+                    </div>
+                    <div class="card-body m-1">
+                        <h5 class="card-title">@role.Name</h5>
+                        <div class="row">
+                            <a asp-controller="Admin" asp-action="EditRole"
+                               asp-route-id="@role.Id" class="btn btn-crashBlue mr-2">Edit</a>
+                            <form onsubmit="confirmDeleteRole(event)" method="post" asp-action="DeleteRole" asp-route-id="@role.Id">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                        
+
+                    </div>
+
+                </div>
+            }
+        }
+        else
+        {
+            <div class="card">
+                <div class="card-header">
+                    No roles created yet
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">
+                        Use the button below to create a role
+                    </h5>
+                    <a class="btn btn-crashBlue" style="width:auto"
+                       asp-controller="Admin" asp-action="CreateRole">
+                        Create Role
+                    </a>
+                </div>
             </div>
-            <div class="card-body">
-                <h5 class="card-title">@role.Name</h5>
-            </div>
+        }
 
-            <div class="card-footer">
-                <a asp-controller="Admin" asp-action="EditRole"
-                   asp-route-id="@role.Id" class="btn btn-primary">Edit</a>
-                <form onsubmit="confirmDeleteRole(event)" method="post" asp-action="DeleteRole" asp-route-id="@role.Id">
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                </form>
-
-            </div>
-
-        </div>
-    }
-}
-else
-{
-    <div class="card">
-        <div class="card-header">
-            No roles created yet
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">
-                Use the button below to create a role
-            </h5>
-            <a class="btn btn-primary" style="width:auto"
-               asp-controller="Admin" asp-action="CreateRole">
-                Create Role
-            </a>
-        </div>
     </div>
-}
+    <div class="col-2 mb-4"></div>
+</div>
 
 @section Scripts {
     <script src="~/js/site.js"></script>
