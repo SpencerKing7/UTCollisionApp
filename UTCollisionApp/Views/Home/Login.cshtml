@@ -8,31 +8,32 @@
     <div class="row">
         <div class="col-3"></div>
         <div class="col">
-            <div class="m-1 p-1">
+            <div class="">
 
-                <h3>Please Enter Username and Password</h3>
+                <h3 class="display-4 mt-4 mb-4">Please Enter Username and Password</h3>
+                <div style="font-size:large">
+                    <form method="post" asp-controller="Home" asp-action="Login">
+                        <div asp-validation-summary="All" class="text-danger list-unstyled"></div>
+                        <div class="form-group">
+                            <label asp-for="Username">Username:</label>
+                            <input asp-for="Username" class="form-control" />
+                        </div>
 
-                <form method="post" asp-controller="Home" asp-action="Login">
-                    <div asp-validation-summary="All" class="text-danger list-unstyled"></div>
-                    <div class="form-group">
-                        <label asp-for="Username">Username:</label>
-                        <input asp-for="Username" class="form-control" />
-                    </div>
+                        <div class="form-group">
+                            <label asp-for="Password">Password:</label>
+                            <input asp-for="Password" class="form-control" />
+                        </div>
 
-                    <div class="form-group">
-                        <label asp-for="Password">Password:</label>
-                        <input asp-for="Password" class="form-control" />
-                    </div>
+                        <button class="btn btn-lg btn-crashBlue" type="submit">Login</button>
 
-                    <button class="btn btn-sm btn-primary" type="submit">Login</button>
+                        <input type="hidden" asp-for="ReturnUrl" />
 
-                    <input type="hidden" asp-for="ReturnUrl" />
-
-                </form>
+                    </form>
+                </div>
             </div>
             <div>
-                <div class="nav-item">
-                    <a asp-action="createuser" asp-controller="home" class="btn btn-sm btn-crashLightGrey">Create User</a>
+                <div class="nav-item mt-3">
+                    <a asp-action="createuser" asp-controller="home" class="btn btn-lg btn-crashLightGrey">Create User</a>
                 </div>
             </div>
         </div>
