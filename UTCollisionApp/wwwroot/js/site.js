@@ -1,20 +1,45 @@
-﻿const delement = document.getElementById("deleteSpan")
-const celement = document.getElementById("confirmDeleteSpan")
+﻿
 
-delement.addEventListener("click", confirmDelete)
-celement.addEventListener("click", confirmDelete)
+//const delement = document.getElementById("deleteSpan")
+//const celement = document.getElementById("confirmDeleteSpan")
 
-function confirmDelete(uniqueId, isTrue) {
+//delement.addEventListener("click", confirmDelete)
+//celement.addEventListener("click", confirmDelete)
 
-    document.getElementById("deleteSpan" = 'deleteSpan_' + uniqueId);
-    document.getElementById("confirmDeleteSpan" = 'confirmDeleteSpan_' + uniqueId);
+//function confirmDelete() {
 
-    if (isTrue) {
-        $('#' + deleteSpan).hide();
-        $('#' + confirmDeleteSpan).show();
-    } else {
-        $('#' + deleteSpan).show();
-        $('#' + confirmDeleteSpan).hide();
+//    document.getElementById("deleteSpan");
+//    document.getElementById("confirmDeleteSpan");
+
+//    if (isTrue) {
+//        $('#' + deleteSpan).hide();
+//        $('#' + confirmDeleteSpan).show();
+//    } else {
+//        $('#' + deleteSpan).show();
+//        $('#' + confirmDeleteSpan).hide();
+//    }
+//}
+
+//function hide() {
+//    document.getElementById("confirmDeleteSpan").style.display = 'none';
+//    console.log("It worked")
+//}
+
+function confirmDelete(e) {
+    if (confirm("Confirm deletion of this user?"))
+        alert('User Deleted');
+    else {
+        alert('Cancelled');
+        e.preventDefault();
+    }
+}
+
+function confirmDeleteRole(e) {
+    if (confirm("Confirm deletion of this user?"))
+        alert('Role Deleted');
+    else {
+        alert('Cancelled');
+        e.preventDefault();
     }
 }
 

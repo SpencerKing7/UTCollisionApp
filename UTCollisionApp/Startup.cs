@@ -113,12 +113,12 @@ namespace UTCollisionApp
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.Use(async (ctx, next) =>
-            {
-                ctx.Response.Headers.Add("Content-Security-Policy",
-                                        "default-src 'self'");
-                await next();
-            });
+            //app.Use(async (ctx, next) =>
+            //{
+            //    ctx.Response.Headers.Add("Content-Security-Policy",
+            //                            "default-src 'self'");
+            //    await next();
+            //});
 
             app.UseEndpoints(endpoints =>
             {

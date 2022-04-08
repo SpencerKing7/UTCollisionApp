@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="Content-Security-Policy"
+    @*<meta http-equiv="Content-Security-Policy"
           content="base-uri 'self';
            	block-all-mixed-content;
            	default-src 'self';
@@ -15,7 +15,7 @@
             form-action 'self';
            	script-src 'self';
            	style-src 'self';
-           	upgrade-insecure-requests;">
+           	upgrade-insecure-requests;">*@
     <title>@ViewData["Title"] - UT Collisions</title>
     <link rel="icon" type="image/x-icon" href="~/assets/logo.png" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -102,7 +102,6 @@
     {
         @RenderSection("Scripts", required: true)
     }
-
 
 </body>
 </html>
