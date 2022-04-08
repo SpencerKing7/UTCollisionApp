@@ -1,7 +1,13 @@
-﻿function confirmDelete(uniqueId, isTrue) {
+﻿const delement = document.getElementById("deleteSpan")
+const celement = document.getElementById("confirmDeleteSpan")
 
-    var deleteSpan = 'deleteSpan_' + uniqueId;
-    var confirmDeleteSpan = 'confirmDeleteSpan_' + uniqueId;
+delement.addEventListener("click", confirmDelete)
+celement.addEventListener("click", confirmDelete)
+
+function confirmDelete(uniqueId, isTrue) {
+
+    document.getElementById("deleteSpan" = 'deleteSpan_' + uniqueId);
+    document.getElementById("confirmDeleteSpan" = 'confirmDeleteSpan_' + uniqueId);
 
     if (isTrue) {
         $('#' + deleteSpan).hide();
