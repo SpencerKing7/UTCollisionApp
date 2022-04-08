@@ -2,23 +2,8 @@
     ViewData["Title"] = "Home";
 }
 
-@* Secondary Navbar *@
-<!--<div class="bg-dark text-white">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="navbar p-2">
-                <a class="nav-link float-end p-2 text-white" style="position:center">Statistics</a>
-                <a class="nav-link float-end p-2 text-white" style="position:center" asp-controller="Predictor" asp-action="SeverityCalc">Severvity Calculator</a>
-                <a class="nav-link float-end p-2 text-white" style="position:center" href="#contact">Contact Us</a>
-            </div>
 
-        </div>
-    </div>
-</div>-->
-@*<script>
-        alert("We use cookies to personalize content.\t<a asp-action='Privacy'>Learn more</a>");
-    </script>*@
-
+@*Cookies notification*@
 <script type="text/javascript"
         src="https://app.termly.io/embed.min.js"
         data-auto-block="on"
@@ -64,7 +49,7 @@
             </a>
         </div>
     </div>
-
+    @*Side buttons*@
     <div class="col-3">
         <div class="text-center m-3">
 
@@ -123,7 +108,7 @@
             A dataset has been collected on motor vehicle collisions during three years: 2016, 2017, and 2019.
             This dataset and the other analyses provided will help lawmakers understand what is causing high number of car crashes, which will lead to effective changes and safer roads.
         </p>
-        <p class="mb-0">
+        <p class="mb-3">
             This data has been stored in a searchable database and we created a web application that allows users to view all the data and predictions.
             Those who need to further investiagate
             will have the privileges to add/view/update/delete records.

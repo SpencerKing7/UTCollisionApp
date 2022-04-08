@@ -1,20 +1,19 @@
-﻿const delement = document.getElementById("deleteSpan")
-const celement = document.getElementById("confirmDeleteSpan")
+﻿
+function confirmDelete(e) {
+    if (confirm("Confirm deletion of this user?"))
+        alert('User Deleted');
+    else {
+        alert('Cancelled');
+        e.preventDefault();
+    }
+}
 
-delement.addEventListener("click", confirmDelete)
-celement.addEventListener("click", confirmDelete)
-
-function confirmDelete(uniqueId, isTrue) {
-
-    document.getElementById("deleteSpan" = 'deleteSpan_' + uniqueId);
-    document.getElementById("confirmDeleteSpan" = 'confirmDeleteSpan_' + uniqueId);
-
-    if (isTrue) {
-        $('#' + deleteSpan).hide();
-        $('#' + confirmDeleteSpan).show();
-    } else {
-        $('#' + deleteSpan).show();
-        $('#' + confirmDeleteSpan).hide();
+function confirmDeleteRole(e) {
+    if (confirm("Confirm deletion of this user?"))
+        alert('Role Deleted');
+    else {
+        alert('Cancelled');
+        e.preventDefault();
     }
 }
 

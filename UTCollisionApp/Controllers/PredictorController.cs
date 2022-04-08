@@ -27,6 +27,7 @@ namespace UTCollisionApp.Controllers
             //_countySession.ModelMetadata.GraphName = 'test';
         }
 
+        //For our severity predictor
         [HttpGet]
         public IActionResult SeverityCalc(Prediction prediction)
         {
@@ -39,6 +40,7 @@ namespace UTCollisionApp.Controllers
             return View(new SeverityPredictorData());
         }
 
+        //For our crash locator
         [HttpGet]
         public IActionResult CrashLocator(CityPrediction cp)
         {
@@ -53,6 +55,7 @@ namespace UTCollisionApp.Controllers
             return View(new CityPredictorData());
         }
 
+        //For our county locator
         [HttpGet]
         public IActionResult CountyLocator(CountyPrediction cp)
         {
