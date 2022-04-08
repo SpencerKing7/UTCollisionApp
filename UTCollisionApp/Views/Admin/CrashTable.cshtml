@@ -29,8 +29,8 @@
         <table class="table table-bordered table-striped mt-3">
             <thead class="bg-crashBlue">
                 <tr>
-                    <th>City</th>
                     <th>County</th>
+                    <th>City</th>
                     <th>Date</th>
                     <th>Severity</th>
                     <th>Route</th>
@@ -68,12 +68,12 @@
         <p><b>Page @Model.PageInfo.CurrentPage.ToString() of @Model.PageInfo.TotalPages.ToString()</b><br /><i>15 records per page</i></p>
 
         <div class="container-fluid text-center">
-            <a asp-controller="Admin" asp-action="CrashTable" asp-route-pageNum="1">First page ... </a>
+            <a class="text-black-50" asp-controller="Admin" asp-action="CrashTable" asp-route-pageNum="1">First page ... </a>
             <div page-changer="@Model.PageInfo" page-action="CrashTable" page-classes-enabled="true" page-class="btn"
                  page-class-normal="btn-outline-dark" page-class-selected="btn-dark"
                  class="btn-group pull-right m-1">
             </div>
-            <a asp-controller="Admin" asp-action="CrashTable" asp-route-pageNum="@Model.PageInfo.TotalPages">... Last page (@Model.PageInfo.TotalPages.ToString())</a>
+            <a class="text-black-50" asp-controller="Admin" asp-action="CrashTable" asp-route-pageNum="@Model.PageInfo.TotalPages">... Last page (@Model.PageInfo.TotalPages.ToString())</a>
         </div>
     </div>
 
