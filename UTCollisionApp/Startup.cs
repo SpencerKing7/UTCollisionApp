@@ -37,9 +37,19 @@ namespace UTCollisionApp
 
             
 
-            // Database Connections
+            // Database Connections (WE COULDN'T GET THE ENVIRONMENTAL VARIABLES WORKING..... BUT ALL THE CONFIGURATION AND CODE IS THERE FOR IT TO WORK)
             //string crash = Environment.GetEnvironmentVariable("RDSConnectionStringCrash");
             //string identity = Environment.GetEnvironmentVariable("RDSConnectionStringIdentity");
+
+            //services.AddDbContext<CollisionDbContext>(options =>
+            //{
+            //    options.UseMySql(Environment.GetEnvironmentVariable("RDSConnectionStringCrash"));
+            //});
+
+            //services.AddDbContext<AppIdentityDBContext>(options =>
+            //{
+            //    options.UseMySql(Environment.GetEnvironmentVariable("RDSConnectionStringIdentity"));
+            //});
 
             services.AddDbContext<CollisionDbContext>(options =>
             {
@@ -52,8 +62,7 @@ namespace UTCollisionApp
             });
 
 
-            //services.AddDbContext<AppIdentityDBContext>(options =>
-            //    options.UseMySql(identity));
+
             services.AddHsts(options =>
             {
                 options.Preload = true;
@@ -155,18 +164,18 @@ namespace UTCollisionApp
             app.UseAuthentication();
             app.UseAuthorization();
 
-            //app.Use(async (ctx, next) =>
-            //{
-            //    ctx.Response.Headers.Add("Content-Security-Policy",
-            //                            "default-src 'self'");
-            //    await next();
-            //});
+            app.Use(async (ctx, next) =>
+            {
+                ctx.Response.Headers.Add("Content-Security-Policy",
+                                        "default-src 'self'");
+                await next();
+            });
 
             app.UseEndpoints(endpoints =>
             {
                 // Admin County Filering
                 endpoints.MapControllerRoute("Counties",
-                    "Admin/CrashTable/{county}/PageNum{pageNum}/{severity?}",
+                    "Admin/CrashTable/{county}/PageNum{pageNum}/{level?}",
                     new { Controller = "Admin", action = "CrashTable", pageNum = 1 });
                 
                 // Normal User Filtering

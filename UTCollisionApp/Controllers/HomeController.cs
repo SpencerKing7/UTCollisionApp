@@ -71,22 +71,25 @@ namespace UTCollisionApp.Controllers
             return View();
         }
 
-        public IActionResult AccidentTable(string counties, int pageNum = 1)
+        public IActionResult AccidentTable(string severity, string counties, int pageNum = 1)
         {
             //Button Viewbags
             ViewBag.Button = "Sign Out";
             ViewBag.Controller = "Home";
             ViewBag.Action = "Index";
 
+            ViewBag.County = counties;
+            ViewBag.Severity = severity;
+
             //Pagination and Table Data
-            int pageSize = 25;
+            int pageSize = 15;
 
             var x = new CrashViewModel
             {
                 Crashes = _repo.Crashes
                 .Include(x => x.Location)
                 .Include(x => x.Factor)
-                .Where(x => x.Location.COUNTY_NAME == counties || counties == null)
+                .Where(x => (x.Location.COUNTY_NAME == counties || counties == null) && (x.CRASH_SEVERITY_ID.ToString() == severity || severity == null)) 
                 .OrderByDescending(c => c.CRASH_DATETIME)
                 .Skip((pageNum - 1) * pageSize)
                 .Take(pageSize),
